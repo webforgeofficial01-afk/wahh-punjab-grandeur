@@ -258,23 +258,33 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
+      <LoadingSplash />
       {/* ===== Nav ===== */}
       <nav
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-charcoal-deep/85 backdrop-blur-xl border-b border-gold/15 py-3"
-            : "bg-transparent py-5"
+            ? "bg-charcoal-deep/85 backdrop-blur-xl border-b border-gold/15 py-2.5"
+            : "bg-transparent py-4"
         }`}
       >
         <div className="mx-auto max-w-7xl px-6 grid grid-cols-[minmax(0,1fr)_auto] sm:flex sm:items-center sm:justify-between gap-4">
-          <div className="flex min-w-0 items-baseline gap-3">
-            <span className="font-display text-gold text-base sm:text-lg font-bold tracking-[0.35em] truncate">
-              WAHH · PUNJAB
+          <a href="#top" className="flex min-w-0 items-center gap-3 group">
+            <img
+              src={LOGO}
+              alt="Wahh Punjab Grandeur"
+              width={44}
+              height={44}
+              className={`rounded-full object-cover ring-1 ring-gold/40 shadow-ember transition-all duration-500 ${scrolled ? "size-9" : "size-11"}`}
+            />
+            <span className="flex flex-col leading-tight min-w-0">
+              <span className="font-display text-gold text-sm sm:text-base font-bold tracking-[0.32em] truncate group-hover:text-gold-light transition-colors">
+                WAHH · PUNJAB
+              </span>
+              <span className="hidden sm:inline text-[8px] uppercase tracking-[0.5em] text-ivory/40">
+                Grandeur · Est. MCMLXXXII
+              </span>
             </span>
-            <span className="hidden lg:inline text-[9px] uppercase tracking-[0.45em] text-ivory/40">
-              Grandeur
-            </span>
-          </div>
+          </a>
           <div className="hidden md:flex items-center gap-9 text-[10px] uppercase tracking-[0.35em] text-ivory/70">
             <a href="#legacy" className="hover:text-gold transition-colors">Legacy</a>
             <a href="#fire" className="hover:text-gold transition-colors">Fire</a>
