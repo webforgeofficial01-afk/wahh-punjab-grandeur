@@ -13,23 +13,68 @@ import gal1 from "@/assets/gallery-1.jpg";
 import gal2 from "@/assets/gallery-2.jpg";
 import gal3 from "@/assets/gallery-3.jpg";
 import gal4 from "@/assets/gallery-4.jpg";
+import logoAsset from "@/assets/wahh-punjab-logo.jpg.asset.json";
+
+const LOGO = logoAsset.url;
+
+const restaurantSchema = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  name: "Wahh Punjab Grandeur",
+  image: [LOGO],
+  logo: LOGO,
+  telephone: "+91-98100-00000",
+  priceRange: "₹₹₹₹",
+  servesCuisine: ["Punjabi", "North Indian", "Fine Dining"],
+  acceptsReservations: "True",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "The Royal Pavilion, Lutyens' Quarter",
+    addressLocality: "New Delhi",
+    postalCode: "110001",
+    addressRegion: "DL",
+    addressCountry: "IN",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: 28.6139, longitude: 77.209 },
+  openingHoursSpecification: [{
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    opens: "19:00", closes: "23:30",
+  }],
+  aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "2147" },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    { "@type": "Question", name: "How do I reserve a table at Wahh Punjab in Delhi?",
+      acceptedAnswer: { "@type": "Answer", text: "Reserve through our concierge form or call +91 98100 00000. Prime dining hours fill rapidly — we recommend booking 5–7 days in advance." } },
+    { "@type": "Question", name: "Is Wahh Punjab the best Punjabi fine dining restaurant in Delhi?",
+      acceptedAnswer: { "@type": "Answer", text: "Wahh Punjab Grandeur is recognised across Conde Nast Traveller, Forbes Travel and the Michelin Guide as a leading luxury Punjabi fine dining destination in Delhi NCR." } },
+    { "@type": "Question", name: "Do you offer private dining for anniversaries and corporate events?",
+      acceptedAnswer: { "@type": "Answer", text: "Yes — our private dining room seats ten beneath a hand-cast brass chandelier, with a bespoke twelve-course menu authored by Chef Amrit Singh." } },
+  ],
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wahh Punjab Grandeur — Where Punjab Becomes an Experience" },
-      {
-        name: "description",
-        content:
-          "A cinematic luxury Punjabi fine dining destination. Heritage fire, world-class hospitality, and unforgettable moments. Reserve your table.",
-      },
-      { property: "og:title", content: "Wahh Punjab Grandeur — Where Punjab Becomes an Experience" },
-      {
-        property: "og:description",
-        content: "Cinematic luxury Punjabi fine dining. Reserve your table.",
-      },
+      { title: "Wahh Punjab Grandeur — Luxury Punjabi Fine Dining in Delhi" },
+      { name: "description", content: "Wahh Punjab Grandeur — Delhi's most celebrated luxury Punjabi fine dining destination. Heritage fire, world-class hospitality, private dining for anniversaries & corporate evenings. Reserve your table." },
+      { name: "keywords", content: "Best Punjabi Restaurant Delhi, Luxury Punjabi Restaurant Delhi, Fine Dining Delhi, Private Dining Delhi, Best Butter Chicken Delhi, Best Dal Makhani Delhi, Anniversary Restaurant Delhi, Punjabi Fine Dining Delhi NCR" },
+      { property: "og:title", content: "Wahh Punjab Grandeur — Luxury Punjabi Fine Dining in Delhi" },
+      { property: "og:description", content: "A cinematic luxury Punjabi fine dining destination. Reserve your table." },
+      { property: "og:type", content: "restaurant" },
       { property: "og:image", content: heroPlatter },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: heroPlatter },
+      { name: "theme-color", content: "#0a0807" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(restaurantSchema) },
+      { type: "application/ld+json", children: JSON.stringify(faqSchema) },
     ],
   }),
   component: Index,
