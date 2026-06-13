@@ -202,6 +202,43 @@ const galleryImages = [
 
 /* ---------- Page ---------- */
 
+function LoadingSplash() {
+  const [gone, setGone] = useState(false);
+  const [fade, setFade] = useState(false);
+  useEffect(() => {
+    const t1 = setTimeout(() => setFade(true), 2200);
+    const t2 = setTimeout(() => setGone(true), 2900);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+  if (gone) return null;
+  return (
+    <div
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-charcoal-deep transition-opacity duration-700 ${fade ? "opacity-0" : "opacity-100"}`}
+      aria-hidden
+    >
+      <div className="absolute inset-0 bg-radial-gradient pointer-events-none"
+           style={{ background: "radial-gradient(circle at center, color-mix(in oklab, var(--gold) 12%, transparent), transparent 60%)" }} />
+      <div className="relative animate-fade-up">
+        <div className="absolute -inset-8 rounded-full bg-gold/20 blur-3xl animate-ember-pulse" />
+        <img
+          src={LOGO}
+          alt="Wahh Punjab"
+          width={160}
+          height={160}
+          className="relative size-32 sm:size-40 rounded-full object-cover shadow-luxe ring-1 ring-gold/40"
+        />
+      </div>
+      <div className="mt-10 h-px w-40 hairline-gold opacity-70" />
+      <p className="mt-6 quote-serif italic text-base sm:text-lg text-ivory/80 text-center px-6 animate-fade-up" style={{ animationDelay: "0.4s" }}>
+        Every great feast begins with anticipation.
+      </p>
+      <div className="mt-8 text-[9px] uppercase tracking-[0.5em] text-gold/70 animate-fade-up" style={{ animationDelay: "0.8s" }}>
+        Wahh · Punjab · Grandeur
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   const [scrolled, setScrolled] = useState(false);
   const [seatsLeft, setSeatsLeft] = useState(17);
@@ -213,7 +250,6 @@ function Index() {
   }, []);
 
   useEffect(() => {
-    // Subtle real-time-style decay
     const t = setInterval(() => {
       setSeatsLeft((n) => (n > 9 ? n - (Math.random() > 0.7 ? 1 : 0) : n));
     }, 14000);
