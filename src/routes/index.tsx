@@ -935,9 +935,21 @@ function Index() {
         <div className="mx-auto max-w-7xl">
           <div className="grid md:grid-cols-12 gap-10 mb-16">
             <div className="md:col-span-5">
-              <div className="font-display text-gold text-2xl tracking-[0.3em]">WAHH · PUNJAB</div>
-              <div className="text-[9px] uppercase tracking-[0.5em] text-ivory/40 mt-1">
-                Grandeur · Est. MCMLXXXII
+              <div className="flex items-center gap-4">
+                <img
+                  src={LOGO}
+                  alt="Wahh Punjab Grandeur emblem"
+                  width={72}
+                  height={72}
+                  loading="lazy"
+                  className="size-16 rounded-full object-cover ring-1 ring-gold/40 shadow-ember"
+                />
+                <div>
+                  <div className="font-display text-gold text-2xl tracking-[0.3em]">WAHH · PUNJAB</div>
+                  <div className="text-[9px] uppercase tracking-[0.5em] text-ivory/40 mt-1">
+                    Grandeur · Est. MCMLXXXII
+                  </div>
+                </div>
               </div>
               <p className="mt-6 quote-serif italic text-ivory/55 max-w-sm leading-relaxed">
                 A custodian of Punjab's culinary memory — one plate, one ember,
