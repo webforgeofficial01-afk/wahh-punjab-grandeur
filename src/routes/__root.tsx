@@ -77,18 +77,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Wahh Punjab — Heritage Punjabi Fine Dining" },
+      { title: "Wahh Punjab Grandeur — Where Punjab Becomes an Experience" },
       {
         name: "description",
         content:
-          "Wahh Punjab — a regal fine-dining tribute to the five rivers. Heritage Punjabi cuisine, tandoor-charred over hand-cured coals, served in a matte-black-and-gold sanctuary.",
+          "Wahh Punjab Grandeur — a cinematic luxury Punjabi fine dining destination. Heritage, fire, artistry and world-class hospitality. Reserve your table.",
       },
-      { name: "author", content: "Wahh Punjab" },
-      { property: "og:title", content: "Wahh Punjab — Heritage Punjabi Fine Dining" },
+      { name: "author", content: "Wahh Punjab Grandeur" },
+      { property: "og:title", content: "Wahh Punjab Grandeur — Where Punjab Becomes an Experience" },
       {
         property: "og:description",
-        content:
-          "Heritage Punjabi cuisine reimagined as fine dining. Reserve your table.",
+        content: "Cinematic luxury Punjabi fine dining. Reserve your table.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -99,7 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap",
       },
     ],
   }),
