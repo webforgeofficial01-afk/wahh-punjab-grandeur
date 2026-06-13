@@ -1,70 +1,57 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import heroEmbers from "@/assets/hero-embers.jpg";
 import heroPlatter from "@/assets/hero-platter.jpg";
 import legacyImg from "@/assets/legacy.jpg";
 import fireImg from "@/assets/fire-experience.jpg";
 import chefImg from "@/assets/chef.jpg";
 import privateDining from "@/assets/private-dining.jpg";
-import dishDal from "@/assets/dish-dal.jpg";
-import dishKulcha from "@/assets/dish-kulcha.jpg";
-import dishBiryani from "@/assets/dish-biryani.jpg";
 import gal1 from "@/assets/gallery-1.jpg";
 import gal2 from "@/assets/gallery-2.jpg";
 import gal3 from "@/assets/gallery-3.jpg";
 import gal4 from "@/assets/gallery-4.jpg";
+import dishDal from "@/assets/dish-dal.jpg";
+import dishKulcha from "@/assets/dish-kulcha.jpg";
+import dishBiryani from "@/assets/dish-biryani.jpg";
 import logoAsset from "@/assets/wahh-punjab-logo.jpg.asset.json";
+import { menu, categories, type MenuItem } from "@/data/menu";
 
 const LOGO = logoAsset.url;
+const PHONE = "+91-99999-00000";
+const WHATSAPP = "919999900000";
 
 const restaurantSchema = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
-  name: "Wahh Punjab Grandeur",
+  name: "Waah Punjab Restaurant",
   image: [LOGO],
   logo: LOGO,
-  telephone: "+91-98100-00000",
-  priceRange: "₹₹₹₹",
-  servesCuisine: ["Punjabi", "North Indian", "Fine Dining"],
+  priceRange: "₹₹",
+  servesCuisine: ["Punjabi", "North Indian", "Chinese", "Tandoori"],
   acceptsReservations: "True",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "The Royal Pavilion, Lutyens' Quarter",
-    addressLocality: "New Delhi",
-    postalCode: "110001",
+    streetAddress: "Shop No. 1, A-1 Block, Guru Nanak Marg, Opp. Muthoot Finance, Sant Nagar, Burari",
+    addressLocality: "Delhi",
+    postalCode: "110084",
     addressRegion: "DL",
     addressCountry: "IN",
   },
-  geo: { "@type": "GeoCoordinates", latitude: 28.6139, longitude: 77.209 },
-  openingHoursSpecification: [{
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-    opens: "19:00", closes: "23:30",
-  }],
-  aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "2147" },
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    { "@type": "Question", name: "How do I reserve a table at Wahh Punjab in Delhi?",
-      acceptedAnswer: { "@type": "Answer", text: "Reserve through our concierge form or call +91 98100 00000. Prime dining hours fill rapidly — we recommend booking 5–7 days in advance." } },
-    { "@type": "Question", name: "Is Wahh Punjab the best Punjabi fine dining restaurant in Delhi?",
-      acceptedAnswer: { "@type": "Answer", text: "Wahh Punjab Grandeur is recognised across Conde Nast Traveller, Forbes Travel and the Michelin Guide as a leading luxury Punjabi fine dining destination in Delhi NCR." } },
-    { "@type": "Question", name: "Do you offer private dining for anniversaries and corporate events?",
-      acceptedAnswer: { "@type": "Answer", text: "Yes — our private dining room seats ten beneath a hand-cast brass chandelier, with a bespoke twelve-course menu authored by Chef Amrit Singh." } },
-  ],
+  hasMenu: menu.map((m) => ({
+    "@type": "MenuItem",
+    name: m.name,
+    offers: { "@type": "Offer", price: m.variants[0].price, priceCurrency: "INR" },
+  })).slice(0, 50),
 };
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wahh Punjab Grandeur — Luxury Punjabi Fine Dining in Delhi" },
-      { name: "description", content: "Wahh Punjab Grandeur — Delhi's most celebrated luxury Punjabi fine dining destination. Heritage fire, world-class hospitality, private dining for anniversaries & corporate evenings. Reserve your table." },
-      { name: "keywords", content: "Best Punjabi Restaurant Delhi, Luxury Punjabi Restaurant Delhi, Fine Dining Delhi, Private Dining Delhi, Best Butter Chicken Delhi, Best Dal Makhani Delhi, Anniversary Restaurant Delhi, Punjabi Fine Dining Delhi NCR" },
-      { property: "og:title", content: "Wahh Punjab Grandeur — Luxury Punjabi Fine Dining in Delhi" },
-      { property: "og:description", content: "A cinematic luxury Punjabi fine dining destination. Reserve your table." },
+      { title: "Waah Punjab — Premium Punjabi, Tandoori & Chinese in Burari, Delhi" },
+      { name: "description", content: "Waah Punjab Restaurant, Sant Nagar, Burari — Premium Punjabi, tandoori, biryani, Chinese, momos & thalis. Free home delivery up to 3 KM. Order online." },
+      { name: "keywords", content: "Waah Punjab, Punjabi Restaurant Burari, Sant Nagar Delhi, Best Butter Chicken Burari, Tandoori Delhi, Biryani Burari, Online food order Burari" },
+      { property: "og:title", content: "Waah Punjab — Burari, Delhi" },
+      { property: "og:description", content: "Premium Punjabi fine dining in Burari. Order online — free delivery up to 3 KM." },
       { property: "og:type", content: "restaurant" },
       { property: "og:image", content: heroPlatter },
       { name: "twitter:card", content: "summary_large_image" },
@@ -72,16 +59,12 @@ export const Route = createFileRoute("/")({
       { name: "theme-color", content: "#0a0807" },
     ],
     links: [{ rel: "canonical", href: "/" }],
-    scripts: [
-      { type: "application/ld+json", children: JSON.stringify(restaurantSchema) },
-      { type: "application/ld+json", children: JSON.stringify(faqSchema) },
-    ],
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(restaurantSchema) }],
   }),
   component: Index,
 });
 
-/* ---------- Reusable atoms ---------- */
-
+/* ---------- atoms ---------- */
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
     <span className="inline-flex items-center gap-3 eyebrow">
@@ -92,14 +75,12 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 
 function EmberField() {
-  // Deterministic positions to avoid hydration mismatch
-  const particles = Array.from({ length: 28 }, (_, i) => {
-    const left = (i * 37) % 100;
-    const delay = (i * 0.7) % 12;
-    const duration = 10 + (i % 7);
-    const size = 1.5 + (i % 4) * 0.6;
-    return { left, delay, duration, size };
-  });
+  const particles = Array.from({ length: 32 }, (_, i) => ({
+    left: (i * 37) % 100,
+    delay: (i * 0.7) % 12,
+    duration: 10 + (i % 7),
+    size: 1.5 + (i % 4) * 0.6,
+  }));
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
       {particles.map((p, i) => (
@@ -129,85 +110,100 @@ function GoldDivider() {
   );
 }
 
-/* ---------- Data ---------- */
+/* ---------- Scroll reveal hook ---------- */
+function useReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-visible");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -60px 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
 
-const dishes = [
-  {
-    name: "Dal Sultan-e-Khaas",
-    tagline: "The Sovereign of Slow Fire",
-    desc: "Black urad simmered forty-eight hours over cured charcoal, finished with cultured cream and a single leaf of twenty-four karat gold.",
-    price: "₹1,250",
-    badge: "Chef's Signature",
-    img: dishDal,
-  },
-  {
-    name: "Truffle Ghee Kulcha",
-    tagline: "Hearth, Truffle, Heritage",
-    desc: "Hand-stretched dough kissed by the tandoor, crowned with cultured ghee and shaved Italian black winter truffle.",
-    price: "₹850",
-    badge: "Most Loved",
-    img: dishKulcha,
-  },
-  {
-    name: "Zaffrani Parda Biryani",
-    tagline: "Sealed in Saffron, Broken Tableside",
-    desc: "Aged basmati layered with Kashmiri saffron and braised goat shoulder. Concealed beneath a golden dough crown — broken before you.",
-    price: "₹2,400",
-    badge: "House Royal",
-    img: dishBiryani,
-  },
-];
+/* ---------- Parallax hook ---------- */
+function useParallax() {
+  useEffect(() => {
+    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]"));
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const vh = window.innerHeight;
+        for (const el of els) {
+          const rect = el.getBoundingClientRect();
+          const speed = parseFloat(el.dataset.parallax || "0.2");
+          const offset = (rect.top + rect.height / 2 - vh / 2) * speed * -1;
+          el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
+        }
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+}
 
-const testimonials = [
-  {
-    name: "Aarav Mehta",
-    place: "London · Restaurateur",
-    quote:
-      "The most cinematic two hours I've spent at any table this decade. Every plate arrived like a chapter.",
-    initials: "AM",
-  },
-  {
-    name: "Isabella Conti",
-    place: "Milan · Vogue Italia",
-    quote:
-      "An editorial in food. The lighting, the silence between courses, the warmth of the staff — it is theatre.",
-    initials: "IC",
-  },
-  {
-    name: "Vikram Singh",
-    place: "Dubai · Hotelier",
-    quote:
-      "I have eaten in every major capital. Wahh Punjab Grandeur is now my standard for what hospitality means.",
-    initials: "VS",
-  },
-];
+/* ---------- Cart ---------- */
+type CartLine = { key: string; itemId: string; name: string; variant: string; price: number; qty: number };
 
-const awards = [
-  "Conde Nast Traveller — Hot List 2024",
-  "Michelin Guide — Recommended",
-  "The World's 50 Best — Discovery",
-  "Robb Report — Editor's Choice",
-  "Forbes Travel — Five Star",
-  "Wallpaper* — Best of the Year",
-];
+function useCart() {
+  const [lines, setLines] = useState<CartLine[]>(() => {
+    if (typeof window === "undefined") return [];
+    try {
+      const raw = localStorage.getItem("waah:cart");
+      return raw ? (JSON.parse(raw) as CartLine[]) : [];
+    } catch {
+      return [];
+    }
+  });
+  useEffect(() => {
+    try { localStorage.setItem("waah:cart", JSON.stringify(lines)); } catch {/* noop */}
+  }, [lines]);
 
-const galleryImages = [
-  { src: gal1, alt: "Saffron sparkling wine with gold leaf" },
-  { src: dishBiryani, alt: "Saffron biryani in copper handi" },
-  { src: gal2, alt: "Hands kneading dough with flour dust" },
-  { src: gal3, alt: "Tandoori prawns with gold leaf" },
-  { src: dishKulcha, alt: "Truffle ghee kulcha on black marble" },
-  { src: gal4, alt: "Saffron broth poured tableside" },
-];
+  const add = (item: MenuItem, vIndex = 0) => {
+    const v = item.variants[vIndex];
+    const key = `${item.id}::${v.label}`;
+    setLines((prev) => {
+      const idx = prev.findIndex((l) => l.key === key);
+      if (idx >= 0) {
+        const next = [...prev];
+        next[idx] = { ...next[idx], qty: next[idx].qty + 1 };
+        return next;
+      }
+      return [...prev, { key, itemId: item.id, name: item.name, variant: v.label, price: v.price, qty: 1 }];
+    });
+  };
+  const setQty = (key: string, qty: number) =>
+    setLines((prev) => prev.flatMap((l) => (l.key === key ? (qty <= 0 ? [] : [{ ...l, qty }]) : [l])));
+  const remove = (key: string) => setQty(key, 0);
+  const clear = () => setLines([]);
+  const count = lines.reduce((n, l) => n + l.qty, 0);
+  const total = lines.reduce((s, l) => s + l.qty * l.price, 0);
+  return { lines, add, setQty, remove, clear, count, total };
+}
 
 /* ---------- Page ---------- */
-
 function LoadingSplash() {
   const [gone, setGone] = useState(false);
   const [fade, setFade] = useState(false);
   useEffect(() => {
-    const t1 = setTimeout(() => setFade(true), 2200);
-    const t2 = setTimeout(() => setGone(true), 2900);
+    const t1 = setTimeout(() => setFade(true), 1800);
+    const t2 = setTimeout(() => setGone(true), 2500);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
   if (gone) return null;
@@ -216,32 +212,26 @@ function LoadingSplash() {
       className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-charcoal-deep transition-opacity duration-700 ${fade ? "opacity-0" : "opacity-100"}`}
       aria-hidden
     >
-      <div className="absolute inset-0 bg-radial-gradient pointer-events-none"
-           style={{ background: "radial-gradient(circle at center, color-mix(in oklab, var(--gold) 12%, transparent), transparent 60%)" }} />
+      <div className="absolute inset-0" style={{ background: "radial-gradient(circle at center, color-mix(in oklab, var(--gold) 14%, transparent), transparent 60%)" }} />
       <div className="relative animate-fade-up">
         <div className="absolute -inset-8 rounded-full bg-gold/20 blur-3xl animate-ember-pulse" />
-        <img
-          src={LOGO}
-          alt="Wahh Punjab"
-          width={160}
-          height={160}
-          className="relative size-32 sm:size-40 rounded-full object-cover shadow-luxe ring-1 ring-gold/40"
-        />
+        <img src={LOGO} alt="Waah Punjab" width={160} height={160} className="relative size-32 sm:size-40 rounded-full object-cover shadow-luxe ring-1 ring-gold/40" />
       </div>
       <div className="mt-10 h-px w-40 hairline-gold opacity-70" />
-      <p className="mt-6 quote-serif italic text-base sm:text-lg text-ivory/80 text-center px-6 animate-fade-up" style={{ animationDelay: "0.4s" }}>
-        Every great feast begins with anticipation.
+      <p className="mt-6 quote-serif italic text-base sm:text-lg text-ivory/80 text-center px-6 animate-fade-up" style={{ animationDelay: "0.3s" }}>
+        Where every flame tells a Punjabi story.
       </p>
-      <div className="mt-8 text-[9px] uppercase tracking-[0.5em] text-gold/70 animate-fade-up" style={{ animationDelay: "0.8s" }}>
-        Wahh · Punjab · Grandeur
-      </div>
     </div>
   );
 }
 
 function Index() {
   const [scrolled, setScrolled] = useState(false);
-  const [seatsLeft, setSeatsLeft] = useState(17);
+  const [cartOpen, setCartOpen] = useState(false);
+  const cart = useCart();
+
+  useReveal();
+  useParallax();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -249,265 +239,148 @@ function Index() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const t = setInterval(() => {
-      setSeatsLeft((n) => (n > 9 ? n - (Math.random() > 0.7 ? 1 : 0) : n));
-    }, 14000);
-    return () => clearInterval(t);
-  }, []);
-
   return (
     <div className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
       <LoadingSplash />
+
       {/* ===== Nav ===== */}
-      <nav
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-charcoal-deep/85 backdrop-blur-xl border-b border-gold/15 py-2.5"
-            : "bg-transparent py-4"
-        }`}
-      >
-        <div className="mx-auto max-w-7xl px-6 grid grid-cols-[minmax(0,1fr)_auto] sm:flex sm:items-center sm:justify-between gap-4">
+      <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "bg-charcoal-deep/85 backdrop-blur-xl border-b border-gold/15 py-2.5" : "bg-transparent py-4"}`}>
+        <div className="mx-auto max-w-7xl px-6 flex items-center justify-between gap-4">
           <a href="#top" className="flex min-w-0 items-center gap-3 group">
-            <img
-              src={LOGO}
-              alt="Wahh Punjab Grandeur"
-              width={44}
-              height={44}
-              className={`rounded-full object-cover ring-1 ring-gold/40 shadow-ember transition-all duration-500 ${scrolled ? "size-9" : "size-11"}`}
-            />
+            <img src={LOGO} alt="Waah Punjab" width={44} height={44} className={`rounded-full object-cover ring-1 ring-gold/40 shadow-ember transition-all duration-500 ${scrolled ? "size-9" : "size-11"}`} />
             <span className="flex flex-col leading-tight min-w-0">
-              <span className="font-display text-gold text-sm sm:text-base font-bold tracking-[0.32em] truncate group-hover:text-gold-light transition-colors">
-                WAHH · PUNJAB
-              </span>
-              <span className="hidden sm:inline text-[8px] uppercase tracking-[0.5em] text-ivory/40">
-                Grandeur · Est. MCMLXXXII
-              </span>
+              <span className="font-display text-gold text-sm sm:text-base font-bold tracking-[0.32em] truncate">WAAH · PUNJAB</span>
+              <span className="hidden sm:inline text-[8px] uppercase tracking-[0.5em] text-ivory/40">Burari · Delhi</span>
             </span>
           </a>
-          <div className="hidden md:flex items-center gap-9 text-[10px] uppercase tracking-[0.35em] text-ivory/70">
-            <a href="#legacy" className="hover:text-gold transition-colors">Legacy</a>
-            <a href="#fire" className="hover:text-gold transition-colors">Fire</a>
+          <div className="hidden md:flex items-center gap-7 text-[10px] uppercase tracking-[0.35em] text-ivory/70">
+            <a href="#story" className="hover:text-gold transition-colors">Story</a>
             <a href="#menu" className="hover:text-gold transition-colors">Menu</a>
-            <a href="#chef" className="hover:text-gold transition-colors">Chef</a>
-            <a href="#private" className="hover:text-gold transition-colors">Private</a>
+            <a href="#signature" className="hover:text-gold transition-colors">Signature</a>
+            <a href="#visit" className="hover:text-gold transition-colors">Visit</a>
           </div>
-          <a
-            href="#reserve"
-            className="shrink-0 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.35em] border border-gold/40 px-4 py-2 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors"
-          >
-            <span className="h-1.5 w-1.5 rounded-full bg-amber animate-ticker" />
-            Reserve
-          </a>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setCartOpen(true)}
+              className="relative inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] border border-gold/40 px-3 py-2 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors"
+            >
+              Cart
+              {cart.count > 0 && (
+                <span className="inline-flex items-center justify-center min-w-5 h-5 px-1 rounded-full bg-amber text-charcoal-deep text-[10px] font-bold">{cart.count}</span>
+              )}
+            </button>
+          </div>
         </div>
       </nav>
 
       {/* ===== HERO ===== */}
-      <section className="relative min-h-screen w-full overflow-hidden">
-        {/* Cinematic background */}
+      <section id="top" className="relative min-h-screen w-full overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <img
-            src={heroEmbers}
-            alt=""
-            width={1920}
-            height={1080}
-            className="h-full w-full object-cover opacity-70 animate-slow-zoom"
-          />
+          <div data-parallax="0.18" className="absolute inset-0 will-change-transform">
+            <img src={heroEmbers} alt="" width={1920} height={1080} className="h-[120%] w-full object-cover opacity-70 animate-slow-zoom" />
+          </div>
           <div className="absolute inset-0 bg-gradient-to-b from-charcoal-deep/40 via-charcoal-deep/70 to-charcoal-deep" />
           <div className="absolute inset-0 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/30 to-charcoal-deep/70" />
         </div>
         <EmberField />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 pt-36 pb-16 md:pt-44 md:pb-24 grid lg:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-screen">
-          {/* Left — headline */}
           <div className="animate-fade-up">
-            <Eyebrow>A Punjabi Hospitality House · Est. MCMLXXXII</Eyebrow>
-
+            <Eyebrow>Sant Nagar · Burari · Delhi 110084</Eyebrow>
             <h1 className="mt-8 editorial text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[0.95] text-balance text-ivory">
-              Where{" "}
-              <span className="italic text-gold-shimmer">Punjab</span>
+              The taste of <span className="italic text-gold-shimmer">Punjab</span>,
               <br />
-              Becomes an{" "}
-              <span className="italic text-glow-amber">Experience.</span>
+              served like <span className="italic text-glow-amber">royalty.</span>
             </h1>
-
             <p className="mt-8 max-w-xl text-base sm:text-lg text-ivory/65 leading-relaxed quote-serif">
-              An unforgettable culinary journey crafted through heritage,
-              fire, storytelling, and world-class hospitality.
+              Slow-fire tandoor, butter-rich gravies, hand-rolled momos and chilled shakes — the full menu of Waah Punjab, now orderable in a few taps. Free home delivery within 3 KM.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <a
-                href="#reserve"
-                className="group inline-flex items-center gap-3 bg-gold text-charcoal-deep px-8 py-4 text-[11px] uppercase tracking-[0.35em] font-medium shadow-ember hover:bg-gold-light transition-all duration-500 hover:-translate-y-0.5"
-              >
-                Reserve Your Table
-                <span className="transition-transform group-hover:translate-x-1">→</span>
+              <a href="#menu" className="group inline-flex items-center gap-3 bg-gold text-charcoal-deep px-8 py-4 text-[11px] uppercase tracking-[0.35em] font-medium shadow-ember hover:bg-gold-light transition-all duration-500 hover:-translate-y-0.5">
+                Order Now <span className="transition-transform group-hover:translate-x-1">→</span>
               </a>
-              <a
-                href="#legacy"
-                className="inline-flex items-center gap-3 border border-gold/40 px-8 py-4 text-[11px] uppercase tracking-[0.35em] text-gold hover:bg-gold/10 transition-colors"
-              >
-                Explore The Experience
+              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="inline-flex items-center gap-3 border border-gold/40 px-8 py-4 text-[11px] uppercase tracking-[0.35em] text-gold hover:bg-gold/10 transition-colors">
+                Call To Reserve
               </a>
             </div>
 
-            {/* Urgency layer */}
             <div className="mt-10 inline-flex items-center gap-3 border border-amber/30 bg-amber/5 px-4 py-2.5">
               <span className="h-2 w-2 rounded-full bg-amber animate-ticker" />
-              <span className="text-[10px] uppercase tracking-[0.3em] text-amber-glow">
-                Only {seatsLeft} Prime Dinner Reservations Remaining This Week
-              </span>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-amber-glow">Free Home Delivery · Up to 3 KM · Live on Swiggy & Zomato</span>
             </div>
 
-            {/* Trust */}
-            <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-2xl">
+            <div className="mt-12 grid grid-cols-3 gap-6 max-w-2xl">
               <div className="border-l border-gold/25 pl-4">
-                <div className="text-gold text-sm tracking-widest">★★★★★</div>
-                <div className="mt-1 text-xs text-ivory/60">
-                  <span className="text-ivory font-medium">4.9</span>
-                  <span className="text-ivory/40"> / 5</span> Guest Rating
-                </div>
+                <div className="editorial text-2xl text-gold-light">{menu.length}+</div>
+                <div className="mt-1 text-xs text-ivory/60">Dishes On Menu</div>
               </div>
               <div className="border-l border-gold/25 pl-4">
-                <div className="editorial text-2xl text-gold-light">50,000+</div>
-                <div className="mt-1 text-xs text-ivory/60">Guests Served</div>
+                <div className="editorial text-2xl text-gold-light">3 KM</div>
+                <div className="mt-1 text-xs text-ivory/60">Free Delivery Radius</div>
               </div>
-              <div className="border-l border-gold/25 pl-4 col-span-2 sm:col-span-1">
-                <div className="text-[10px] uppercase tracking-[0.3em] text-gold">Featured In</div>
-                <div className="mt-1 text-xs text-ivory/60">Vogue · Forbes · Robb Report</div>
+              <div className="border-l border-gold/25 pl-4">
+                <div className="editorial text-2xl text-gold-light">₹15+</div>
+                <div className="mt-1 text-xs text-ivory/60">From the Tandoor</div>
               </div>
             </div>
           </div>
 
-          {/* Right — Reservation widget */}
-          <div className="relative animate-fade-up">
-            <div className="absolute -inset-1 bg-gold/10 blur-2xl -z-10 animate-ember-pulse" aria-hidden />
-            <div className="relative bg-charcoal/80 backdrop-blur-xl border border-gold/25 shadow-luxe p-7 sm:p-9">
-              <div className="absolute -top-3 left-7 bg-charcoal-deep px-3 eyebrow text-[10px]">
-                ✦ Reservation
-              </div>
-
-              <div className="mt-2">
-                <h3 className="editorial text-2xl text-ivory">An Evening Reserved.</h3>
-                <p className="mt-1 text-xs text-ivory/55 quote-serif italic">
-                  Secure your preferred dining experience before availability closes.
-                </p>
-              </div>
-
-              <form onSubmit={(e) => e.preventDefault()} className="mt-6 space-y-4">
-                <div className="grid grid-cols-2 gap-3">
-                  <label className="block">
-                    <span className="block text-[9px] uppercase tracking-[0.3em] text-gold/70 mb-1.5">Date</span>
-                    <input
-                      type="date"
-                      className="w-full bg-charcoal-deep/60 border border-gold/20 px-3 py-2.5 text-sm text-ivory focus:border-gold focus:outline-none transition-colors"
-                    />
-                  </label>
-                  <label className="block">
-                    <span className="block text-[9px] uppercase tracking-[0.3em] text-gold/70 mb-1.5">Time</span>
-                    <select className="w-full bg-charcoal-deep/60 border border-gold/20 px-3 py-2.5 text-sm text-ivory focus:border-gold focus:outline-none transition-colors">
-                      <option>19:00</option>
-                      <option>19:30</option>
-                      <option>20:00</option>
-                      <option>20:30</option>
-                      <option>21:00</option>
-                    </select>
-                  </label>
-                </div>
-                <label className="block">
-                  <span className="block text-[9px] uppercase tracking-[0.3em] text-gold/70 mb-1.5">Guests</span>
-                  <select className="w-full bg-charcoal-deep/60 border border-gold/20 px-3 py-2.5 text-sm text-ivory focus:border-gold focus:outline-none transition-colors">
-                    <option>Two Guests</option>
-                    <option>Four Guests</option>
-                    <option>Six Guests</option>
-                    <option>Private Dining (8+)</option>
-                  </select>
-                </label>
-                <label className="block">
-                  <span className="block text-[9px] uppercase tracking-[0.3em] text-gold/70 mb-1.5">Full Name</span>
-                  <input
-                    type="text"
-                    placeholder="Mr. / Ms."
-                    className="w-full bg-charcoal-deep/60 border border-gold/20 px-3 py-2.5 text-sm text-ivory placeholder:text-ivory/35 focus:border-gold focus:outline-none transition-colors"
-                  />
-                </label>
-                <button
-                  type="submit"
-                  className="w-full bg-gold text-charcoal-deep py-3.5 text-[11px] uppercase tracking-[0.4em] font-medium hover:bg-gold-light transition-colors shadow-ember"
-                >
-                  Confirm Reservation
-                </button>
-                <p className="text-center text-[9px] uppercase tracking-[0.3em] text-ivory/40">
-                  Or call our concierge · +91 98100 00000
-                </p>
-              </form>
+          {/* Hero plate visual */}
+          <div className="relative hidden lg:block">
+            <div className="absolute -inset-12 rounded-full bg-amber/20 blur-3xl animate-ember-pulse" aria-hidden />
+            <div className="relative aspect-square overflow-hidden rounded-full ring-1 ring-gold/40 shadow-luxe">
+              <img src={heroPlatter} alt="Royal Punjabi platter" className="h-full w-full object-cover animate-slow-zoom" />
+            </div>
+            <div className="absolute -bottom-4 -left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
+              <div className="text-[9px] uppercase tracking-[0.35em] text-gold">House Special</div>
+              <div className="editorial text-lg text-ivory">Waah Punjab Thali · ₹299</div>
             </div>
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[9px] uppercase tracking-[0.4em] text-ivory/40">
           <span>Scroll</span>
           <span className="h-10 w-px bg-gradient-to-b from-gold/60 to-transparent" />
         </div>
       </section>
 
-      {/* ===== CHAPTER I — LEGACY ===== */}
-      <section id="legacy" className="relative py-32 lg:py-44 px-6">
+      {/* ===== STORY ===== */}
+      <section id="story" className="relative py-32 lg:py-44 px-6">
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          <div className="lg:col-span-5 order-2 lg:order-1">
-            <Eyebrow>Chapter I · The Legacy</Eyebrow>
+          <div className="lg:col-span-5 order-2 lg:order-1" data-reveal>
+            <Eyebrow>The House</Eyebrow>
             <h2 className="mt-6 editorial text-4xl sm:text-5xl lg:text-6xl text-balance leading-[1.05] text-ivory">
-              Four decades of fire.
+              A Burari kitchen,
               <br />
-              <span className="italic text-gold-shimmer">A single, unbroken flame.</span>
+              <span className="italic text-gold-shimmer">built around the tandoor.</span>
             </h2>
             <p className="mt-8 quote-serif italic text-lg text-ivory/70 leading-relaxed">
-              From a single charcoal pit in old Amritsar to private dining rooms
-              across three continents, Wahh Punjab has carried the soul of the
-              five rivers across forty years — preserving recipes whispered by
-              grandmothers, polished to the precision of the world's finest tables.
+              Waah Punjab is a neighbourhood fine-dining house on Guru Nanak Marg, Sant Nagar. We cook the Punjabi food we grew up on — butter chicken, dal makhani, mutton rogan josh, biryani straight from the clay oven — and pair it with sharp Indo-Chinese, hand-folded momos, and thick shakes for the family table.
             </p>
             <div className="mt-10 grid grid-cols-3 gap-6 border-t border-gold/15 pt-8">
               <div>
-                <div className="editorial text-3xl text-gold text-glow-gold">1982</div>
-                <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">
-                  Founded
-                </div>
+                <div className="editorial text-3xl text-gold text-glow-gold">15+</div>
+                <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">Menu Sections</div>
               </div>
               <div>
-                <div className="editorial text-3xl text-gold text-glow-gold">3°</div>
-                <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">
-                  Continents
-                </div>
+                <div className="editorial text-3xl text-gold text-glow-gold">Tue–Sun</div>
+                <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">Open Daily</div>
               </div>
               <div>
-                <div className="editorial text-3xl text-gold text-glow-gold">27</div>
-                <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">
-                  Spices Daily
-                </div>
+                <div className="editorial text-3xl text-gold text-glow-gold">3 KM</div>
+                <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">Free Delivery</div>
               </div>
             </div>
           </div>
 
-          <div className="lg:col-span-7 order-1 lg:order-2 relative">
+          <div className="lg:col-span-7 order-1 lg:order-2 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -bottom-6 -right-6 size-40 bg-amber/20 blur-3xl -z-10 animate-ember-pulse" />
-            <img
-              src={legacyImg}
-              alt="An antique Punjabi haveli courtyard at dusk"
-              loading="lazy"
-              width={1280}
-              height={1280}
-              className="w-full h-auto shadow-luxe"
-            />
+            <img src={legacyImg} alt="Tandoor at Waah Punjab" loading="lazy" width={1280} height={1280} className="w-full h-auto shadow-luxe" />
             <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto bg-charcoal-deep/85 backdrop-blur-md border border-gold/25 px-4 py-3 max-w-xs">
-              <div className="text-[9px] uppercase tracking-[0.35em] text-gold mb-1">Amritsar · 1982</div>
-              <div className="text-xs text-ivory/70 quote-serif italic">
-                The first charcoal was lit on a winter evening — it has not been
-                allowed to die since.
-              </div>
+              <div className="text-[9px] uppercase tracking-[0.35em] text-gold mb-1">From the Tandoor</div>
+              <div className="text-xs text-ivory/70 quote-serif italic">Slow-cured charcoal, hand-stretched naan, every plate hits the table hot.</div>
             </div>
           </div>
         </div>
@@ -515,417 +388,188 @@ function Index() {
 
       <GoldDivider />
 
-      {/* ===== CHAPTER II — SIGNATURE FIRE ===== */}
-      <section id="fire" className="relative overflow-hidden">
-        {/* Parallax background */}
+      {/* ===== FIRE PARALLAX ===== */}
+      <section className="relative overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <img
-            src={fireImg}
-            alt=""
-            loading="lazy"
-            width={1920}
-            height={1080}
-            className="h-full w-full object-cover opacity-40 animate-slow-zoom"
-          />
+          <div data-parallax="0.25" className="absolute inset-0 will-change-transform">
+            <img src={fireImg} alt="" loading="lazy" className="h-[130%] w-full object-cover opacity-40 animate-slow-zoom" />
+          </div>
           <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep via-charcoal-deep/80 to-charcoal-deep/60" />
         </div>
         <EmberField />
-
-        <div className="relative mx-auto max-w-5xl px-6 py-32 lg:py-44 text-center">
-          <Eyebrow>Chapter II · The Signature Fire Experience</Eyebrow>
+        <div className="relative mx-auto max-w-5xl px-6 py-32 lg:py-44 text-center" data-reveal>
+          <Eyebrow>Smoke · Spice · Slow Fire</Eyebrow>
           <h2 className="mt-8 editorial text-5xl sm:text-6xl lg:text-7xl leading-[1] text-balance text-ivory">
-            Smoke. Spice.
-            <br />
-            <span className="italic text-glow-amber">Centuries on a single skewer.</span>
+            The tandoor doesn't <span className="italic text-glow-amber">rest.</span>
           </h2>
           <p className="mt-10 max-w-2xl mx-auto quote-serif italic text-lg sm:text-xl text-ivory/75 leading-relaxed">
-            The hearth is our cathedral. Hand-cured charcoal aged for seventy-two
-            hours, marinades pulled slow through the night, and a fire tended
-            with the patience of prayer — every plate carries the heat of an
-            ancestor's hand.
+            From the first tandoori roti at lunch to the last seekh kabab past midnight — fresh charcoal, fresh marinade, plate after plate.
           </p>
-
-          <div className="mt-16 grid sm:grid-cols-3 gap-4 sm:gap-6 text-left">
-            {[
-              { n: "72h", t: "Charcoal Cured" },
-              { n: "48h", t: "Marinade Drawn" },
-              { n: "850°", t: "Tandoor Heat" },
-            ].map((m) => (
-              <div
-                key={m.t}
-                className="border border-gold/20 bg-charcoal/60 backdrop-blur-md p-6 hover:border-gold/50 transition-colors group"
-              >
-                <div className="editorial text-4xl text-gold text-glow-gold group-hover:text-glow-amber transition-all">
-                  {m.n}
-                </div>
-                <div className="mt-2 text-[10px] uppercase tracking-[0.35em] text-ivory/55">
-                  {m.t}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* ===== CHAPTER III — SIGNATURE DISHES ===== */}
-      <section id="menu" className="relative py-32 lg:py-44 px-6 border-y border-gold/10">
+      {/* ===== SIGNATURE DISHES ===== */}
+      <section id="signature" className="relative py-32 lg:py-44 px-6 border-y border-gold/10">
         <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-20">
-            <Eyebrow>Chapter III · Signature Dishes</Eyebrow>
-            <h2 className="mt-6 editorial text-5xl sm:text-6xl lg:text-7xl text-balance leading-tight text-gold-shimmer">
-              The Jewels of the Menu
-            </h2>
-            <p className="mt-6 max-w-xl mx-auto quote-serif italic text-lg text-ivory/65">
-              Each course a chapter. Each plate a story written in fire, butter, and time.
-            </p>
+          <div className="text-center mb-20" data-reveal>
+            <Eyebrow>House Signatures</Eyebrow>
+            <h2 className="mt-6 editorial text-5xl sm:text-6xl lg:text-7xl text-balance leading-tight text-gold-shimmer">The plates we are known for</h2>
           </div>
-
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
-            {dishes.map((d, i) => (
-              <article
-                key={d.name}
-                className="dish-card group relative bg-charcoal/50 border border-gold/15 hover:border-gold/45 transition-all duration-700 hover:shadow-luxe hover:-translate-y-1"
-              >
+            {[
+              { name: "Waah Punjab Special Chicken", price: "₹280 / ₹430 / ₹680", img: dishDal, tag: "House Royal", desc: "Our signature gravy — slow-cooked chicken in a buttery, aromatic masala. Order it as Quarter, Half or Full." },
+              { name: "Butter Chicken", price: "₹240 / ₹400 / ₹680", img: dishKulcha, tag: "Most Loved", desc: "Tandoor-charred chicken in a velvety, tomato-cream gravy. The Delhi classic done right." },
+              { name: "Waah Punjab Special Thali", price: "₹299", img: dishBiryani, tag: "Best Value", desc: "A grand single-platter feast of our specials — perfect for the full Punjabi experience." },
+            ].map((d, i) => (
+              <article key={d.name} className="dish-card group relative bg-charcoal/50 border border-gold/15 hover:border-gold/45 transition-all duration-700 hover:shadow-luxe hover:-translate-y-1" data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className="relative aspect-[4/5] overflow-hidden">
-                  <img
-                    src={d.img}
-                    alt={d.name}
-                    loading="lazy"
-                    width={1024}
-                    height={1024}
-                    className="dish-img absolute inset-0 h-full w-full object-cover"
-                  />
+                  <img src={d.img} alt={d.name} loading="lazy" className="dish-img absolute inset-0 h-full w-full object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep via-charcoal-deep/20 to-transparent" />
-                  <div className="absolute top-4 left-4 bg-gold text-charcoal-deep text-[9px] uppercase tracking-[0.3em] px-2.5 py-1">
-                    {d.badge}
-                  </div>
-                  <div className="absolute top-4 right-4 text-[10px] uppercase tracking-[0.3em] text-ivory/60">
-                    No. {String(i + 1).padStart(2, "0")}
-                  </div>
-                  <div className="dish-overlay absolute inset-0 opacity-0 bg-charcoal-deep/55 backdrop-blur-sm flex items-end p-6">
-                    <p className="text-sm quote-serif italic text-ivory/85 leading-relaxed">
-                      {d.desc}
-                    </p>
-                  </div>
+                  <div className="absolute top-4 left-4 bg-gold text-charcoal-deep text-[9px] uppercase tracking-[0.3em] px-2.5 py-1">{d.tag}</div>
                 </div>
                 <div className="p-6">
-                  <div className="text-[10px] uppercase tracking-[0.35em] text-gold/70">
-                    {d.tagline}
-                  </div>
-                  <div className="mt-2 flex items-baseline justify-between gap-3">
+                  <div className="flex items-baseline justify-between gap-3">
                     <h3 className="editorial text-2xl text-ivory">{d.name}</h3>
-                    <span className="text-glow-amber editorial text-lg whitespace-nowrap">
-                      {d.price}
-                    </span>
                   </div>
-                  <p className="mt-3 text-sm text-ivory/55 leading-relaxed quote-serif italic">
-                    {d.desc}
-                  </p>
-                  <div className="mt-5 pt-4 border-t border-gold/10 text-[10px] uppercase tracking-[0.3em] text-gold/60">
-                    ✦ Chef Recommends
-                  </div>
+                  <div className="mt-1 text-glow-amber editorial text-lg">{d.price}</div>
+                  <p className="mt-3 text-sm text-ivory/55 leading-relaxed quote-serif italic">{d.desc}</p>
+                  <a href="#menu" className="mt-5 inline-block text-[10px] uppercase tracking-[0.3em] text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors">Order from menu →</a>
                 </div>
               </article>
             ))}
           </div>
-
-          <div className="mt-16 text-center">
-            <a
-              href="#reserve"
-              className="inline-block text-[11px] uppercase tracking-[0.4em] text-gold border-b border-gold/40 pb-2 hover:border-gold transition-colors"
-            >
-              Request The Full Tasting Menu →
-            </a>
-          </div>
         </div>
       </section>
 
-      {/* ===== CHAPTER IV — CHEF ===== */}
-      <section id="chef" className="relative py-32 lg:py-44 px-6">
+      {/* ===== FULL MENU ===== */}
+      <MenuSection onAdd={cart.add} />
+
+      {/* ===== CHEF / PROMISE ===== */}
+      <section className="relative py-32 lg:py-44 px-6">
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          <div className="lg:col-span-5 relative">
+          <div className="lg:col-span-5 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -top-6 -left-6 size-40 bg-gold/20 blur-3xl -z-10" />
-            <img
-              src={chefImg}
-              alt="Chef Amrit Singh beside a glowing tandoor"
-              loading="lazy"
-              width={1024}
-              height={1280}
-              className="w-full h-auto shadow-luxe grayscale-[0.15] hover:grayscale-0 transition-all duration-1000"
-            />
+            <img src={chefImg} alt="In the Waah Punjab kitchen" loading="lazy" className="w-full h-auto shadow-luxe grayscale-[0.15] hover:grayscale-0 transition-all duration-1000" />
           </div>
-          <div className="lg:col-span-7">
-            <Eyebrow>Chapter IV · The Chef's Philosophy</Eyebrow>
+          <div className="lg:col-span-7" data-reveal>
+            <Eyebrow>Our Promise</Eyebrow>
             <blockquote className="mt-8 editorial italic text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-ivory text-balance">
-              "Tradition is not preserved.
+              "Fresh charcoal. Fresh masala.
               <br />
-              <span className="text-gold-shimmer">It is reimagined."</span>
+              <span className="text-gold-shimmer">Cooked when you order — never before."</span>
             </blockquote>
-            <p className="mt-10 quote-serif italic text-lg text-ivory/65 leading-relaxed max-w-xl">
-              Chef Amrit Singh has tended fire for thirty-one years across
-              Amritsar, London and Dubai. He believes the kitchen is a
-              cathedral, the tandoor an altar, and every guest a witness.
-            </p>
-            <div className="mt-10 flex items-center gap-4">
-              <div className="h-px w-16 bg-gold/50" />
-              <div>
-                <div className="editorial text-xl text-gold">Amrit Singh</div>
-                <div className="text-[10px] uppercase tracking-[0.4em] text-ivory/50 mt-1">
-                  Executive Chef · Custodian
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CHAPTER V — TESTIMONIALS ===== */}
-      <section className="relative py-32 lg:py-44 px-6 bg-charcoal/40 border-y border-gold/10">
-        <div className="mx-auto max-w-7xl">
-          <div className="text-center mb-20">
-            <Eyebrow>Chapter V · Guest Testimony</Eyebrow>
-            <h2 className="mt-6 editorial text-4xl sm:text-5xl lg:text-6xl text-balance text-ivory leading-tight">
-              Told in the words of <span className="italic text-gold-shimmer">those who returned.</span>
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((t) => (
-              <figure
-                key={t.name}
-                className="relative bg-charcoal/60 border border-gold/15 p-8 hover:border-gold/40 transition-colors group"
-              >
-                <div className="absolute -top-3 left-6 bg-charcoal px-2 text-gold text-3xl editorial leading-none">
-                  "
-                </div>
-                <div className="text-gold text-xs tracking-[0.3em] mb-4">★★★★★</div>
-                <blockquote className="quote-serif italic text-lg text-ivory/80 leading-relaxed">
-                  {t.quote}
-                </blockquote>
-                <figcaption className="mt-8 pt-6 border-t border-gold/10 flex items-center gap-4">
-                  <div className="size-12 rounded-full border border-gold/40 bg-gradient-to-br from-gold/20 to-bronze/20 flex items-center justify-center editorial text-gold text-sm tracking-widest">
-                    {t.initials}
-                  </div>
-                  <div>
-                    <div className="editorial text-base text-ivory">{t.name}</div>
-                    <div className="text-[10px] uppercase tracking-[0.3em] text-ivory/45 mt-0.5">
-                      {t.place}
-                    </div>
-                  </div>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CHAPTER VI — PRIVATE DINING ===== */}
-      <section id="private" className="relative min-h-[90vh] overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <img
-            src={privateDining}
-            alt=""
-            loading="lazy"
-            width={1920}
-            height={1080}
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/85 to-charcoal-deep/20" />
-        </div>
-
-        <div className="relative mx-auto max-w-7xl px-6 py-32 lg:py-44 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <Eyebrow>Chapter VI · Private Dining</Eyebrow>
-            <h2 className="mt-8 editorial text-4xl sm:text-5xl lg:text-6xl leading-tight text-ivory text-balance">
-              Reserved for celebrations
-              <br />
-              <span className="italic text-gold-shimmer">worthy of remembrance.</span>
-            </h2>
-            <p className="mt-8 quote-serif italic text-lg text-ivory/70 leading-relaxed max-w-lg">
-              A single black marble table beneath a hand-cast brass chandelier.
-              Ten seats. A bespoke twelve-course menu authored by the Chef.
-              Available by invitation, for the evenings you intend to remember
-              forever.
-            </p>
-
-            <ul className="mt-10 space-y-3 text-sm text-ivory/65">
+            <ul className="mt-10 space-y-3 text-sm text-ivory/70 quote-serif italic">
               {[
-                "Bespoke menu by Chef Amrit Singh",
-                "Dedicated maître d' and sommelier",
-                "Private entrance & valet",
-                "Curated music & ambient design",
-              ].map((f) => (
-                <li key={f} className="flex items-start gap-3">
+                "100% fresh ingredients — no pre-cooked gravies",
+                "Pure desi ghee & cultured butter in every signature dish",
+                "Halal meat, sourced daily",
+                "Hygienic packaging for every delivery order",
+              ].map((p) => (
+                <li key={p} className="flex items-start gap-3">
                   <span className="mt-2 h-px w-6 bg-gold shrink-0" />
-                  <span className="quote-serif italic">{f}</span>
+                  <span>{p}</span>
                 </li>
               ))}
             </ul>
-
-            <a
-              href="#reserve"
-              className="mt-10 inline-flex items-center gap-3 border border-gold/50 px-8 py-4 text-[11px] uppercase tracking-[0.35em] text-gold hover:bg-gold hover:text-charcoal-deep transition-colors"
-            >
-              Inquire By Invitation →
-            </a>
           </div>
         </div>
       </section>
 
-      {/* ===== CHAPTER VII — SCARCITY BANNER ===== */}
-      <section className="relative py-16 px-6 border-y border-gold/20 bg-charcoal-deep">
-        <div className="mx-auto max-w-7xl grid gap-8 md:grid-cols-[1fr_auto] items-center">
-          <div className="flex items-center gap-4">
-            <span className="h-3 w-3 rounded-full bg-amber animate-ticker shrink-0" />
-            <div>
-              <div className="text-[10px] uppercase tracking-[0.4em] text-amber-glow mb-1">
-                Live Availability
-              </div>
-              <div className="editorial text-2xl sm:text-3xl text-ivory">
-                Weekend reservations <span className="italic text-glow-amber">filling rapidly.</span>
-              </div>
+      {/* ===== PRIVATE / FAMILY DINING ===== */}
+      <section className="relative min-h-[80vh] overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <div data-parallax="0.2" className="absolute inset-0 will-change-transform">
+            <img src={privateDining} alt="" loading="lazy" className="h-[125%] w-full object-cover" />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/85 to-charcoal-deep/20" />
+        </div>
+        <div className="relative mx-auto max-w-7xl px-6 py-32 lg:py-44 grid lg:grid-cols-2 gap-12 items-center" data-reveal>
+          <div>
+            <Eyebrow>Family Gatherings & Parties</Eyebrow>
+            <h2 className="mt-8 editorial text-4xl sm:text-5xl lg:text-6xl leading-tight text-ivory text-balance">
+              Hosting at home?
+              <br />
+              <span className="italic text-gold-shimmer">We'll cater the whole table.</span>
+            </h2>
+            <p className="mt-8 quote-serif italic text-lg text-ivory/70 leading-relaxed max-w-lg">
+              Birthdays, kitty parties, family functions in Sant Nagar, Burari, Kamla Nagar and nearby — call us for bulk orders, custom thali platters and family packs.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="inline-flex items-center gap-3 bg-gold text-charcoal-deep px-8 py-4 text-[11px] uppercase tracking-[0.35em] hover:bg-gold-light transition-colors shadow-ember">Call {PHONE}</a>
+              <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 border border-gold/50 px-8 py-4 text-[11px] uppercase tracking-[0.35em] text-gold hover:bg-gold/10 transition-colors">WhatsApp Us</a>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-4 sm:gap-6 text-center min-w-0">
-            {[
-              { d: "Fri", left: 4, total: 18 },
-              { d: "Sat", left: 2, total: 18 },
-              { d: "Sun", left: 7, total: 18 },
-            ].map((s) => (
-              <div key={s.d} className="border border-gold/20 px-3 sm:px-5 py-3">
-                <div className="text-[10px] uppercase tracking-[0.3em] text-gold mb-1">{s.d}</div>
-                <div className="editorial text-xl text-ivory">
-                  {s.left} <span className="text-ivory/30 text-sm">/ {s.total}</span>
-                </div>
-                <div className="text-[9px] uppercase tracking-[0.25em] text-ivory/40 mt-1">left</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* ===== CHAPTER VIII — AWARDS ===== */}
-      <section className="py-24 px-6">
-        <div className="mx-auto max-w-7xl text-center">
-          <Eyebrow>Chapter VIII · Recognition</Eyebrow>
-          <h2 className="mt-6 editorial text-3xl sm:text-4xl text-ivory">
-            Quietly acknowledged by those who watch closely.
-          </h2>
-          <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-10 items-center">
-            {awards.map((a) => (
-              <div
-                key={a}
-                className="border-y border-gold/15 py-5 px-2 text-[10px] uppercase tracking-[0.25em] text-ivory/55 hover:text-gold transition-colors quote-serif not-italic"
-              >
-                {a}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CHAPTER IX — GALLERY ===== */}
+      {/* ===== GALLERY ===== */}
       <section className="relative py-32 px-6 bg-charcoal/40 border-y border-gold/10">
         <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14" data-reveal>
             <div>
-              <Eyebrow>Chapter IX · The Editorial Gallery</Eyebrow>
+              <Eyebrow>The Table</Eyebrow>
               <h2 className="mt-6 editorial text-4xl sm:text-5xl text-ivory text-balance leading-tight">
-                Fragments of an <span className="italic text-gold-shimmer">unforgettable</span> evening.
+                Straight from the <span className="italic text-gold-shimmer">Waah Punjab</span> kitchen.
               </h2>
             </div>
-            <a
-              href="#"
-              className="text-[10px] uppercase tracking-[0.4em] text-gold border-b border-gold/40 pb-2 self-start md:self-auto hover:border-gold transition-colors"
-            >
-              Follow @WahhPunjab →
-            </a>
           </div>
-
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[220px]">
-            {galleryImages.map((g, i) => {
-              const spans = [
-                "col-span-2 row-span-2",
-                "",
-                "row-span-2",
-                "",
-                "",
-                "col-span-2",
-              ];
-              return (
-                <div
-                  key={i}
-                  className={`relative overflow-hidden group border border-gold/10 ${spans[i] ?? ""}`}
-                >
-                  <img
-                    src={g.src}
-                    alt={g.alt}
-                    loading="lazy"
-                    width={1024}
-                    height={1024}
-                    className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-charcoal-deep/0 group-hover:bg-charcoal-deep/40 transition-colors duration-700" />
-                </div>
-              );
-            })}
+            {[
+              { src: gal1, span: "col-span-2 row-span-2" },
+              { src: dishBiryani, span: "" },
+              { src: gal3, span: "row-span-2" },
+              { src: gal2, span: "" },
+              { src: dishKulcha, span: "" },
+              { src: gal4, span: "col-span-2" },
+            ].map((g, i) => (
+              <div key={i} className={`relative overflow-hidden group border border-gold/10 ${g.span}`} data-reveal style={{ transitionDelay: `${i * 60}ms` }}>
+                <img src={g.src} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-110" />
+                <div className="absolute inset-0 bg-charcoal-deep/0 group-hover:bg-charcoal-deep/40 transition-colors duration-700" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ===== FINAL CONVERSION ===== */}
-      <section id="reserve" className="relative py-32 lg:py-44 px-6 overflow-hidden">
+      {/* ===== VISIT / FINAL ===== */}
+      <section id="visit" className="relative py-32 lg:py-44 px-6 overflow-hidden">
         <div className="absolute inset-0 -z-10">
-          <img
-            src={heroEmbers}
-            alt=""
-            loading="lazy"
-            width={1920}
-            height={1080}
-            className="h-full w-full object-cover opacity-40"
-          />
+          <img src={heroEmbers} alt="" loading="lazy" className="h-full w-full object-cover opacity-40" />
           <div className="absolute inset-0 bg-charcoal-deep/80" />
         </div>
         <EmberField />
-
-        <div className="relative mx-auto max-w-4xl text-center">
-          <Eyebrow>The Final Invitation</Eyebrow>
-          <h2 className="mt-8 editorial text-6xl sm:text-7xl lg:text-8xl leading-[0.95] text-balance text-ivory">
-            Your Table
-            <br />
-            <span className="italic text-gold-shimmer">Awaits.</span>
+        <div className="relative mx-auto max-w-5xl text-center" data-reveal>
+          <Eyebrow>Visit Us</Eyebrow>
+          <h2 className="mt-8 editorial text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-balance text-ivory">
+            Your table at <span className="italic text-gold-shimmer">Waah Punjab</span> is waiting.
           </h2>
-          <p className="mt-10 quote-serif italic text-xl sm:text-2xl text-ivory/75 max-w-2xl mx-auto leading-relaxed">
-            Experience Punjab through fire, artistry, hospitality, and
-            unforgettable moments.
-          </p>
-
-          <div className="mt-12 flex flex-wrap justify-center gap-4">
-            <a
-              href="#hero-reserve"
-              onClick={(e) => {
-                e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="group inline-flex items-center gap-3 bg-gold text-charcoal-deep px-10 py-5 text-[11px] uppercase tracking-[0.4em] font-medium hover:bg-gold-light transition-all duration-500 shadow-ember hover:-translate-y-0.5"
-            >
-              Reserve Your Table
-              <span className="transition-transform group-hover:translate-x-1">→</span>
-            </a>
-            <a
-              href="tel:+919810000000"
-              className="inline-flex items-center gap-3 border border-gold/50 px-10 py-5 text-[11px] uppercase tracking-[0.4em] text-gold hover:bg-gold/10 transition-colors"
-            >
-              Contact Concierge
-            </a>
+          <div className="mt-12 grid sm:grid-cols-3 gap-6 text-left">
+            <div className="border border-gold/20 p-6 bg-charcoal/40 backdrop-blur-md">
+              <div className="text-[10px] uppercase tracking-[0.35em] text-gold mb-2">Address</div>
+              <div className="text-sm text-ivory/75 quote-serif italic leading-relaxed">
+                Shop No. 1, A-1 Block<br />Guru Nanak Marg<br />Opp. Muthoot Finance<br />Sant Nagar, Burari<br />Delhi - 110084
+              </div>
+            </div>
+            <div className="border border-gold/20 p-6 bg-charcoal/40 backdrop-blur-md">
+              <div className="text-[10px] uppercase tracking-[0.35em] text-gold mb-2">Call & Order</div>
+              <div className="text-sm text-ivory/75 quote-serif italic leading-relaxed">
+                <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="hover:text-gold transition-colors">{PHONE}</a><br />
+                Free delivery up to 3 KM<br />
+                Live on Swiggy & Zomato<br />
+                <span className="text-ivory/40 text-xs">GST extra</span>
+              </div>
+            </div>
+            <div className="border border-gold/20 p-6 bg-charcoal/40 backdrop-blur-md">
+              <div className="text-[10px] uppercase tracking-[0.35em] text-gold mb-2">Hours</div>
+              <div className="text-sm text-ivory/75 quote-serif italic leading-relaxed">
+                Open All Days<br />11:00 — 23:30<br />Dine-in · Takeaway · Delivery
+              </div>
+            </div>
           </div>
-
-          <div className="mt-16 inline-flex items-center gap-3 border border-amber/30 bg-amber/5 px-4 py-2.5">
-            <span className="h-2 w-2 rounded-full bg-amber animate-ticker" />
-            <span className="text-[10px] uppercase tracking-[0.3em] text-amber-glow">
-              {seatsLeft} reservations remain this week
-            </span>
+          <div className="mt-12 flex flex-wrap justify-center gap-4">
+            <a href="#menu" className="inline-flex items-center gap-3 bg-gold text-charcoal-deep px-10 py-5 text-[11px] uppercase tracking-[0.4em] font-medium hover:bg-gold-light transition-all duration-500 shadow-ember hover:-translate-y-0.5">Order Now →</a>
+            <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 border border-gold/50 px-10 py-5 text-[11px] uppercase tracking-[0.4em] text-gold hover:bg-gold/10 transition-colors">WhatsApp</a>
           </div>
         </div>
       </section>
@@ -936,68 +580,279 @@ function Index() {
           <div className="grid md:grid-cols-12 gap-10 mb-16">
             <div className="md:col-span-5">
               <div className="flex items-center gap-4">
-                <img
-                  src={LOGO}
-                  alt="Wahh Punjab Grandeur emblem"
-                  width={72}
-                  height={72}
-                  loading="lazy"
-                  className="size-16 rounded-full object-cover ring-1 ring-gold/40 shadow-ember"
-                />
+                <img src={LOGO} alt="Waah Punjab" width={72} height={72} loading="lazy" className="size-16 rounded-full object-cover ring-1 ring-gold/40 shadow-ember" />
                 <div>
-                  <div className="font-display text-gold text-2xl tracking-[0.3em]">WAHH · PUNJAB</div>
-                  <div className="text-[9px] uppercase tracking-[0.5em] text-ivory/40 mt-1">
-                    Grandeur · Est. MCMLXXXII
-                  </div>
+                  <div className="font-display text-gold text-2xl tracking-[0.3em]">WAAH · PUNJAB</div>
+                  <div className="text-[9px] uppercase tracking-[0.5em] text-ivory/40 mt-1">Sant Nagar · Burari · Delhi</div>
                 </div>
               </div>
-              <p className="mt-6 quote-serif italic text-ivory/55 max-w-sm leading-relaxed">
-                A custodian of Punjab's culinary memory — one plate, one ember,
-                one guest at a time.
-              </p>
-              <div className="mt-6 flex gap-4 text-[10px] uppercase tracking-[0.35em] text-ivory/45">
-                <a href="#" className="hover:text-gold transition-colors">Instagram</a>
-                <a href="#" className="hover:text-gold transition-colors">Journal</a>
-                <a href="#" className="hover:text-gold transition-colors">Press</a>
-              </div>
+              <p className="mt-6 quote-serif italic text-ivory/55 max-w-sm leading-relaxed">A neighbourhood Punjabi house — tandoor, biryani, momos & shakes, served the way we'd serve our own family.</p>
             </div>
             <div className="md:col-span-3">
-              <h4 className="text-[10px] uppercase tracking-[0.4em] text-gold mb-4">Locate Us</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.4em] text-gold mb-4">Find Us</h4>
               <address className="not-italic text-sm text-ivory/65 leading-relaxed quote-serif">
-                The Royal Pavilion<br />
-                Lutyens' Quarter<br />
-                New Delhi 110001
+                Shop No. 1, A-1 Block<br />Guru Nanak Marg, Sant Nagar<br />Burari, Delhi 110084
               </address>
             </div>
             <div className="md:col-span-2">
               <h4 className="text-[10px] uppercase tracking-[0.4em] text-gold mb-4">Hours</h4>
-              <p className="text-sm text-ivory/65 leading-relaxed quote-serif">
-                Tue — Sun<br />
-                19:00 — 23:30<br />
-                <span className="text-ivory/35">Closed Mondays</span>
-              </p>
+              <p className="text-sm text-ivory/65 leading-relaxed quote-serif">Open All Days<br />11:00 — 23:30</p>
             </div>
             <div className="md:col-span-2">
-              <h4 className="text-[10px] uppercase tracking-[0.4em] text-gold mb-4">Concierge</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.4em] text-gold mb-4">Order</h4>
               <p className="text-sm text-ivory/65 leading-relaxed quote-serif">
-                +91 98100 00000<br />
-                <a href="mailto:reserve@wahhpunjab.com" className="hover:text-gold transition-colors">
-                  reserve@wahhpunjab.com
-                </a>
+                <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="hover:text-gold transition-colors">{PHONE}</a><br />
+                Swiggy · Zomato
               </p>
             </div>
           </div>
-
           <div className="pt-8 border-t border-gold/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-[9px] uppercase tracking-[0.4em] text-ivory/30">
-              © MMXXIV · Wahh Punjab Grandeur · All Rights Reserved
-            </p>
-            <p className="text-[9px] uppercase tracking-[0.4em] text-ivory/30">
-              A Hospitality House
-            </p>
+            <p className="text-[9px] uppercase tracking-[0.4em] text-ivory/30">© Waah Punjab Restaurant · All Rights Reserved</p>
+            <p className="text-[9px] uppercase tracking-[0.4em] text-ivory/30">GST Extra</p>
           </div>
         </div>
       </footer>
+
+      {/* ===== Sticky Cart FAB (mobile) ===== */}
+      {cart.count > 0 && !cartOpen && (
+        <button
+          onClick={() => setCartOpen(true)}
+          className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-3 bg-gold text-charcoal-deep px-5 py-3.5 text-[11px] uppercase tracking-[0.3em] shadow-ember hover:bg-gold-light transition-all"
+        >
+          <span className="font-bold">{cart.count}</span>
+          <span>View Cart · ₹{cart.total}</span>
+        </button>
+      )}
+
+      {/* ===== Cart Drawer ===== */}
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} cart={cart} />
     </div>
+  );
+}
+
+/* ---------- Menu Section ---------- */
+function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => void }) {
+  const [active, setActive] = useState<string>("All");
+  const [query, setQuery] = useState("");
+  const [vegOnly, setVegOnly] = useState(false);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return menu.filter(
+      (m) =>
+        (active === "All" || m.category === active) &&
+        (!vegOnly || m.veg) &&
+        (q === "" || m.name.toLowerCase().includes(q)),
+    );
+  }, [active, query, vegOnly]);
+
+  const grouped = useMemo(() => {
+    const map = new Map<string, MenuItem[]>();
+    for (const m of filtered) {
+      if (!map.has(m.category)) map.set(m.category, []);
+      map.get(m.category)!.push(m);
+    }
+    return Array.from(map.entries());
+  }, [filtered]);
+
+  return (
+    <section id="menu" className="relative py-24 lg:py-32 px-6 bg-charcoal/30 border-y border-gold/10">
+      <div className="mx-auto max-w-7xl">
+        <div className="text-center mb-12" data-reveal>
+          <Eyebrow>The Full Menu · Order Online</Eyebrow>
+          <h2 className="mt-6 editorial text-5xl sm:text-6xl lg:text-7xl text-balance leading-tight text-gold-shimmer">
+            Every dish. Tap to order.
+          </h2>
+          <p className="mt-4 text-ivory/60 quote-serif italic">{menu.length} dishes · {categories.length} sections · Free delivery within 3 KM</p>
+        </div>
+
+        {/* Controls */}
+        <div className="sticky top-16 z-30 -mx-6 px-6 py-4 bg-charcoal-deep/90 backdrop-blur-xl border-y border-gold/15">
+          <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap gap-3 items-center">
+              <div className="relative flex-1 min-w-[220px]">
+                <input
+                  type="search"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search dishes — butter chicken, momos, biryani…"
+                  className="w-full bg-charcoal-deep/80 border border-gold/25 px-4 py-2.5 text-sm text-ivory placeholder:text-ivory/35 focus:border-gold focus:outline-none"
+                />
+              </div>
+              <label className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-ivory/70 cursor-pointer select-none">
+                <input type="checkbox" checked={vegOnly} onChange={(e) => setVegOnly(e.target.checked)} className="accent-green-500" />
+                Veg only
+              </label>
+            </div>
+            <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 [scrollbar-width:thin]">
+              {(["All", ...categories] as const).map((c) => (
+                <button
+                  key={c}
+                  onClick={() => setActive(c)}
+                  className={`shrink-0 px-3.5 py-2 text-[10px] uppercase tracking-[0.28em] border transition-colors ${
+                    active === c
+                      ? "bg-gold text-charcoal-deep border-gold"
+                      : "border-gold/25 text-ivory/70 hover:border-gold/60 hover:text-gold"
+                  }`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Items */}
+        <div className="mt-10 space-y-14">
+          {grouped.length === 0 && (
+            <p className="text-center text-ivory/50 quote-serif italic py-16">No dishes match your search.</p>
+          )}
+          {grouped.map(([cat, items]) => (
+            <div key={cat}>
+              <h3 className="editorial text-2xl sm:text-3xl text-ivory mb-6 flex items-center gap-4">
+                <span className="text-gold/70">✦</span>
+                {cat}
+                <span className="flex-1 h-px hairline-gold opacity-40" />
+                <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/40">{items.length}</span>
+              </h3>
+              <ul className="grid sm:grid-cols-2 gap-4">
+                {items.map((m) => (
+                  <li
+                    key={m.id}
+                    className="group bg-charcoal/60 border border-gold/15 hover:border-gold/45 p-4 sm:p-5 transition-all duration-500 hover:-translate-y-0.5 hover:shadow-ember"
+                  >
+                    <div className="flex items-start gap-3">
+                      <span
+                        className={`mt-1.5 inline-block size-3 border ${m.veg ? "border-green-500" : "border-red-500"} p-0.5`}
+                        aria-label={m.veg ? "Vegetarian" : "Non-vegetarian"}
+                      >
+                        <span className={`block size-full rounded-full ${m.veg ? "bg-green-500" : "bg-red-500"}`} />
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-baseline justify-between gap-3">
+                          <h4 className="editorial text-lg text-ivory leading-tight">{m.name}</h4>
+                        </div>
+                        {m.desc && (
+                          <p className="mt-1 text-xs text-ivory/55 quote-serif italic">{m.desc}</p>
+                        )}
+                        <div className="mt-3 flex flex-wrap items-center gap-2">
+                          {m.variants.map((v, idx) => (
+                            <button
+                              key={v.label}
+                              onClick={() => onAdd(m, idx)}
+                              className="inline-flex items-center gap-2 border border-gold/30 px-3 py-1.5 text-xs text-ivory hover:bg-gold hover:text-charcoal-deep transition-colors"
+                              aria-label={`Add ${m.name} ${v.label} ₹${v.price}`}
+                            >
+                              {m.variants.length > 1 && (
+                                <span className="text-[9px] uppercase tracking-[0.25em] text-gold/80 group-hover:text-charcoal-deep">{v.label}</span>
+                              )}
+                              <span className="text-glow-amber font-medium">₹{v.price}</span>
+                              <span className="text-gold">+</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Cart Drawer ---------- */
+function CartDrawer({
+  open,
+  onClose,
+  cart,
+}: {
+  open: boolean;
+  onClose: () => void;
+  cart: ReturnType<typeof useCart>;
+}) {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+
+  const sendOrder = () => {
+    if (cart.lines.length === 0) return;
+    const lines = cart.lines
+      .map((l) => `• ${l.name}${l.variant !== "Regular" ? ` (${l.variant})` : ""} × ${l.qty} — ₹${l.price * l.qty}`)
+      .join("%0A");
+    const total = `Total: ₹${cart.total}`;
+    const customer = `Name: ${name || "—"}%0APhone: ${phone || "—"}%0AAddress: ${address || "—"}`;
+    const msg = `*New Order — Waah Punjab*%0A%0A${lines}%0A%0A${total}%0A%0A${customer}`;
+    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
+  };
+
+  return (
+    <>
+      <div
+        className={`fixed inset-0 z-[80] bg-charcoal-deep/70 backdrop-blur-sm transition-opacity duration-300 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        onClick={onClose}
+        aria-hidden
+      />
+      <aside
+        className={`fixed top-0 right-0 z-[90] h-full w-full sm:w-[440px] bg-charcoal border-l border-gold/25 shadow-luxe transition-transform duration-500 ${open ? "translate-x-0" : "translate-x-full"} flex flex-col`}
+        aria-label="Cart"
+      >
+        <header className="flex items-center justify-between p-5 border-b border-gold/15">
+          <div>
+            <div className="text-[10px] uppercase tracking-[0.4em] text-gold">Your Order</div>
+            <div className="editorial text-xl text-ivory">{cart.count} {cart.count === 1 ? "item" : "items"}</div>
+          </div>
+          <button onClick={onClose} className="text-ivory/60 hover:text-gold text-2xl leading-none" aria-label="Close cart">×</button>
+        </header>
+
+        <div className="flex-1 overflow-y-auto p-5 space-y-3">
+          {cart.lines.length === 0 && (
+            <p className="text-center text-ivory/50 quote-serif italic py-16">Your cart is empty. Pick something from the menu.</p>
+          )}
+          {cart.lines.map((l) => (
+            <div key={l.key} className="flex items-start gap-3 border border-gold/15 p-3">
+              <div className="flex-1 min-w-0">
+                <div className="text-sm text-ivory">{l.name}</div>
+                {l.variant !== "Regular" && (
+                  <div className="text-[10px] uppercase tracking-[0.25em] text-gold/70 mt-0.5">{l.variant}</div>
+                )}
+                <div className="text-xs text-ivory/60 mt-1">₹{l.price} each</div>
+              </div>
+              <div className="flex items-center gap-2">
+                <button onClick={() => cart.setQty(l.key, l.qty - 1)} className="size-7 border border-gold/30 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors">−</button>
+                <span className="w-6 text-center text-sm text-ivory">{l.qty}</span>
+                <button onClick={() => cart.setQty(l.key, l.qty + 1)} className="size-7 border border-gold/30 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors">+</button>
+              </div>
+              <div className="w-16 text-right text-sm text-glow-amber">₹{l.price * l.qty}</div>
+            </div>
+          ))}
+        </div>
+
+        {cart.lines.length > 0 && (
+          <div className="border-t border-gold/15 p-5 space-y-3">
+            <div className="grid grid-cols-2 gap-2">
+              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="bg-charcoal-deep/60 border border-gold/20 px-3 py-2 text-sm text-ivory placeholder:text-ivory/35 focus:border-gold focus:outline-none" />
+              <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" inputMode="tel" className="bg-charcoal-deep/60 border border-gold/20 px-3 py-2 text-sm text-ivory placeholder:text-ivory/35 focus:border-gold focus:outline-none" />
+            </div>
+            <input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Delivery address (or 'Takeaway')" className="w-full bg-charcoal-deep/60 border border-gold/20 px-3 py-2 text-sm text-ivory placeholder:text-ivory/35 focus:border-gold focus:outline-none" />
+            <div className="flex items-center justify-between pt-2">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/60">Total</span>
+              <span className="editorial text-2xl text-gold-shimmer">₹{cart.total}</span>
+            </div>
+            <button
+              onClick={sendOrder}
+              className="w-full bg-gold text-charcoal-deep py-3.5 text-[11px] uppercase tracking-[0.4em] font-medium hover:bg-gold-light transition-colors shadow-ember"
+            >
+              Send Order via WhatsApp →
+            </button>
+            <button onClick={cart.clear} className="w-full text-[10px] uppercase tracking-[0.35em] text-ivory/50 hover:text-gold py-1">Clear cart</button>
+            <p className="text-center text-[9px] uppercase tracking-[0.3em] text-ivory/35">Or call {PHONE} · GST extra</p>
+          </div>
+        )}
+      </aside>
+    </>
   );
 }
