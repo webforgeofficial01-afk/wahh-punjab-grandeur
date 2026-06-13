@@ -13,23 +13,68 @@ import gal1 from "@/assets/gallery-1.jpg";
 import gal2 from "@/assets/gallery-2.jpg";
 import gal3 from "@/assets/gallery-3.jpg";
 import gal4 from "@/assets/gallery-4.jpg";
+import logoAsset from "@/assets/wahh-punjab-logo.jpg.asset.json";
+
+const LOGO = logoAsset.url;
+
+const restaurantSchema = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  name: "Wahh Punjab Grandeur",
+  image: [LOGO],
+  logo: LOGO,
+  telephone: "+91-98100-00000",
+  priceRange: "₹₹₹₹",
+  servesCuisine: ["Punjabi", "North Indian", "Fine Dining"],
+  acceptsReservations: "True",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "The Royal Pavilion, Lutyens' Quarter",
+    addressLocality: "New Delhi",
+    postalCode: "110001",
+    addressRegion: "DL",
+    addressCountry: "IN",
+  },
+  geo: { "@type": "GeoCoordinates", latitude: 28.6139, longitude: 77.209 },
+  openingHoursSpecification: [{
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    opens: "19:00", closes: "23:30",
+  }],
+  aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "2147" },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    { "@type": "Question", name: "How do I reserve a table at Wahh Punjab in Delhi?",
+      acceptedAnswer: { "@type": "Answer", text: "Reserve through our concierge form or call +91 98100 00000. Prime dining hours fill rapidly — we recommend booking 5–7 days in advance." } },
+    { "@type": "Question", name: "Is Wahh Punjab the best Punjabi fine dining restaurant in Delhi?",
+      acceptedAnswer: { "@type": "Answer", text: "Wahh Punjab Grandeur is recognised across Conde Nast Traveller, Forbes Travel and the Michelin Guide as a leading luxury Punjabi fine dining destination in Delhi NCR." } },
+    { "@type": "Question", name: "Do you offer private dining for anniversaries and corporate events?",
+      acceptedAnswer: { "@type": "Answer", text: "Yes — our private dining room seats ten beneath a hand-cast brass chandelier, with a bespoke twelve-course menu authored by Chef Amrit Singh." } },
+  ],
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wahh Punjab Grandeur — Where Punjab Becomes an Experience" },
-      {
-        name: "description",
-        content:
-          "A cinematic luxury Punjabi fine dining destination. Heritage fire, world-class hospitality, and unforgettable moments. Reserve your table.",
-      },
-      { property: "og:title", content: "Wahh Punjab Grandeur — Where Punjab Becomes an Experience" },
-      {
-        property: "og:description",
-        content: "Cinematic luxury Punjabi fine dining. Reserve your table.",
-      },
+      { title: "Wahh Punjab Grandeur — Luxury Punjabi Fine Dining in Delhi" },
+      { name: "description", content: "Wahh Punjab Grandeur — Delhi's most celebrated luxury Punjabi fine dining destination. Heritage fire, world-class hospitality, private dining for anniversaries & corporate evenings. Reserve your table." },
+      { name: "keywords", content: "Best Punjabi Restaurant Delhi, Luxury Punjabi Restaurant Delhi, Fine Dining Delhi, Private Dining Delhi, Best Butter Chicken Delhi, Best Dal Makhani Delhi, Anniversary Restaurant Delhi, Punjabi Fine Dining Delhi NCR" },
+      { property: "og:title", content: "Wahh Punjab Grandeur — Luxury Punjabi Fine Dining in Delhi" },
+      { property: "og:description", content: "A cinematic luxury Punjabi fine dining destination. Reserve your table." },
+      { property: "og:type", content: "restaurant" },
       { property: "og:image", content: heroPlatter },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: heroPlatter },
+      { name: "theme-color", content: "#0a0807" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(restaurantSchema) },
+      { type: "application/ld+json", children: JSON.stringify(faqSchema) },
     ],
   }),
   component: Index,
@@ -157,6 +202,43 @@ const galleryImages = [
 
 /* ---------- Page ---------- */
 
+function LoadingSplash() {
+  const [gone, setGone] = useState(false);
+  const [fade, setFade] = useState(false);
+  useEffect(() => {
+    const t1 = setTimeout(() => setFade(true), 2200);
+    const t2 = setTimeout(() => setGone(true), 2900);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+  if (gone) return null;
+  return (
+    <div
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-charcoal-deep transition-opacity duration-700 ${fade ? "opacity-0" : "opacity-100"}`}
+      aria-hidden
+    >
+      <div className="absolute inset-0 bg-radial-gradient pointer-events-none"
+           style={{ background: "radial-gradient(circle at center, color-mix(in oklab, var(--gold) 12%, transparent), transparent 60%)" }} />
+      <div className="relative animate-fade-up">
+        <div className="absolute -inset-8 rounded-full bg-gold/20 blur-3xl animate-ember-pulse" />
+        <img
+          src={LOGO}
+          alt="Wahh Punjab"
+          width={160}
+          height={160}
+          className="relative size-32 sm:size-40 rounded-full object-cover shadow-luxe ring-1 ring-gold/40"
+        />
+      </div>
+      <div className="mt-10 h-px w-40 hairline-gold opacity-70" />
+      <p className="mt-6 quote-serif italic text-base sm:text-lg text-ivory/80 text-center px-6 animate-fade-up" style={{ animationDelay: "0.4s" }}>
+        Every great feast begins with anticipation.
+      </p>
+      <div className="mt-8 text-[9px] uppercase tracking-[0.5em] text-gold/70 animate-fade-up" style={{ animationDelay: "0.8s" }}>
+        Wahh · Punjab · Grandeur
+      </div>
+    </div>
+  );
+}
+
 function Index() {
   const [scrolled, setScrolled] = useState(false);
   const [seatsLeft, setSeatsLeft] = useState(17);
@@ -168,7 +250,6 @@ function Index() {
   }, []);
 
   useEffect(() => {
-    // Subtle real-time-style decay
     const t = setInterval(() => {
       setSeatsLeft((n) => (n > 9 ? n - (Math.random() > 0.7 ? 1 : 0) : n));
     }, 14000);
@@ -177,23 +258,33 @@ function Index() {
 
   return (
     <div className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
+      <LoadingSplash />
       {/* ===== Nav ===== */}
       <nav
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "bg-charcoal-deep/85 backdrop-blur-xl border-b border-gold/15 py-3"
-            : "bg-transparent py-5"
+            ? "bg-charcoal-deep/85 backdrop-blur-xl border-b border-gold/15 py-2.5"
+            : "bg-transparent py-4"
         }`}
       >
         <div className="mx-auto max-w-7xl px-6 grid grid-cols-[minmax(0,1fr)_auto] sm:flex sm:items-center sm:justify-between gap-4">
-          <div className="flex min-w-0 items-baseline gap-3">
-            <span className="font-display text-gold text-base sm:text-lg font-bold tracking-[0.35em] truncate">
-              WAHH · PUNJAB
+          <a href="#top" className="flex min-w-0 items-center gap-3 group">
+            <img
+              src={LOGO}
+              alt="Wahh Punjab Grandeur"
+              width={44}
+              height={44}
+              className={`rounded-full object-cover ring-1 ring-gold/40 shadow-ember transition-all duration-500 ${scrolled ? "size-9" : "size-11"}`}
+            />
+            <span className="flex flex-col leading-tight min-w-0">
+              <span className="font-display text-gold text-sm sm:text-base font-bold tracking-[0.32em] truncate group-hover:text-gold-light transition-colors">
+                WAHH · PUNJAB
+              </span>
+              <span className="hidden sm:inline text-[8px] uppercase tracking-[0.5em] text-ivory/40">
+                Grandeur · Est. MCMLXXXII
+              </span>
             </span>
-            <span className="hidden lg:inline text-[9px] uppercase tracking-[0.45em] text-ivory/40">
-              Grandeur
-            </span>
-          </div>
+          </a>
           <div className="hidden md:flex items-center gap-9 text-[10px] uppercase tracking-[0.35em] text-ivory/70">
             <a href="#legacy" className="hover:text-gold transition-colors">Legacy</a>
             <a href="#fire" className="hover:text-gold transition-colors">Fire</a>
@@ -844,9 +935,21 @@ function Index() {
         <div className="mx-auto max-w-7xl">
           <div className="grid md:grid-cols-12 gap-10 mb-16">
             <div className="md:col-span-5">
-              <div className="font-display text-gold text-2xl tracking-[0.3em]">WAHH · PUNJAB</div>
-              <div className="text-[9px] uppercase tracking-[0.5em] text-ivory/40 mt-1">
-                Grandeur · Est. MCMLXXXII
+              <div className="flex items-center gap-4">
+                <img
+                  src={LOGO}
+                  alt="Wahh Punjab Grandeur emblem"
+                  width={72}
+                  height={72}
+                  loading="lazy"
+                  className="size-16 rounded-full object-cover ring-1 ring-gold/40 shadow-ember"
+                />
+                <div>
+                  <div className="font-display text-gold text-2xl tracking-[0.3em]">WAHH · PUNJAB</div>
+                  <div className="text-[9px] uppercase tracking-[0.5em] text-ivory/40 mt-1">
+                    Grandeur · Est. MCMLXXXII
+                  </div>
+                </div>
               </div>
               <p className="mt-6 quote-serif italic text-ivory/55 max-w-sm leading-relaxed">
                 A custodian of Punjab's culinary memory — one plate, one ember,
