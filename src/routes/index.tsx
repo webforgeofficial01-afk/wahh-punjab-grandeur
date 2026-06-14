@@ -597,10 +597,7 @@ function Index() {
 
       {/* ===== VISIT / FINAL ===== */}
       <section id="visit" className="relative py-32 lg:py-44 px-6 overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <img src={heroEmbers} alt="" loading="lazy" className="h-full w-full object-cover opacity-40" />
-          <div className="absolute inset-0 bg-charcoal-deep/80" />
-        </div>
+        <Environment image={bgVisitLounge} overlay="dark" parallax={0.14} tint="dual" />
         <EmberField />
         <div className="relative mx-auto max-w-5xl text-center" data-reveal>
           <Eyebrow>Visit Us</Eyebrow>
