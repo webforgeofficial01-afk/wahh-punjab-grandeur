@@ -758,8 +758,8 @@ function Index() {
             <div className="md:col-span-2">
               <h4 className="text-[10px] uppercase tracking-[0.4em] text-gold mb-4">Order</h4>
               <p className="text-sm text-ivory/65 leading-relaxed quote-serif">
-                <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="hover:text-gold transition-colors">{PHONE}</a><br />
-                Swiggy · Zomato
+                <a href={`tel:${PHONE_TEL}`} className="hover:text-gold transition-colors">{PHONE}</a><br />
+                Call to order
               </p>
             </div>
           </div>
