@@ -337,13 +337,8 @@ function Index() {
 
       {/* ===== HERO ===== */}
       <section id="top" className="relative min-h-screen w-full overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div data-parallax="0.18" className="absolute inset-0 will-change-transform">
-            <img src={heroEmbers} alt="" width={1920} height={1080} className="h-[120%] w-full object-cover opacity-70 animate-slow-zoom" />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal-deep/40 via-charcoal-deep/70 to-charcoal-deep" />
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/30 to-charcoal-deep/70" />
-        </div>
+        <Environment image={bgHeroHall} overlay="soft" parallax={0.18} tint="dual" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/30 to-transparent" />
         <EmberField />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 pt-36 pb-16 md:pt-44 md:pb-24 grid lg:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-screen">
