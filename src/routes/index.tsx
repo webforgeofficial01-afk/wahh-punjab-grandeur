@@ -203,24 +203,41 @@ function LoadingSplash() {
   const [gone, setGone] = useState(false);
   const [fade, setFade] = useState(false);
   useEffect(() => {
-    const t1 = setTimeout(() => setFade(true), 1800);
-    const t2 = setTimeout(() => setGone(true), 2500);
+    const t1 = setTimeout(() => setFade(true), 2600);
+    const t2 = setTimeout(() => setGone(true), 3400);
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
   if (gone) return null;
   return (
     <div
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-charcoal-deep transition-opacity duration-700 ${fade ? "opacity-0" : "opacity-100"}`}
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black transition-opacity duration-[800ms] ${fade ? "opacity-0" : "opacity-100"}`}
       aria-hidden
     >
-      <div className="absolute inset-0" style={{ background: "radial-gradient(circle at center, color-mix(in oklab, var(--gold) 14%, transparent), transparent 60%)" }} />
-      <div className="relative animate-fade-up">
-        <div className="absolute -inset-8 rounded-full bg-gold/20 blur-3xl animate-ember-pulse" />
-        <img src={LOGO} alt="Wahh Punjab" width={160} height={160} className="relative size-32 sm:size-40 rounded-full object-cover shadow-luxe ring-1 ring-gold/40" />
+      {/* Warm golden glow emerges from center */}
+      <div className="absolute inset-0 splash-glow" />
+      {/* Subtle vignette */}
+      <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%)" }} />
+
+      <div className="relative splash-logo-wrap">
+        <div className="absolute -inset-16 rounded-full bg-gold/15 blur-3xl animate-ember-pulse" />
+        <img
+          src={LOGO}
+          alt="Wahh Punjab"
+          width={200}
+          height={200}
+          className="relative size-36 sm:size-48 rounded-full object-cover ring-1 ring-gold/50"
+          style={{ boxShadow: "0 0 60px -10px color-mix(in oklab, var(--gold) 60%, transparent), 0 0 120px -20px color-mix(in oklab, var(--amber) 40%, transparent)" }}
+        />
+        {/* Gold sweep across logo */}
+        <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
+          <div className="splash-sweep absolute inset-0" />
+        </div>
       </div>
-      <div className="mt-10 h-px w-40 hairline-gold opacity-70" />
-      <p className="mt-6 quote-serif italic text-base sm:text-lg text-ivory/80 text-center px-6 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-        Where every flame tells a Punjabi story.
+
+      <div className="mt-12 h-px w-0 hairline-gold opacity-80 splash-line" />
+
+      <p className="mt-8 font-display text-sm sm:text-base text-center px-6 tracking-[0.4em] uppercase splash-tagline" style={{ color: "color-mix(in oklab, var(--gold-light) 95%, white)" }}>
+        Where Punjab Becomes An Experience.
       </p>
     </div>
   );
