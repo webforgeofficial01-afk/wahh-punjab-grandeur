@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import heroEmbers from "@/assets/hero-embers.jpg";
+
 import heroPlatter from "@/assets/hero-platter.jpg";
 import legacyImg from "@/assets/legacy.jpg";
 import fireImg from "@/assets/fire-experience.jpg";
