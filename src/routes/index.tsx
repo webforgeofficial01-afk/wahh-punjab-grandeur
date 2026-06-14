@@ -662,32 +662,7 @@ function Index() {
       </section>
 
 
-      {/* ===== PRIVATE / FAMILY DINING ===== */}
-      <section className="relative min-h-[80vh] overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div data-parallax="0.2" className="absolute inset-0 will-change-transform">
-            <img src={privateDining} alt="" loading="lazy" className="h-[125%] w-full object-cover" />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/85 to-charcoal-deep/20" />
-        </div>
-        <div className="relative mx-auto max-w-7xl px-6 py-32 lg:py-44 grid lg:grid-cols-2 gap-12 items-center" data-reveal>
-          <div>
-            <Eyebrow>Family Gatherings & Parties</Eyebrow>
-            <h2 className="mt-8 editorial text-4xl sm:text-5xl lg:text-6xl leading-tight text-ivory text-balance">
-              Hosting at home?
-              <br />
-              <span className="italic text-gold-shimmer">We'll cater the whole table.</span>
-            </h2>
-            <p className="mt-8 quote-serif italic text-lg text-ivory/70 leading-relaxed max-w-lg">
-              Birthdays, kitty parties, family functions in Sant Nagar, Burari, Kamla Nagar and nearby — call us for bulk orders, custom thali platters and family packs.
-            </p>
-            <div className="mt-12 flex flex-wrap gap-5">
-              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="btn-luxe"><span>Call {PHONE}</span></a>
-              <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="btn-luxe-outline"><span>WhatsApp Us</span></a>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* ===== GALLERY ===== */}
       <section className="relative py-32 px-6 bg-charcoal/40 border-y border-gold/10">
