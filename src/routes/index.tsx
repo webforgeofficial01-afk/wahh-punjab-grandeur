@@ -562,9 +562,9 @@ function Index() {
             <p className="mt-8 quote-serif italic text-lg text-ivory/70 leading-relaxed max-w-lg">
               Birthdays, kitty parties, family functions in Sant Nagar, Burari, Kamla Nagar and nearby — call us for bulk orders, custom thali platters and family packs.
             </p>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="inline-flex items-center gap-3 bg-gold text-charcoal-deep px-8 py-4 text-[11px] uppercase tracking-[0.35em] hover:bg-gold-light transition-colors shadow-ember">Call {PHONE}</a>
-              <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 border border-gold/50 px-8 py-4 text-[11px] uppercase tracking-[0.35em] text-gold hover:bg-gold/10 transition-colors">WhatsApp Us</a>
+            <div className="mt-12 flex flex-wrap gap-5">
+              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="btn-luxe"><span>Call {PHONE}</span></a>
+              <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="btn-luxe-outline"><span>WhatsApp Us</span></a>
             </div>
           </div>
         </div>
