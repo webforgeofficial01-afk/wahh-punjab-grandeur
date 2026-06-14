@@ -13,6 +13,12 @@ import gal4 from "@/assets/gallery-4.jpg";
 import dishDal from "@/assets/dish-dal.jpg";
 import dishKulcha from "@/assets/dish-kulcha.jpg";
 import dishBiryani from "@/assets/dish-biryani.jpg";
+import bgHeroHall from "@/assets/bg-hero-hall.jpg";
+import bgStoryHaveli from "@/assets/bg-story-haveli.jpg";
+import bgMenuTable from "@/assets/bg-menu-table.jpg";
+import bgChefKitchen from "@/assets/bg-chef-kitchen.jpg";
+import bgVisitLounge from "@/assets/bg-visit-lounge.jpg";
+import bgSignatureTable from "@/assets/bg-signature-table.jpg";
 import logoAsset from "@/assets/wahh-punjab-logo.jpg.asset.json";
 import { menu, categories, type MenuItem } from "@/data/menu";
 
