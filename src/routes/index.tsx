@@ -931,19 +931,9 @@ function CartDrawer({
   onClose: () => void;
   cart: ReturnType<typeof useCart>;
 }) {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-
   const sendOrder = () => {
     if (cart.lines.length === 0) return;
-    const lines = cart.lines
-      .map((l) => `• ${l.name}${l.variant !== "Regular" ? ` (${l.variant})` : ""} × ${l.qty} — ₹${l.price * l.qty}`)
-      .join("%0A");
-    const total = `Total: ₹${cart.total}`;
-    const customer = `Name: ${name || "—"}%0APhone: ${phone || "—"}%0AAddress: ${address || "—"}`;
-    const msg = `*New Order — Wahh Punjab*%0A%0A${lines}%0A%0A${total}%0A%0A${customer}`;
-    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
+    window.location.href = `tel:${PHONE_TEL}`;
   };
 
   return (
