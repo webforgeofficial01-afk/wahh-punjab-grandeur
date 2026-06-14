@@ -550,8 +550,8 @@ function Index() {
                 <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">Open Daily</div>
               </div>
               <div>
-                <div className="editorial text-3xl text-gold text-glow-gold">3 KM</div>
-                <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">Free Delivery</div>
+                <div className="editorial text-3xl text-gold text-glow-gold">Call</div>
+                <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">To Order Delivery</div>
               </div>
             </div>
           </div>
