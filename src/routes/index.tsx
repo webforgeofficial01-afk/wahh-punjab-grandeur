@@ -117,6 +117,101 @@ function GoldDivider() {
   );
 }
 
+/* ---------- Scroll progress bar ---------- */
+function ScrollProgress() {
+  const [p, setP] = useState(0);
+  useEffect(() => {
+    const onScroll = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      setP(max > 0 ? (h.scrollTop / max) * 100 : 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+  return (
+    <div className="fixed top-0 inset-x-0 z-[60] h-[2px] pointer-events-none" aria-hidden>
+      <div
+        className="h-full"
+        style={{
+          width: `${p}%`,
+          background: "linear-gradient(90deg, transparent, var(--gold) 30%, var(--amber-glow) 60%, var(--gold) 90%, transparent)",
+          boxShadow: "0 0 14px color-mix(in oklab, var(--gold) 70%, transparent), 0 0 28px color-mix(in oklab, var(--amber) 50%, transparent)",
+          transition: "width 120ms linear",
+        }}
+      />
+    </div>
+  );
+}
+
+/* ---------- Section index dots (desktop) ---------- */
+function SectionDots() {
+  const items = useMemo(
+    () => [
+      { id: "top", label: "Hero" },
+      { id: "story", label: "Story" },
+      { id: "signature", label: "Signature" },
+      { id: "menu", label: "Menu" },
+      { id: "visit", label: "Visit" },
+    ],
+    [],
+  );
+  const [active, setActive] = useState("top");
+  useEffect(() => {
+    const els = items
+      .map((i) => document.getElementById(i.id))
+      .filter((el): el is HTMLElement => !!el);
+    if (els.length === 0) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const v = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (v) setActive(v.target.id);
+      },
+      { rootMargin: "-40% 0px -50% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [items]);
+  return (
+    <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-5" aria-label="Sections">
+      {items.map((it) => {
+        const isActive = active === it.id;
+        return (
+          <a key={it.id} href={`#${it.id}`} className="group relative flex items-center gap-3 justify-end" aria-label={`Jump to ${it.label}`}>
+            <span className={`font-display text-[9px] uppercase tracking-[0.4em] transition-all duration-500 ${isActive ? "opacity-100 text-gold translate-x-0" : "opacity-0 group-hover:opacity-80 text-ivory translate-x-2 group-hover:translate-x-0"}`}>
+              {it.label}
+            </span>
+            <span className={`block transition-all duration-500 rounded-full ${isActive ? "h-6 w-[3px] bg-gradient-to-b from-gold-light to-gold shadow-[0_0_12px_color-mix(in_oklab,var(--gold)_70%,transparent)]" : "h-1.5 w-1.5 bg-ivory/30 group-hover:bg-gold/70"}`} />
+          </a>
+        );
+      })}
+    </nav>
+  );
+}
+
+/* ---------- Marquee band ---------- */
+function Marquee({ items }: { items: string[] }) {
+  const loop = [...items, ...items, ...items];
+  return (
+    <div className="relative border-y border-gold/15 bg-charcoal-deep/60 overflow-hidden" aria-hidden>
+      <div className="marquee-track flex gap-12 py-5 whitespace-nowrap">
+        {loop.map((t, i) => (
+          <span key={i} className="inline-flex items-center gap-12 font-display text-[11px] uppercase tracking-[0.5em] text-gold-shimmer">
+            {t}<span className="text-gold/40">✦</span>
+          </span>
+        ))}
+      </div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-charcoal-deep to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-charcoal-deep to-transparent" />
+    </div>
+  );
+}
+
 /* ---------- Cinematic multi-layer environment ---------- */
 function Environment({
   image,
