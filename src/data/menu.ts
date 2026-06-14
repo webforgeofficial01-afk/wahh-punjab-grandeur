@@ -132,7 +132,7 @@ export const menu: MenuItem[] = [
     ["Punjabi Kukad", 250, 400, 650],
     ["Methi Malai Chicken", 250, 400, 650],
     ["Chicken Dahi Wala", 250, 400, 650],
-    ["Waah Punjab Special Chicken", 280, 430, 680],
+    ["Wahh Punjab Special Chicken", 280, 430, 680],
   ].map(([n, q, h, f]) =>
     mk(n as string, "Chicken Curry", false, [
       { label: "Quarter", price: q as number },
@@ -166,7 +166,7 @@ export const menu: MenuItem[] = [
       { label: "Full", price: 450 },
     ]),
   ),
-  mk("Waah Punjab Special Mutton", "Mutton", false, [
+  mk("Wahh Punjab Special Mutton", "Mutton", false, [
     { label: "Half", price: 280 },
     { label: "Full", price: 480 },
   ]),
@@ -288,5 +288,5 @@ export const menu: MenuItem[] = [
 
   // Thalis
   mk("Deluxe Thali", "Thalis", true, one(249), "A grand spread of seasonal Punjabi favourites."),
-  mk("Waah Punjab Special Thali", "Thalis", true, one(299), "Our signature royal thali — house specialties on a single platter."),
+  mk("Wahh Punjab Special Thali", "Thalis", true, one(299), "Our signature royal thali — house specialties on a single platter."),
 ];

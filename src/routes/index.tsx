@@ -23,7 +23,7 @@ const WHATSAPP = "919999900000";
 const restaurantSchema = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
-  name: "Waah Punjab Restaurant",
+  name: "Wahh Punjab Restaurant",
   image: [LOGO],
   logo: LOGO,
   priceRange: "₹₹",
@@ -47,10 +47,10 @@ const restaurantSchema = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Waah Punjab — Premium Punjabi, Tandoori & Chinese in Burari, Delhi" },
-      { name: "description", content: "Waah Punjab Restaurant, Sant Nagar, Burari — Premium Punjabi, tandoori, biryani, Chinese, momos & thalis. Free home delivery up to 3 KM. Order online." },
-      { name: "keywords", content: "Waah Punjab, Punjabi Restaurant Burari, Sant Nagar Delhi, Best Butter Chicken Burari, Tandoori Delhi, Biryani Burari, Online food order Burari" },
-      { property: "og:title", content: "Waah Punjab — Burari, Delhi" },
+      { title: "Wahh Punjab — Premium Punjabi, Tandoori & Chinese in Burari, Delhi" },
+      { name: "description", content: "Wahh Punjab Restaurant, Sant Nagar, Burari — Premium Punjabi, tandoori, biryani, Chinese, momos & thalis. Free home delivery up to 3 KM. Order online." },
+      { name: "keywords", content: "Wahh Punjab, Punjabi Restaurant Burari, Sant Nagar Delhi, Best Butter Chicken Burari, Tandoori Delhi, Biryani Burari, Online food order Burari" },
+      { property: "og:title", content: "Wahh Punjab — Burari, Delhi" },
       { property: "og:description", content: "Premium Punjabi fine dining in Burari. Order online — free delivery up to 3 KM." },
       { property: "og:type", content: "restaurant" },
       { property: "og:image", content: heroPlatter },
@@ -166,14 +166,14 @@ function useCart() {
   const [hydrated, setHydrated] = useState(false);
   useEffect(() => {
     try {
-      const raw = localStorage.getItem("waah:cart");
+      const raw = localStorage.getItem("wahh:cart");
       if (raw) setLines(JSON.parse(raw) as CartLine[]);
     } catch {/* noop */}
     setHydrated(true);
   }, []);
   useEffect(() => {
     if (!hydrated) return;
-    try { localStorage.setItem("waah:cart", JSON.stringify(lines)); } catch {/* noop */}
+    try { localStorage.setItem("wahh:cart", JSON.stringify(lines)); } catch {/* noop */}
   }, [lines, hydrated]);
 
   const add = (item: MenuItem, vIndex = 0) => {
@@ -216,7 +216,7 @@ function LoadingSplash() {
       <div className="absolute inset-0" style={{ background: "radial-gradient(circle at center, color-mix(in oklab, var(--gold) 14%, transparent), transparent 60%)" }} />
       <div className="relative animate-fade-up">
         <div className="absolute -inset-8 rounded-full bg-gold/20 blur-3xl animate-ember-pulse" />
-        <img src={LOGO} alt="Waah Punjab" width={160} height={160} className="relative size-32 sm:size-40 rounded-full object-cover shadow-luxe ring-1 ring-gold/40" />
+        <img src={LOGO} alt="Wahh Punjab" width={160} height={160} className="relative size-32 sm:size-40 rounded-full object-cover shadow-luxe ring-1 ring-gold/40" />
       </div>
       <div className="mt-10 h-px w-40 hairline-gold opacity-70" />
       <p className="mt-6 quote-serif italic text-base sm:text-lg text-ivory/80 text-center px-6 animate-fade-up" style={{ animationDelay: "0.3s" }}>
@@ -248,9 +248,9 @@ function Index() {
       <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "bg-charcoal-deep/85 backdrop-blur-xl border-b border-gold/15 py-2.5" : "bg-transparent py-4"}`}>
         <div className="mx-auto max-w-7xl px-6 flex items-center justify-between gap-4">
           <a href="#top" className="flex min-w-0 items-center gap-3 group">
-            <img src={LOGO} alt="Waah Punjab" width={44} height={44} className={`rounded-full object-cover ring-1 ring-gold/40 shadow-ember transition-all duration-500 ${scrolled ? "size-9" : "size-11"}`} />
+            <img src={LOGO} alt="Wahh Punjab" width={44} height={44} className={`rounded-full object-cover ring-1 ring-gold/40 shadow-ember transition-all duration-500 ${scrolled ? "size-9" : "size-11"}`} />
             <span className="flex flex-col leading-tight min-w-0">
-              <span className="font-display text-gold text-sm sm:text-base font-bold tracking-[0.32em] truncate">WAAH · PUNJAB</span>
+              <span className="font-display text-gold text-sm sm:text-base font-bold tracking-[0.32em] truncate">WAHH · PUNJAB</span>
               <span className="hidden sm:inline text-[8px] uppercase tracking-[0.5em] text-ivory/40">Burari · Delhi</span>
             </span>
           </a>
@@ -335,7 +335,7 @@ function Index() {
             </div>
             <div className="absolute -bottom-4 -left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.35em] text-gold">House Special</div>
-              <div className="editorial text-lg text-ivory">Waah Punjab Thali · ₹299</div>
+              <div className="editorial text-lg text-ivory">Wahh Punjab Thali · ₹299</div>
             </div>
           </div>
         </div>
@@ -357,7 +357,7 @@ function Index() {
               <span className="italic text-gold-shimmer">built around the tandoor.</span>
             </h2>
             <p className="mt-8 quote-serif italic text-lg text-ivory/70 leading-relaxed">
-              Waah Punjab is a neighbourhood fine-dining house on Guru Nanak Marg, Sant Nagar. We cook the Punjabi food we grew up on — butter chicken, dal makhani, mutton rogan josh, biryani straight from the clay oven — and pair it with sharp Indo-Chinese, hand-folded momos, and thick shakes for the family table.
+              Wahh Punjab is a neighbourhood fine-dining house on Guru Nanak Marg, Sant Nagar. We cook the Punjabi food we grew up on — butter chicken, dal makhani, mutton rogan josh, biryani straight from the clay oven — and pair it with sharp Indo-Chinese, hand-folded momos, and thick shakes for the family table.
             </p>
             <div className="mt-10 grid grid-cols-3 gap-6 border-t border-gold/15 pt-8">
               <div>
@@ -378,7 +378,7 @@ function Index() {
           <div className="lg:col-span-7 order-1 lg:order-2 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -bottom-6 -right-6 size-40 bg-amber/20 blur-3xl -z-10 animate-ember-pulse" />
-            <img src={legacyImg} alt="Tandoor at Waah Punjab" loading="lazy" width={1280} height={1280} className="w-full h-auto shadow-luxe" />
+            <img src={legacyImg} alt="Tandoor at Wahh Punjab" loading="lazy" width={1280} height={1280} className="w-full h-auto shadow-luxe" />
             <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto bg-charcoal-deep/85 backdrop-blur-md border border-gold/25 px-4 py-3 max-w-xs">
               <div className="text-[9px] uppercase tracking-[0.35em] text-gold mb-1">From the Tandoor</div>
               <div className="text-xs text-ivory/70 quote-serif italic">Slow-cured charcoal, hand-stretched naan, every plate hits the table hot.</div>
@@ -418,9 +418,9 @@ function Index() {
           </div>
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
             {[
-              { name: "Waah Punjab Special Chicken", price: "₹280 / ₹430 / ₹680", img: dishDal, tag: "House Royal", desc: "Our signature gravy — slow-cooked chicken in a buttery, aromatic masala. Order it as Quarter, Half or Full." },
+              { name: "Wahh Punjab Special Chicken", price: "₹280 / ₹430 / ₹680", img: dishDal, tag: "House Royal", desc: "Our signature gravy — slow-cooked chicken in a buttery, aromatic masala. Order it as Quarter, Half or Full." },
               { name: "Butter Chicken", price: "₹240 / ₹400 / ₹680", img: dishKulcha, tag: "Most Loved", desc: "Tandoor-charred chicken in a velvety, tomato-cream gravy. The Delhi classic done right." },
-              { name: "Waah Punjab Special Thali", price: "₹299", img: dishBiryani, tag: "Best Value", desc: "A grand single-platter feast of our specials — perfect for the full Punjabi experience." },
+              { name: "Wahh Punjab Special Thali", price: "₹299", img: dishBiryani, tag: "Best Value", desc: "A grand single-platter feast of our specials — perfect for the full Punjabi experience." },
             ].map((d, i) => (
               <article key={d.name} className="dish-card group relative bg-charcoal/50 border border-gold/15 hover:border-gold/45 transition-all duration-700 hover:shadow-luxe hover:-translate-y-1" data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className="relative aspect-[4/5] overflow-hidden">
@@ -451,7 +451,7 @@ function Index() {
           <div className="lg:col-span-5 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -top-6 -left-6 size-40 bg-gold/20 blur-3xl -z-10" />
-            <img src={chefImg} alt="Rajat Saluja, owner of Waah Punjab" loading="lazy" className="w-full h-auto shadow-luxe grayscale-[0.15] hover:grayscale-0 transition-all duration-1000" />
+            <img src={chefImg} alt="Rajat Saluja, owner of Wahh Punjab" loading="lazy" className="w-full h-auto shadow-luxe grayscale-[0.15] hover:grayscale-0 transition-all duration-1000" />
             <div className="absolute bottom-4 left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.35em] text-gold">Founded By</div>
               <div className="font-display text-lg font-bold tracking-[0.1em] text-ivory">RAJAT SALUJA</div>
@@ -460,11 +460,11 @@ function Index() {
           <div className="lg:col-span-7" data-reveal>
             <Eyebrow>The Man Behind The House</Eyebrow>
             <h2 className="mt-8 font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.02] tracking-[-0.02em] text-ivory text-balance">
-              Every plate at Waah Punjab carries
+              Every plate at Wahh Punjab carries
               <span className="text-gold-shimmer"> his standard.</span>
             </h2>
             <p className="mt-8 quote-serif italic text-lg text-ivory/75 leading-relaxed max-w-xl">
-              Waah Punjab is the vision of <span className="not-italic font-semibold text-gold">Rajat Saluja</span> — owner, host, and quiet perfectionist. He insists on fresh charcoal, freshly ground masala, and dishes cooked only after you order. His full story is coming soon to this page.
+              Wahh Punjab is the vision of <span className="not-italic font-semibold text-gold">Rajat Saluja</span> — owner, host, and quiet perfectionist. He insists on fresh charcoal, freshly ground masala, and dishes cooked only after you order. His full story is coming soon to this page.
             </p>
             <ul className="mt-10 space-y-3 text-sm text-ivory/75 quote-serif italic">
               {[
@@ -518,7 +518,7 @@ function Index() {
             <div>
               <Eyebrow>The Table</Eyebrow>
               <h2 className="mt-6 editorial text-4xl sm:text-5xl text-ivory text-balance leading-tight">
-                Straight from the <span className="italic text-gold-shimmer">Waah Punjab</span> kitchen.
+                Straight from the <span className="italic text-gold-shimmer">Wahh Punjab</span> kitchen.
               </h2>
             </div>
           </div>
@@ -550,7 +550,7 @@ function Index() {
         <div className="relative mx-auto max-w-5xl text-center" data-reveal>
           <Eyebrow>Visit Us</Eyebrow>
           <h2 className="mt-8 editorial text-5xl sm:text-6xl lg:text-7xl leading-[0.95] text-balance text-ivory">
-            Your table at <span className="italic text-gold-shimmer">Waah Punjab</span> is waiting.
+            Your table at <span className="italic text-gold-shimmer">Wahh Punjab</span> is waiting.
           </h2>
           <div className="mt-12 grid sm:grid-cols-3 gap-6 text-left">
             <div className="border border-gold/20 p-6 bg-charcoal/40 backdrop-blur-md">
@@ -588,9 +588,9 @@ function Index() {
           <div className="grid md:grid-cols-12 gap-10 mb-16">
             <div className="md:col-span-5">
               <div className="flex items-center gap-4">
-                <img src={LOGO} alt="Waah Punjab" width={72} height={72} loading="lazy" className="size-16 rounded-full object-cover ring-1 ring-gold/40 shadow-ember" />
+                <img src={LOGO} alt="Wahh Punjab" width={72} height={72} loading="lazy" className="size-16 rounded-full object-cover ring-1 ring-gold/40 shadow-ember" />
                 <div>
-                  <div className="font-display text-gold text-2xl tracking-[0.3em]">WAAH · PUNJAB</div>
+                  <div className="font-display text-gold text-2xl tracking-[0.3em]">WAHH · PUNJAB</div>
                   <div className="text-[9px] uppercase tracking-[0.5em] text-ivory/40 mt-1">Sant Nagar · Burari · Delhi</div>
                 </div>
               </div>
@@ -615,7 +615,7 @@ function Index() {
             </div>
           </div>
           <div className="pt-8 border-t border-gold/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-[9px] uppercase tracking-[0.4em] text-ivory/30">© Waah Punjab Restaurant · All Rights Reserved</p>
+            <p className="text-[9px] uppercase tracking-[0.4em] text-ivory/30">© Wahh Punjab Restaurant · All Rights Reserved</p>
             <p className="text-[9px] uppercase tracking-[0.4em] text-ivory/30">GST Extra</p>
           </div>
         </div>
@@ -793,7 +793,7 @@ function CartDrawer({
       .join("%0A");
     const total = `Total: ₹${cart.total}`;
     const customer = `Name: ${name || "—"}%0APhone: ${phone || "—"}%0AAddress: ${address || "—"}`;
-    const msg = `*New Order — Waah Punjab*%0A%0A${lines}%0A%0A${total}%0A%0A${customer}`;
+    const msg = `*New Order — Wahh Punjab*%0A%0A${lines}%0A%0A${total}%0A%0A${customer}`;
     window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
   };
 
