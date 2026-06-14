@@ -488,7 +488,7 @@ function Index() {
 
             <div className="mt-10 inline-flex items-center gap-3 border border-amber/30 bg-amber/5 px-4 py-2.5">
               <span className="h-2 w-2 rounded-full bg-amber animate-ticker" />
-              <span className="text-[10px] uppercase tracking-[0.3em] text-amber-glow">Free Home Delivery · Up to 3 KM · Live on Swiggy & Zomato</span>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-amber-glow">Home Delivery · Call {PHONE} To Order</span>
             </div>
 
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-2xl">
