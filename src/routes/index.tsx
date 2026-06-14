@@ -824,7 +824,7 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
           <h2 className="mt-6 editorial text-5xl sm:text-6xl lg:text-7xl text-balance leading-tight text-gold-shimmer">
             Every dish. Tap to order.
           </h2>
-          <p className="mt-4 text-ivory/60 quote-serif italic">{menu.length} dishes · {categories.length} sections · Free delivery within 3 KM</p>
+          <p className="mt-4 text-ivory/60 quote-serif italic">{menu.length} dishes · {categories.length} sections · Call {PHONE} to order delivery</p>
         </div>
 
         {/* Controls */}
