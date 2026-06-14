@@ -405,7 +405,8 @@ function Index() {
       </section>
 
       {/* ===== STORY ===== */}
-      <section id="story" className="relative py-32 lg:py-44 px-6">
+      <section id="story" className="relative py-32 lg:py-44 px-6 overflow-hidden">
+        <Environment image={bgStoryHaveli} overlay="dark" parallax={0.12} tint="gold" />
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           <div className="lg:col-span-5 order-2 lg:order-1" data-reveal>
             <Eyebrow>The House</Eyebrow>
