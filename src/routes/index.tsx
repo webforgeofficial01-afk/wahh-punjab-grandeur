@@ -450,13 +450,7 @@ function Index() {
 
       {/* ===== FIRE PARALLAX ===== */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div data-parallax="0.25" className="absolute inset-0 will-change-transform">
-            <img src={fireImg} alt="" loading="lazy" className="h-[130%] w-full object-cover opacity-40 animate-slow-zoom" />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep via-charcoal-deep/80 to-charcoal-deep/60" />
-        </div>
-        <EmberField />
+        <Environment image={fireImg} overlay="dark" parallax={0.25} tint="amber" />
         <div className="relative mx-auto max-w-5xl px-6 py-32 lg:py-44 text-center" data-reveal>
           <Eyebrow>Smoke · Spice · Slow Fire</Eyebrow>
           <h2 className="mt-8 editorial text-5xl sm:text-6xl lg:text-7xl leading-[1] text-balance text-ivory">
