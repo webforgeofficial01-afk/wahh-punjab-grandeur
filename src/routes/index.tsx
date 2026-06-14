@@ -712,9 +712,8 @@ function Index() {
             <div className="border border-gold/20 p-6 bg-charcoal/40 backdrop-blur-md">
               <div className="text-[10px] uppercase tracking-[0.35em] text-gold mb-2">Call & Order</div>
               <div className="text-sm text-ivory/75 quote-serif italic leading-relaxed">
-                <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="hover:text-gold transition-colors">{PHONE}</a><br />
-                Free delivery up to 3 KM<br />
-                Live on Swiggy & Zomato<br />
+                <a href={`tel:${PHONE_TEL}`} className="hover:text-gold transition-colors">{PHONE}</a><br />
+                Call to order home delivery<br />
                 <span className="text-ivory/40 text-xs">GST extra</span>
               </div>
             </div>
@@ -727,7 +726,7 @@ function Index() {
           </div>
           <div className="mt-14 flex flex-wrap justify-center gap-5">
             <a href="#menu" className="btn-luxe"><span>Curate Your Feast</span><span>→</span></a>
-            <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="btn-luxe-outline"><span>WhatsApp</span></a>
+            <a href={`tel:${PHONE_TEL}`} className="btn-luxe-outline"><span>Call {PHONE}</span></a>
           </div>
         </div>
       </section>
