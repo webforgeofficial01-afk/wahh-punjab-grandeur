@@ -783,9 +783,9 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
                 {items.map((m) => (
                   <li
                     key={m.id}
-                    className="group bg-charcoal/60 border border-gold/15 hover:border-gold/45 p-4 sm:p-5 transition-all duration-500 hover:-translate-y-0.5 hover:shadow-ember"
+                    className="group bg-charcoal/55 border border-gold/15 hover:border-gold/45 p-5 sm:p-6 transition-all duration-500 hover:-translate-y-0.5 hover:shadow-ember"
                   >
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-4">
                       <span
                         className={`mt-1.5 inline-block size-3 border ${m.veg ? "border-green-500" : "border-red-500"} p-0.5`}
                         aria-label={m.veg ? "Vegetarian" : "Non-vegetarian"}
@@ -794,24 +794,24 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
                       </span>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-baseline justify-between gap-3">
-                          <h4 className="editorial text-lg text-ivory leading-tight">{m.name}</h4>
+                          <h4 className="editorial text-lg sm:text-xl text-champagne leading-tight">{m.name}</h4>
                         </div>
                         {m.desc && (
-                          <p className="mt-1 text-xs text-ivory/55 quote-serif italic">{m.desc}</p>
+                          <p className="mt-2 text-xs text-champagne-deep/65 quote-serif italic leading-relaxed">{m.desc}</p>
                         )}
-                        <div className="mt-3 flex flex-wrap items-center gap-2">
+                        <div className="mt-4 flex flex-wrap items-center gap-2.5">
                           {m.variants.map((v, idx) => (
                             <button
                               key={v.label}
                               onClick={() => onAdd(m, idx)}
-                              className="inline-flex items-center gap-2 border border-gold/30 px-3 py-1.5 text-xs text-ivory hover:bg-gold hover:text-charcoal-deep transition-colors"
-                              aria-label={`Add ${m.name} ${v.label} ₹${v.price}`}
+                              className="add-pill"
+                              aria-label={`Add ${m.name} ${v.label} ₹${v.price} to your feast`}
                             >
                               {m.variants.length > 1 && (
-                                <span className="text-[9px] uppercase tracking-[0.25em] text-gold/80 group-hover:text-charcoal-deep">{v.label}</span>
+                                <span className="text-[9px] uppercase tracking-[0.28em] text-gold/85 group-hover:text-charcoal-deep">{v.label}</span>
                               )}
-                              <span className="text-glow-amber font-medium">₹{v.price}</span>
-                              <span className="text-gold">+</span>
+                              <span className="font-semibold text-glow-amber">₹{v.price}</span>
+                              <span className="text-gold/90 text-base leading-none">+</span>
                             </button>
                           ))}
                         </div>
