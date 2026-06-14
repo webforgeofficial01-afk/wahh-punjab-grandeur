@@ -312,3 +312,86 @@
 /* ===== Luxury hero polish ===== */
 h1 { text-wrap: balance; }
 .text-gold-shimmer { animation-duration: 7s; }
+
+/* ===== Cinematic environment layers ===== */
+@keyframes cinematic-push {
+  0% { transform: scale(1.02) translate3d(0,0,0); }
+  100% { transform: scale(1.14) translate3d(0,-2%,0); }
+}
+@keyframes cinematic-drift-x {
+  0%, 100% { transform: translate3d(-1%,0,0); }
+  50% { transform: translate3d(1.5%,0.5%,0); }
+}
+@keyframes light-shift {
+  0%, 100% { opacity: 0.55; transform: translate3d(0,0,0) scale(1); }
+  50% { opacity: 0.9; transform: translate3d(2%,-1%,0) scale(1.05); }
+}
+@keyframes light-shift-alt {
+  0%, 100% { opacity: 0.4; transform: translate3d(0,0,0) scale(1.1); }
+  50% { opacity: 0.75; transform: translate3d(-3%,2%,0) scale(1); }
+}
+@keyframes grain-flicker {
+  0%, 100% { opacity: 0.06; }
+  50% { opacity: 0.1; }
+}
+
+.bg-environment {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -10;
+}
+.bg-layer-back {
+  position: absolute;
+  inset: -8%;
+  background-size: cover;
+  background-position: center;
+  animation: cinematic-push 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.bg-layer-mid {
+  position: absolute;
+  inset: -4%;
+  background-size: cover;
+  background-position: center;
+  animation: cinematic-drift-x 24s ease-in-out infinite;
+  will-change: transform;
+  mix-blend-mode: screen;
+  opacity: 0.35;
+}
+.bg-light-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  pointer-events: none;
+  will-change: opacity, transform;
+}
+.bg-light-amber {
+  background: radial-gradient(circle, color-mix(in oklab, var(--amber) 70%, transparent) 0%, transparent 70%);
+  animation: light-shift 14s ease-in-out infinite;
+}
+.bg-light-gold {
+  background: radial-gradient(circle, color-mix(in oklab, var(--gold) 60%, transparent) 0%, transparent 70%);
+  animation: light-shift-alt 18s ease-in-out infinite;
+}
+.bg-vignette-deep {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 0%, color-mix(in oklab, var(--charcoal-deep) 92%, transparent) 90%),
+    linear-gradient(to bottom, color-mix(in oklab, var(--charcoal-deep) 55%, transparent), color-mix(in oklab, var(--charcoal-deep) 88%, transparent));
+}
+.bg-grain {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-radial-gradient(circle at 30% 20%, rgba(255,255,255,0.03) 0px, transparent 1.5px),
+    repeating-radial-gradient(circle at 70% 80%, rgba(255,255,255,0.025) 0px, transparent 1.2px);
+  animation: grain-flicker 4s steps(6) infinite;
+  mix-blend-mode: overlay;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-layer-back, .bg-layer-mid, .bg-light-amber, .bg-light-gold, .bg-grain { animation: none !important; }
+}
