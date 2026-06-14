@@ -421,6 +421,9 @@ function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
       <LoadingSplash />
+      <ScrollProgress />
+      <SectionDots />
+
 
       {/* ===== Nav ===== */}
       <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "bg-charcoal-deep/85 backdrop-blur-xl border-b border-gold/15 py-2.5" : "bg-transparent py-4"}`}>
