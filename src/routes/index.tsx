@@ -333,7 +333,7 @@ function Index() {
           <a href="#top" className="flex min-w-0 items-center gap-3 group">
             <img src={LOGO} alt="Wahh Punjab" width={44} height={44} className={`rounded-full object-cover ring-1 ring-gold/40 shadow-ember transition-all duration-500 ${scrolled ? "size-9" : "size-11"}`} />
             <span className="flex flex-col leading-tight min-w-0">
-              <span className="font-display text-gold-shimmer text-sm sm:text-lg font-black tracking-[0.2em] sm:tracking-[0.36em] truncate drop-shadow-[0_0_12px_color-mix(in_oklab,var(--gold)_45%,transparent)]">WAHH · PUNJAB</span>
+              <span className="font-display text-gold-shimmer text-[13px] sm:text-lg font-black tracking-[0.12em] sm:tracking-[0.36em] truncate drop-shadow-[0_0_12px_color-mix(in_oklab,var(--gold)_45%,transparent)]">WAHH · PUNJAB</span>
               <span className="hidden sm:inline text-[8px] uppercase tracking-[0.5em] text-ivory/40">Burari · Delhi</span>
             </span>
           </a>
