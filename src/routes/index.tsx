@@ -4,7 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import heroPlatter from "@/assets/hero-platter.jpg";
 import legacyImg from "@/assets/legacy.jpg";
 import fireImg from "@/assets/fire-experience.jpg";
-import chefImg from "@/assets/chef.jpg";
+import rajatAsset from "@/assets/rajat-saluja.jpg.asset.json";
+const chefImg = rajatAsset.url;
 import privateDining from "@/assets/private-dining.jpg";
 import gal1 from "@/assets/gallery-1.jpg";
 import gal2 from "@/assets/gallery-2.jpg";
@@ -506,34 +507,35 @@ function Index() {
           <div className="lg:col-span-5 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -top-6 -left-6 size-40 bg-gold/20 blur-3xl -z-10" />
-            <img src={chefImg} alt="Rajat Saluja, owner of Wahh Punjab" loading="lazy" className="w-full h-auto shadow-luxe grayscale-[0.15] hover:grayscale-0 transition-all duration-1000" />
+            <img src={chefImg} alt="Rajat Saluja, founder of Wahh Punjab" loading="lazy" className="w-full h-auto aspect-[4/5] object-cover shadow-luxe grayscale-[0.1] hover:grayscale-0 transition-all duration-1000" />
             <div className="absolute bottom-4 left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
-              <div className="text-[9px] uppercase tracking-[0.35em] text-gold">Founded By</div>
+              <div className="text-[9px] uppercase tracking-[0.35em] text-gold">Founder</div>
               <div className="font-display text-lg font-bold tracking-[0.1em] text-ivory">RAJAT SALUJA</div>
+              <div className="text-[10px] tracking-[0.2em] text-ivory/60 mt-1 quote-serif italic">b. 16 March 1985</div>
             </div>
           </div>
           <div className="lg:col-span-7" data-reveal>
-            <Eyebrow>The Man Behind The House</Eyebrow>
+            <Eyebrow>Meet The Founder</Eyebrow>
             <h2 className="mt-8 font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.02] tracking-[-0.02em] text-ivory text-balance">
-              Every plate at Wahh Punjab carries
-              <span className="text-gold-shimmer"> his standard.</span>
+              A family legacy of flavour,
+              <span className="text-gold-shimmer"> served with pride.</span>
             </h2>
-            <p className="mt-8 quote-serif italic text-lg text-ivory/75 leading-relaxed max-w-xl">
-              Wahh Punjab is the vision of <span className="not-italic font-semibold text-gold">Rajat Saluja</span> — owner, host, and quiet perfectionist. He insists on fresh charcoal, freshly ground masala, and dishes cooked only after you order. His full story is coming soon to this page.
-            </p>
-            <ul className="mt-10 space-y-3 text-sm text-ivory/75 quote-serif italic">
-              {[
-                "100% fresh ingredients — no pre-cooked gravies",
-                "Pure desi ghee & cultured butter in every signature dish",
-                "Separate veg & non-veg sections — full pure-veg menu available",
-                "Hygienic packaging on every delivery order",
-              ].map((p) => (
-                <li key={p} className="flex items-start gap-3">
-                  <span className="mt-2 h-px w-6 bg-gold shrink-0" />
-                  <span>{p}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-8 space-y-5 quote-serif italic text-lg text-ivory/80 leading-relaxed max-w-2xl">
+              <p>
+                <span className="not-italic font-semibold text-gold">Rajat Saluja</span>, born on <span className="not-italic">16 March 1985</span>, has been passionate about cooking and restaurants since childhood. Coming from a family with a long-standing love for cooking and hospitality, he grew up surrounded by traditions, flavours, and the joy of serving great food.
+              </p>
+              <p>
+                His entrepreneurial journey began with <span className="not-italic font-semibold text-ivory">Raje Di Hatti</span> — a restaurant whose name was lovingly suggested by his mother, <span className="not-italic">Mrs. Sushma Saluja</span>. Inspired by his family's passion for food and hospitality, Rajat continued to build on that foundation and later established <span className="not-italic font-semibold text-gold">Wahh Punjab</span>.
+              </p>
+              <p>
+                Today, Wahh Punjab stands as a reflection of his dedication to authentic Punjabi cuisine, warm hospitality, and the culinary values that have been passed down through generations of the Saluja family.
+              </p>
+            </div>
+            <div className="mt-10 flex flex-wrap gap-x-10 gap-y-4 text-[10px] uppercase tracking-[0.35em] text-ivory/55">
+              <div><span className="text-gold">—</span> Raje Di Hatti</div>
+              <div><span className="text-gold">—</span> Wahh Punjab</div>
+              <div><span className="text-gold">—</span> Saluja Family Kitchens</div>
+            </div>
           </div>
         </div>
       </section>
