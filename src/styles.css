@@ -340,7 +340,8 @@ h1 { text-wrap: balance; }
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  z-index: -10;
+  z-index: -1;
+  isolation: isolate;
 }
 .bg-layer-back {
   position: absolute;

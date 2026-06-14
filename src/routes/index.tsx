@@ -336,7 +336,7 @@ function Index() {
       </nav>
 
       {/* ===== HERO ===== */}
-      <section id="top" className="relative min-h-screen w-full overflow-hidden">
+      <section id="top" className="isolate relative min-h-screen w-full overflow-hidden">
         <Environment image={bgHeroHall} overlay="soft" parallax={0.18} tint="dual" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/30 to-transparent" />
         <EmberField />
@@ -405,7 +405,7 @@ function Index() {
       </section>
 
       {/* ===== STORY ===== */}
-      <section id="story" className="relative py-32 lg:py-44 px-6 overflow-hidden">
+      <section id="story" className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
         <Environment image={bgStoryHaveli} overlay="dark" parallax={0.12} tint="gold" />
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           <div className="lg:col-span-5 order-2 lg:order-1" data-reveal>
@@ -449,7 +449,7 @@ function Index() {
       <GoldDivider />
 
       {/* ===== FIRE PARALLAX ===== */}
-      <section className="relative overflow-hidden">
+      <section className="isolate relative overflow-hidden">
         <Environment image={fireImg} overlay="dark" parallax={0.25} tint="amber" />
         <div className="relative mx-auto max-w-5xl px-6 py-32 lg:py-44 text-center" data-reveal>
           <Eyebrow>Smoke · Spice · Slow Fire</Eyebrow>
@@ -463,7 +463,7 @@ function Index() {
       </section>
 
       {/* ===== SIGNATURE DISHES ===== */}
-      <section id="signature" className="relative py-32 lg:py-44 px-6 border-y border-gold/10 overflow-hidden">
+      <section id="signature" className="isolate relative py-32 lg:py-44 px-6 border-y border-gold/10 overflow-hidden">
         <Environment image={bgSignatureTable} overlay="dark" parallax={0.1} tint="amber" />
         <div className="mx-auto max-w-7xl relative">
           <div className="text-center mb-20" data-reveal>
@@ -500,7 +500,7 @@ function Index() {
       <MenuSection onAdd={cart.add} />
 
       {/* ===== OWNER — RAJAT SALUJA ===== */}
-      <section className="relative py-32 lg:py-44 px-6 overflow-hidden">
+      <section className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
         <Environment image={bgChefKitchen} overlay="dark" parallax={0.14} tint="amber" />
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center relative">
           <div className="lg:col-span-5 relative" data-reveal>
@@ -596,7 +596,7 @@ function Index() {
       </section>
 
       {/* ===== VISIT / FINAL ===== */}
-      <section id="visit" className="relative py-32 lg:py-44 px-6 overflow-hidden">
+      <section id="visit" className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
         <Environment image={bgVisitLounge} overlay="dark" parallax={0.14} tint="dual" />
         <EmberField />
         <div className="relative mx-auto max-w-5xl text-center" data-reveal>
@@ -716,7 +716,7 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
   }, [filtered]);
 
   return (
-    <section id="menu" className="relative py-24 lg:py-32 px-6 border-y border-gold/10 overflow-hidden">
+    <section id="menu" className="isolate relative py-24 lg:py-32 px-6 border-y border-gold/10 overflow-hidden">
       <Environment image={bgMenuTable} overlay="dark" parallax={0.08} tint="amber" />
       <div className="mx-auto max-w-7xl relative">
         <div className="text-center mb-12" data-reveal>
