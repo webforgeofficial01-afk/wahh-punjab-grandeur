@@ -115,17 +115,23 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-weight: 300;
+    font-weight: 500;
+    letter-spacing: 0.005em;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  h1, h2, h3, h4 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -0.02em;
     text-wrap: balance;
   }
-  h1 { font-weight: 800; }
+  h1 { font-weight: 900; letter-spacing: -0.035em; }
+  h2 { font-weight: 800; }
+  h3 { font-weight: 700; }
+  strong, b { font-weight: 800; }
+  p { font-weight: 500; }
+  a { font-weight: 600; }
   ::selection { background: var(--gold); color: var(--charcoal-deep); }
 
   /* Custom scrollbar */
@@ -178,23 +184,24 @@
 
 @utility eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.625rem;
-  font-weight: 500;
+  font-size: 0.7rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5em;
+  letter-spacing: 0.55em;
   color: var(--gold);
 }
 
 @utility editorial {
   font-family: var(--font-editorial);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
+  font-style: italic;
 }
 
 @utility quote-serif {
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 @keyframes shimmer {
