@@ -357,12 +357,13 @@ function Index() {
               A pure-veg <span className="text-gold">&</span> non-veg fine-dining house in Burari — slow-fire tandoor, butter-rich gravies, hand-rolled momos, biryani straight from the clay oven and thick shakes. The entire menu, orderable in a few taps. Free home delivery within 3 KM.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
-              <a href="#menu" className="group inline-flex items-center gap-3 bg-gold text-charcoal-deep px-8 py-4 text-[11px] uppercase tracking-[0.35em] font-medium shadow-ember hover:bg-gold-light transition-all duration-500 hover:-translate-y-0.5">
-                Order Now <span className="transition-transform group-hover:translate-x-1">→</span>
+            <div className="mt-12 flex flex-wrap gap-5">
+              <a href="#menu" className="btn-luxe group">
+                <span>Curate Your Feast</span>
+                <span className="transition-transform group-hover:translate-x-1">→</span>
               </a>
-              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="inline-flex items-center gap-3 border border-gold/40 px-8 py-4 text-[11px] uppercase tracking-[0.35em] text-gold hover:bg-gold/10 transition-colors">
-                Call To Reserve
+              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="btn-luxe-outline">
+                <span>Reserve A Table</span>
               </a>
             </div>
 
