@@ -162,18 +162,19 @@ function useParallax() {
 type CartLine = { key: string; itemId: string; name: string; variant: string; price: number; qty: number };
 
 function useCart() {
-  const [lines, setLines] = useState<CartLine[]>(() => {
-    if (typeof window === "undefined") return [];
+  const [lines, setLines] = useState<CartLine[]>([]);
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
     try {
       const raw = localStorage.getItem("waah:cart");
-      return raw ? (JSON.parse(raw) as CartLine[]) : [];
-    } catch {
-      return [];
-    }
-  });
+      if (raw) setLines(JSON.parse(raw) as CartLine[]);
+    } catch {/* noop */}
+    setHydrated(true);
+  }, []);
   useEffect(() => {
+    if (!hydrated) return;
     try { localStorage.setItem("waah:cart", JSON.stringify(lines)); } catch {/* noop */}
-  }, [lines]);
+  }, [lines, hydrated]);
 
   const add = (item: MenuItem, vIndex = 0) => {
     const v = item.variants[vIndex];
