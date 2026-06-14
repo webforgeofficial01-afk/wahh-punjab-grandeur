@@ -133,6 +133,8 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  font-weight: 700;
+  filter: drop-shadow(0 0 18px color-mix(in oklab, var(--gold) 35%, transparent));
   animation: shimmer 10s linear infinite;
 }
 
