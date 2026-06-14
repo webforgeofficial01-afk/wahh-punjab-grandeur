@@ -931,10 +931,8 @@ function CartDrawer({
   onClose: () => void;
   cart: ReturnType<typeof useCart>;
 }) {
-  const sendOrder = () => {
-    if (cart.lines.length === 0) return;
-    window.location.href = `tel:${PHONE_TEL}`;
-  };
+
+
 
   return (
     <>
