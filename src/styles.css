@@ -110,7 +110,13 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  h1, h2, h3, h4 { font-family: var(--font-editorial); font-weight: 400; letter-spacing: -0.01em; }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  h1 { font-weight: 800; }
   ::selection { background: var(--gold); color: var(--charcoal-deep); }
 
   /* Custom scrollbar */
@@ -127,6 +133,8 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
+  font-weight: 700;
+  filter: drop-shadow(0 0 18px color-mix(in oklab, var(--gold) 35%, transparent));
   animation: shimmer 10s linear infinite;
 }
 
@@ -170,8 +178,8 @@
 
 @utility editorial {
   font-family: var(--font-editorial);
-  font-weight: 400;
-  letter-spacing: -0.015em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 @utility quote-serif {

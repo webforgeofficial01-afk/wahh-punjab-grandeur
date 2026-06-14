@@ -162,18 +162,19 @@ function useParallax() {
 type CartLine = { key: string; itemId: string; name: string; variant: string; price: number; qty: number };
 
 function useCart() {
-  const [lines, setLines] = useState<CartLine[]>(() => {
-    if (typeof window === "undefined") return [];
+  const [lines, setLines] = useState<CartLine[]>([]);
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => {
     try {
       const raw = localStorage.getItem("waah:cart");
-      return raw ? (JSON.parse(raw) as CartLine[]) : [];
-    } catch {
-      return [];
-    }
-  });
+      if (raw) setLines(JSON.parse(raw) as CartLine[]);
+    } catch {/* noop */}
+    setHydrated(true);
+  }, []);
   useEffect(() => {
+    if (!hydrated) return;
     try { localStorage.setItem("waah:cart", JSON.stringify(lines)); } catch {/* noop */}
-  }, [lines]);
+  }, [lines, hydrated]);
 
   const add = (item: MenuItem, vIndex = 0) => {
     const v = item.variants[vIndex];
@@ -286,14 +287,14 @@ function Index() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 pt-36 pb-16 md:pt-44 md:pb-24 grid lg:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-screen">
           <div className="animate-fade-up">
-            <Eyebrow>Sant Nagar · Burari · Delhi 110084</Eyebrow>
-            <h1 className="mt-8 editorial text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[0.95] text-balance text-ivory">
+            <Eyebrow>Sant Nagar · Burari · Delhi 110084 · Pure Veg & Non-Veg</Eyebrow>
+            <h1 className="mt-8 font-display text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.75rem] font-bold leading-[0.92] tracking-[-0.02em] text-balance text-ivory">
               The taste of <span className="italic text-gold-shimmer">Punjab</span>,
               <br />
               served like <span className="italic text-glow-amber">royalty.</span>
             </h1>
-            <p className="mt-8 max-w-xl text-base sm:text-lg text-ivory/65 leading-relaxed quote-serif">
-              Slow-fire tandoor, butter-rich gravies, hand-rolled momos and chilled shakes — the full menu of Waah Punjab, now orderable in a few taps. Free home delivery within 3 KM.
+            <p className="mt-8 max-w-xl text-base sm:text-lg text-ivory/70 leading-relaxed quote-serif">
+              A pure-veg <span className="text-gold">&</span> non-veg fine-dining house in Burari — slow-fire tandoor, butter-rich gravies, hand-rolled momos, biryani straight from the clay oven and thick shakes. The entire menu, orderable in a few taps. Free home delivery within 3 KM.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -444,27 +445,33 @@ function Index() {
       {/* ===== FULL MENU ===== */}
       <MenuSection onAdd={cart.add} />
 
-      {/* ===== CHEF / PROMISE ===== */}
+      {/* ===== CHEF — RAJAT SALUJA ===== */}
       <section className="relative py-32 lg:py-44 px-6">
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           <div className="lg:col-span-5 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -top-6 -left-6 size-40 bg-gold/20 blur-3xl -z-10" />
-            <img src={chefImg} alt="In the Waah Punjab kitchen" loading="lazy" className="w-full h-auto shadow-luxe grayscale-[0.15] hover:grayscale-0 transition-all duration-1000" />
+            <img src={chefImg} alt="Chef Rajat Saluja in the Waah Punjab kitchen" loading="lazy" className="w-full h-auto shadow-luxe grayscale-[0.15] hover:grayscale-0 transition-all duration-1000" />
+            <div className="absolute bottom-4 left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
+              <div className="text-[9px] uppercase tracking-[0.35em] text-gold">Helmed By</div>
+              <div className="font-display text-lg font-bold tracking-[0.1em] text-ivory">CHEF RAJAT SALUJA</div>
+            </div>
           </div>
           <div className="lg:col-span-7" data-reveal>
-            <Eyebrow>Our Promise</Eyebrow>
-            <blockquote className="mt-8 editorial italic text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-ivory text-balance">
-              "Fresh charcoal. Fresh masala.
-              <br />
-              <span className="text-gold-shimmer">Cooked when you order — never before."</span>
-            </blockquote>
-            <ul className="mt-10 space-y-3 text-sm text-ivory/70 quote-serif italic">
+            <Eyebrow>The Man Behind The Flame</Eyebrow>
+            <h2 className="mt-8 font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.02] tracking-[-0.02em] text-ivory text-balance">
+              Every plate at Waah Punjab passes through
+              <span className="text-gold-shimmer"> one pair of hands.</span>
+            </h2>
+            <p className="mt-8 quote-serif italic text-lg text-ivory/75 leading-relaxed max-w-xl">
+              The kitchen is led by <span className="not-italic font-semibold text-gold">Chef Rajat Saluja</span> — a Punjabi cook of the old school, who insists on fresh charcoal, fresh masala and a dish cooked only when you order it. His full story is coming soon to this page.
+            </p>
+            <ul className="mt-10 space-y-3 text-sm text-ivory/75 quote-serif italic">
               {[
                 "100% fresh ingredients — no pre-cooked gravies",
                 "Pure desi ghee & cultured butter in every signature dish",
-                "Halal meat, sourced daily",
-                "Hygienic packaging for every delivery order",
+                "Separate veg & non-veg sections — full pure-veg menu available",
+                "Hygienic packaging on every delivery order",
               ].map((p) => (
                 <li key={p} className="flex items-start gap-3">
                   <span className="mt-2 h-px w-6 bg-gold shrink-0" />
