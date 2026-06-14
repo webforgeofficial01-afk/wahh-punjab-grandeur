@@ -670,9 +670,11 @@ function Index() {
               </p>
             </div>
           </div>
-          <div className="pt-8 border-t border-gold/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-[9px] uppercase tracking-[0.4em] text-ivory/30">© Wahh Punjab Restaurant · All Rights Reserved</p>
-            <p className="text-[9px] uppercase tracking-[0.4em] text-ivory/30">GST Extra</p>
+          <div className="pt-10 border-t border-gold/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-champagne-deep/55">© Wahh Punjab Restaurant · All Rights Reserved · GST Extra</p>
+            <p className="text-[9px] uppercase tracking-[0.45em] text-champagne-deep/60">
+              Designed &amp; Created by <span className="text-gold-shimmer font-semibold tracking-[0.35em]">Velora Studio</span>
+            </p>
           </div>
         </div>
       </footer>
