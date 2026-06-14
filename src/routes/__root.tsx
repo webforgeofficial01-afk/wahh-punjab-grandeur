@@ -91,6 +91,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Wahh Punjab Grandeur — Where Punjab Becomes an Experience" },
+      { name: "description", content: "Wahh Punjab – A premium fine-dining experience celebrating authentic Punjabi heritage with royal ambiance, traditional flavors, and modern luxury dining." },
+      { property: "og:description", content: "Wahh Punjab – A premium fine-dining experience celebrating authentic Punjabi heritage with royal ambiance, traditional flavors, and modern luxury dining." },
+      { name: "twitter:description", content: "Wahh Punjab – A premium fine-dining experience celebrating authentic Punjabi heritage with royal ambiance, traditional flavors, and modern luxury dining." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/ZWHXJLVtgoeOaymDtsDaALslL6i2/social-images/social-1781435439938-1000138926.webp" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/ZWHXJLVtgoeOaymDtsDaALslL6i2/social-images/social-1781435439938-1000138926.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
