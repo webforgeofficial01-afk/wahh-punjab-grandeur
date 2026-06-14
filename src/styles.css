@@ -178,8 +178,8 @@
 
 @utility editorial {
   font-family: var(--font-editorial);
-  font-weight: 400;
-  letter-spacing: -0.015em;
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 @utility quote-serif {
