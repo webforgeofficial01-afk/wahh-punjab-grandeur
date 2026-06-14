@@ -340,10 +340,9 @@ h1 { text-wrap: balance; }
   inset: 0;
   overflow: hidden;
   pointer-events: none;
-  z-index: 0;
+  z-index: -1;
+  isolation: isolate;
 }
-/* Sections using <Environment /> must add `isolate` so the env stays behind content */
-section.has-env > *:not(.bg-environment) { position: relative; z-index: 1; }
 .bg-layer-back {
   position: absolute;
   inset: -8%;
