@@ -679,14 +679,15 @@ function Index() {
         </div>
       </footer>
 
-      {/* ===== Sticky Cart FAB (mobile) ===== */}
+      {/* ===== Sticky Feast FAB (mobile) ===== */}
       {cart.count > 0 && !cartOpen && (
         <button
           onClick={() => setCartOpen(true)}
-          className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-3 bg-gold text-charcoal-deep px-5 py-3.5 text-[11px] uppercase tracking-[0.3em] shadow-ember hover:bg-gold-light transition-all"
+          className="fixed bottom-6 right-6 z-40 btn-luxe"
+          style={{ padding: "1rem 1.6rem" }}
         >
-          <span className="font-bold">{cart.count}</span>
-          <span>View Cart · ₹{cart.total}</span>
+          <span className="font-bold tracking-normal text-base">{cart.count}</span>
+          <span>Review Your Feast · ₹{cart.total}</span>
         </button>
       )}
 
