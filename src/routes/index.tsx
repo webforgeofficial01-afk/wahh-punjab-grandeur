@@ -55,10 +55,10 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Wahh Punjab — Premium Punjabi, Tandoori & Chinese in Burari, Delhi" },
-      { name: "description", content: "Wahh Punjab Restaurant, Sant Nagar, Burari — Premium Punjabi, tandoori, biryani, Chinese, momos & thalis. Free home delivery up to 3 KM. Order online." },
+      { name: "description", content: "Wahh Punjab Restaurant, Sant Nagar, Burari — Premium Punjabi, tandoori, biryani, Chinese, momos & thalis. Call to order home delivery." },
       { name: "keywords", content: "Wahh Punjab, Punjabi Restaurant Burari, Sant Nagar Delhi, Best Butter Chicken Burari, Tandoori Delhi, Biryani Burari, Online food order Burari" },
       { property: "og:title", content: "Wahh Punjab — Burari, Delhi" },
-      { property: "og:description", content: "Premium Punjabi fine dining in Burari. Order online — free delivery up to 3 KM." },
+      { property: "og:description", content: "Premium Punjabi fine dining in Burari. Call to order — home delivery available." },
       { property: "og:type", content: "restaurant" },
       { property: "og:image", content: heroPlatter },
       { name: "twitter:card", content: "summary_large_image" },
