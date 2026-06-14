@@ -747,9 +747,9 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
                   className="w-full bg-charcoal-deep/80 border border-gold/25 px-4 py-2.5 text-sm text-ivory placeholder:text-ivory/35 focus:border-gold focus:outline-none"
                 />
               </div>
-              <label className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-ivory/70 cursor-pointer select-none">
+              <label className="inline-flex items-center gap-2 font-display text-[11px] font-bold uppercase tracking-[0.4em] text-champagne cursor-pointer select-none">
                 <input type="checkbox" checked={vegOnly} onChange={(e) => setVegOnly(e.target.checked)} className="accent-green-500" />
-                Veg only
+                Veg Only
               </label>
             </div>
             <div className="flex gap-2.5 overflow-x-auto pb-1 -mx-1 px-1 [scrollbar-width:thin]">

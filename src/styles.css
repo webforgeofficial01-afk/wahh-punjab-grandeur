@@ -183,12 +183,13 @@
 }
 
 @utility eyebrow {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.55em;
+  letter-spacing: 0.5em;
   color: var(--gold);
+  text-shadow: 0 0 18px color-mix(in oklab, var(--gold) 35%, transparent);
 }
 
 @utility editorial {
@@ -421,11 +422,12 @@ h1 { text-wrap: balance; }
   justify-content: center;
   gap: 0.875rem;
   padding: 1.15rem 2.4rem;
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.42em;
+  letter-spacing: 0.4em;
+  text-shadow: 0 1px 0 color-mix(in oklab, white 35%, transparent);
   color: var(--charcoal-deep);
   background: var(--gradient-champagne);
   border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent);
@@ -463,11 +465,11 @@ h1 { text-wrap: balance; }
   justify-content: center;
   gap: 0.875rem;
   padding: 1.1rem 2.3rem;
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.42em;
+  letter-spacing: 0.4em;
   color: var(--champagne);
   background: color-mix(in oklab, var(--charcoal-deep) 30%, transparent);
   border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
@@ -501,11 +503,11 @@ h1 { text-wrap: balance; }
   align-items: center;
   gap: 0.6rem;
   padding: 0.65rem 1.05rem;
-  font-family: var(--font-sans);
-  font-size: 0.65rem;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.38em;
+  letter-spacing: 0.36em;
   color: var(--champagne);
   background: color-mix(in oklab, var(--charcoal-deep) 55%, transparent);
   border: 1px solid color-mix(in oklab, var(--gold) 38%, transparent);
@@ -525,11 +527,11 @@ h1 { text-wrap: balance; }
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1rem;
-  font-family: var(--font-sans);
-  font-size: 0.62rem;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.3em;
   color: color-mix(in oklab, var(--champagne) 80%, transparent);
   border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
   background: color-mix(in oklab, var(--charcoal-deep) 45%, transparent);
