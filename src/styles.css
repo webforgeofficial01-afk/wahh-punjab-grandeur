@@ -184,23 +184,24 @@
 
 @utility eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.625rem;
-  font-weight: 500;
+  font-size: 0.7rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5em;
+  letter-spacing: 0.55em;
   color: var(--gold);
 }
 
 @utility editorial {
   font-family: var(--font-editorial);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: -0.02em;
+  font-style: italic;
 }
 
 @utility quote-serif {
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 @keyframes shimmer {
