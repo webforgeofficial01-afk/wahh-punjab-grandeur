@@ -487,6 +487,7 @@ main > section, section[id] {
   text-transform: uppercase;
   letter-spacing: 0.4em;
   text-indent: 0.4em;
+  white-space: nowrap;
   text-shadow: 0 0 18px color-mix(in oklab, var(--gold) 45%, transparent);
   color: var(--champagne);
   background: color-mix(in oklab, var(--charcoal-deep) 30%, transparent);
