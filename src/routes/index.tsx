@@ -473,7 +473,7 @@ function Index() {
               <span className="italic text-glow-amber">experience.</span>
             </h1>
             <p className="mt-10 max-w-xl text-base sm:text-lg text-champagne-deep/85 leading-relaxed quote-serif">
-              A pure-veg <span className="text-gold">&</span> non-veg fine-dining house in Burari — slow-fire tandoor, butter-rich gravies, hand-rolled momos, biryani straight from the clay oven and thick shakes. The entire menu, orderable in a few taps. Free home delivery within 3 KM.
+              A pure-veg <span className="text-gold">&</span> non-veg fine-dining house in Burari — slow-fire tandoor, butter-rich gravies, hand-rolled momos, biryani straight from the clay oven and thick shakes. The entire menu, a phone call away. Call to order home delivery.
             </p>
 
             <div className="mt-12 flex flex-wrap gap-5">
