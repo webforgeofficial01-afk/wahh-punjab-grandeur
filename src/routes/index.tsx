@@ -568,7 +568,7 @@ function Index() {
         </div>
       </section>
 
-      <GoldDivider />
+      <Marquee items={["Wahh Punjab", "Tandoor · Slow Fire", "Hand-Folded Momos", "Biryani From The Clay Oven", "Free Delivery · 3 KM", "Live On Swiggy & Zomato", "Sant Nagar · Burari"]} />
 
       {/* ===== FIRE PARALLAX ===== */}
       <section className="isolate relative overflow-hidden">
