@@ -500,8 +500,9 @@ function Index() {
       <MenuSection onAdd={cart.add} />
 
       {/* ===== OWNER — RAJAT SALUJA ===== */}
-      <section className="relative py-32 lg:py-44 px-6">
-        <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+      <section className="relative py-32 lg:py-44 px-6 overflow-hidden">
+        <Environment image={bgChefKitchen} overlay="dark" parallax={0.14} tint="amber" />
+        <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center relative">
           <div className="lg:col-span-5 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -top-6 -left-6 size-40 bg-gold/20 blur-3xl -z-10" />
