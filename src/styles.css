@@ -125,9 +125,6 @@
     font-weight: 800;
     letter-spacing: -0.02em;
     text-wrap: balance;
-    text-shadow:
-      0 0 22px color-mix(in oklab, var(--gold) 28%, transparent),
-      0 0 48px color-mix(in oklab, var(--amber) 16%, transparent);
   }
   h1 { font-weight: 900; letter-spacing: -0.035em; }
   h2 { font-weight: 800; }
