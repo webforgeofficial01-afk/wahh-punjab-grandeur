@@ -6,7 +6,7 @@ import legacyImg from "@/assets/legacy.jpg";
 import fireImg from "@/assets/fire-experience.jpg";
 import rajatAsset from "@/assets/rajat-saluja.jpg.asset.json";
 const chefImg = rajatAsset.url;
-import privateDining from "@/assets/private-dining.jpg";
+
 import gal1 from "@/assets/gallery-1.jpg";
 import gal2 from "@/assets/gallery-2.jpg";
 import gal3 from "@/assets/gallery-3.jpg";
