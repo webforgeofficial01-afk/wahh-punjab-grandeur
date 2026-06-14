@@ -405,3 +405,182 @@ h1 { text-wrap: balance; }
 @media (prefers-reduced-motion: reduce) {
   .bg-layer-back, .bg-layer-mid, .bg-light-amber, .bg-light-gold, .bg-grain { animation: none !important; }
 }
+
+/* ===== Luxury Button System ===== */
+@utility btn-luxe {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+  padding: 1.15rem 2.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  color: var(--charcoal-deep);
+  background: var(--gradient-champagne);
+  border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent);
+  box-shadow: var(--shadow-luxe-btn);
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), box-shadow 0.6s ease, filter 0.6s ease;
+  cursor: pointer;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 35%, color-mix(in oklab, white 75%, transparent) 50%, transparent 65%);
+    transform: translateX(-120%);
+    transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1);
+    z-index: 1;
+    pointer-events: none;
+  }
+  &:hover::before { transform: translateX(120%); }
+  &:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+    box-shadow:
+      0 26px 60px -18px color-mix(in oklab, var(--gold) 70%, transparent),
+      0 0 0 1px color-mix(in oklab, var(--gold) 60%, transparent),
+      inset 0 1px 0 color-mix(in oklab, var(--gold-light) 80%, transparent);
+  }
+  & > * { position: relative; z-index: 2; }
+}
+
+@utility btn-luxe-outline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+  padding: 1.1rem 2.3rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  color: var(--champagne);
+  background: color-mix(in oklab, var(--charcoal-deep) 30%, transparent);
+  border: 1px solid color-mix(in oklab, var(--gold) 45%, transparent);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  isolation: isolate;
+  transition: all 0.6s cubic-bezier(0.16,1,0.3,1);
+  cursor: pointer;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 120%, color-mix(in oklab, var(--gold) 35%, transparent), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+  &:hover {
+    color: var(--gold-light);
+    border-color: color-mix(in oklab, var(--gold) 80%, transparent);
+    transform: translateY(-2px);
+    box-shadow: 0 22px 50px -22px color-mix(in oklab, var(--gold) 50%, transparent);
+  }
+  &:hover::after { opacity: 1; }
+  & > * { position: relative; z-index: 2; }
+}
+
+@utility btn-luxe-ghost {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.05rem;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.38em;
+  color: var(--champagne);
+  background: color-mix(in oklab, var(--charcoal-deep) 55%, transparent);
+  border: 1px solid color-mix(in oklab, var(--gold) 38%, transparent);
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  &:hover {
+    color: var(--gold-light);
+    border-color: color-mix(in oklab, var(--gold) 75%, transparent);
+    background: color-mix(in oklab, var(--gold) 10%, transparent);
+    box-shadow: 0 0 24px -6px color-mix(in oklab, var(--gold) 40%, transparent);
+  }
+}
+
+@utility chip-luxe {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  color: color-mix(in oklab, var(--champagne) 80%, transparent);
+  border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
+  background: color-mix(in oklab, var(--charcoal-deep) 45%, transparent);
+  transition: all 0.45s ease;
+  cursor: pointer;
+  &:hover {
+    color: var(--gold-light);
+    border-color: color-mix(in oklab, var(--gold) 65%, transparent);
+    background: color-mix(in oklab, var(--gold) 6%, transparent);
+  }
+}
+
+@utility chip-luxe-active {
+  background: var(--gradient-champagne);
+  color: var(--charcoal-deep);
+  border-color: var(--gold);
+  box-shadow: 0 0 24px -6px color-mix(in oklab, var(--gold) 55%, transparent), inset 0 1px 0 color-mix(in oklab, white 50%, transparent);
+}
+
+@utility text-champagne {
+  color: var(--champagne);
+}
+@utility text-champagne-deep {
+  color: var(--champagne-deep);
+}
+
+/* Add-to-feast pill on menu items */
+@utility add-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--champagne);
+  background: color-mix(in oklab, var(--charcoal-deep) 60%, transparent);
+  border: 1px solid color-mix(in oklab, var(--gold) 32%, transparent);
+  transition: all 0.45s cubic-bezier(0.16,1,0.3,1);
+  cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-champagne);
+    transform: translateY(101%);
+    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+    z-index: -1;
+  }
+  &:hover {
+    color: var(--charcoal-deep);
+    border-color: var(--gold);
+    box-shadow: 0 10px 30px -10px color-mix(in oklab, var(--gold) 60%, transparent);
+    transform: translateY(-1px);
+  }
+  &:hover::before { transform: translateY(0); }
+}
