@@ -325,11 +325,12 @@ function Index() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setCartOpen(true)}
-              className="relative inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] border border-gold/40 px-3 py-2 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors"
+              className="btn-luxe-ghost"
+              aria-label="Open your dining selection"
             >
-              Cart
+              <span>Your Feast</span>
               {cart.count > 0 && (
-                <span className="inline-flex items-center justify-center min-w-5 h-5 px-1 rounded-full bg-amber text-charcoal-deep text-[10px] font-bold">{cart.count}</span>
+                <span className="inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full bg-gradient-to-b from-gold-light to-gold text-charcoal-deep text-[10px] font-bold tracking-normal">{cart.count}</span>
               )}
             </button>
           </div>
