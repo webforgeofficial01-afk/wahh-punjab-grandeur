@@ -287,14 +287,14 @@ function Index() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 pt-36 pb-16 md:pt-44 md:pb-24 grid lg:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-screen">
           <div className="animate-fade-up">
-            <Eyebrow>Sant Nagar · Burari · Delhi 110084</Eyebrow>
-            <h1 className="mt-8 editorial text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.5rem] leading-[0.95] text-balance text-ivory">
+            <Eyebrow>Sant Nagar · Burari · Delhi 110084 · Pure Veg & Non-Veg</Eyebrow>
+            <h1 className="mt-8 font-display text-[2.75rem] sm:text-6xl lg:text-7xl xl:text-[5.75rem] font-bold leading-[0.92] tracking-[-0.02em] text-balance text-ivory">
               The taste of <span className="italic text-gold-shimmer">Punjab</span>,
               <br />
               served like <span className="italic text-glow-amber">royalty.</span>
             </h1>
-            <p className="mt-8 max-w-xl text-base sm:text-lg text-ivory/65 leading-relaxed quote-serif">
-              Slow-fire tandoor, butter-rich gravies, hand-rolled momos and chilled shakes — the full menu of Waah Punjab, now orderable in a few taps. Free home delivery within 3 KM.
+            <p className="mt-8 max-w-xl text-base sm:text-lg text-ivory/70 leading-relaxed quote-serif">
+              A pure-veg <span className="text-gold">&</span> non-veg fine-dining house in Burari — slow-fire tandoor, butter-rich gravies, hand-rolled momos, biryani straight from the clay oven and thick shakes. The entire menu, orderable in a few taps. Free home delivery within 3 KM.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
