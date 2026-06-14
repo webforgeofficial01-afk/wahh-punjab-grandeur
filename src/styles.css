@@ -415,6 +415,19 @@ h1 { text-wrap: balance; }
   .bg-layer-back, .bg-layer-mid, .bg-light-amber, .bg-light-gold, .bg-grain { animation: none !important; }
 }
 
+/* Disable expensive continuous bg animations + ember particles on mobile / touch — invisible at small sizes,
+   massive paint cost. Also drops the always-animating grain layer that triggers full-section repaints. */
+@media (max-width: 900px), (hover: none) {
+  .bg-layer-back, .bg-layer-mid, .bg-light-amber, .bg-light-gold, .bg-grain { animation: none !important; }
+}
+
+/* Let the browser skip painting/layout for off-screen sections.
+   No visual change — only off-screen work is skipped. */
+main > section, section[id] {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
+}
+
 /* ===== Luxury Button System ===== */
 @utility btn-luxe {
   position: relative;
