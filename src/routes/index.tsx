@@ -982,18 +982,13 @@ function CartDrawer({
 
         {cart.lines.length > 0 && (
           <div className="border-t border-gold/15 px-6 py-6 space-y-4 bg-charcoal-deep/60">
-            <div className="grid grid-cols-2 gap-3">
-              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="bg-charcoal-deep/70 border border-gold/25 px-3.5 py-2.5 text-sm text-champagne placeholder:text-champagne-deep/45 focus:border-gold focus:outline-none transition-colors" />
-              <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" inputMode="tel" className="bg-charcoal-deep/70 border border-gold/25 px-3.5 py-2.5 text-sm text-champagne placeholder:text-champagne-deep/45 focus:border-gold focus:outline-none transition-colors" />
-            </div>
-            <input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Delivery address (or 'Takeaway')" className="w-full bg-charcoal-deep/70 border border-gold/25 px-3.5 py-2.5 text-sm text-champagne placeholder:text-champagne-deep/45 focus:border-gold focus:outline-none transition-colors" />
             <div className="flex items-center justify-between pt-2 border-t border-gold/10">
               <span className="text-[10px] uppercase tracking-[0.4em] text-champagne-deep/75">Selection Total</span>
               <span className="editorial text-3xl text-gold-shimmer">₹{cart.total}</span>
             </div>
-            <button onClick={sendOrder} className="btn-luxe w-full"><span>Confirm Your Feast</span><span>→</span></button>
+            <a href={`tel:${PHONE_TEL}`} onClick={onClose} className="btn-luxe w-full"><span>Call {PHONE} To Order</span><span>→</span></a>
             <button onClick={cart.clear} className="w-full text-[9px] uppercase tracking-[0.4em] text-champagne-deep/55 hover:text-gold py-1 transition-colors">Clear Selection</button>
-            <p className="text-center text-[9px] uppercase tracking-[0.35em] text-champagne-deep/45">Or call {PHONE} · GST extra</p>
+            <p className="text-center text-[9px] uppercase tracking-[0.35em] text-champagne-deep/45">Delivery available · Call {PHONE} · GST extra</p>
           </div>
         )}
       </aside>
