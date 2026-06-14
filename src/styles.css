@@ -263,3 +263,52 @@
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   .animate-slow-zoom, .animate-ember-pulse, .animate-ticker { animation: none !important; }
 }
+
+/* ===== Cinematic Splash ===== */
+@keyframes splash-glow-in {
+  0% { opacity: 0; transform: scale(0.6); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.splash-glow {
+  background: radial-gradient(circle at center,
+    color-mix(in oklab, var(--amber) 35%, transparent) 0%,
+    color-mix(in oklab, var(--gold) 18%, transparent) 25%,
+    transparent 65%);
+  animation: splash-glow-in 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes splash-logo-reveal {
+  0% { opacity: 0; transform: scale(0.85); filter: blur(20px) brightness(0.3); }
+  60% { opacity: 1; filter: blur(0) brightness(1); }
+  100% { opacity: 1; transform: scale(1); filter: blur(0) brightness(1); }
+}
+.splash-logo-wrap {
+  animation: splash-logo-reveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.4s;
+}
+@keyframes splash-sweep {
+  0% { transform: translateX(-120%) skewX(-18deg); opacity: 0; }
+  40% { opacity: 0.9; }
+  100% { transform: translateX(120%) skewX(-18deg); opacity: 0; }
+}
+.splash-sweep {
+  background: linear-gradient(90deg, transparent 0%, color-mix(in oklab, var(--gold-light) 70%, transparent) 50%, transparent 100%);
+  mix-blend-mode: overlay;
+  animation: splash-sweep 2.4s cubic-bezier(0.4, 0, 0.2, 1) 1.2s infinite;
+}
+@keyframes splash-line-grow {
+  to { width: 10rem; }
+}
+.splash-line { animation: splash-line-grow 1s cubic-bezier(0.16,1,0.3,1) 1.6s forwards; }
+@keyframes splash-tagline-in {
+  from { opacity: 0; letter-spacing: 0.1em; transform: translateY(8px); }
+  to { opacity: 1; letter-spacing: 0.4em; transform: translateY(0); }
+}
+.splash-tagline {
+  opacity: 0;
+  animation: splash-tagline-in 1.4s cubic-bezier(0.16,1,0.3,1) 2s forwards;
+  text-shadow: 0 0 24px color-mix(in oklab, var(--gold) 40%, transparent);
+}
+
+/* ===== Luxury hero polish ===== */
+h1 { text-wrap: balance; }
+.text-gold-shimmer { animation-duration: 7s; }
