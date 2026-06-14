@@ -497,8 +497,8 @@ function Index() {
                 <div className="mt-1 text-xs text-ivory/60">Dishes On Menu</div>
               </div>
               <div className="border-l border-gold/25 pl-4">
-                <div className="editorial text-2xl text-gold-light">3 KM</div>
-                <div className="mt-1 text-xs text-ivory/60">Free Delivery Radius</div>
+                <div className="editorial text-2xl text-gold-light">Call</div>
+                <div className="mt-1 text-xs text-ivory/60">To Order Delivery</div>
               </div>
               <div className="border-l border-gold/25 pl-4">
                 <div className="editorial text-2xl text-gold-light">₹15+</div>
