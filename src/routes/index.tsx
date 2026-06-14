@@ -631,9 +631,9 @@ function Index() {
               </div>
             </div>
           </div>
-          <div className="mt-12 flex flex-wrap justify-center gap-4">
-            <a href="#menu" className="inline-flex items-center gap-3 bg-gold text-charcoal-deep px-10 py-5 text-[11px] uppercase tracking-[0.4em] font-medium hover:bg-gold-light transition-all duration-500 shadow-ember hover:-translate-y-0.5">Order Now →</a>
-            <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 border border-gold/50 px-10 py-5 text-[11px] uppercase tracking-[0.4em] text-gold hover:bg-gold/10 transition-colors">WhatsApp</a>
+          <div className="mt-14 flex flex-wrap justify-center gap-5">
+            <a href="#menu" className="btn-luxe"><span>Curate Your Feast</span><span>→</span></a>
+            <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="btn-luxe-outline"><span>WhatsApp</span></a>
           </div>
         </div>
       </section>
