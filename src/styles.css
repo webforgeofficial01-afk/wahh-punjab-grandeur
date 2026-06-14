@@ -442,6 +442,7 @@ main > section, section[id] {
   text-transform: uppercase;
   letter-spacing: 0.4em;
   text-indent: 0.4em;
+  white-space: nowrap;
   text-shadow: 0 1px 0 color-mix(in oklab, white 55%, transparent), 0 0 18px color-mix(in oklab, var(--gold-light) 35%, transparent);
   color: oklch(0.22 0.05 60);
   background: var(--gradient-champagne);
@@ -486,6 +487,7 @@ main > section, section[id] {
   text-transform: uppercase;
   letter-spacing: 0.4em;
   text-indent: 0.4em;
+  white-space: nowrap;
   text-shadow: 0 0 18px color-mix(in oklab, var(--gold) 45%, transparent);
   color: var(--champagne);
   background: color-mix(in oklab, var(--charcoal-deep) 30%, transparent);
@@ -521,11 +523,12 @@ main > section, section[id] {
   gap: 0.5rem;
   padding: 0.5rem 0.85rem;
   font-family: var(--font-display);
-  font-size: 0.64rem;
+  font-size: 0.62rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.36em;
-  text-indent: 0.36em;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  white-space: nowrap;
   text-shadow: 0 0 14px color-mix(in oklab, var(--gold) 40%, transparent);
   color: var(--champagne);
   background: color-mix(in oklab, var(--charcoal-deep) 55%, transparent);
@@ -552,6 +555,7 @@ main > section, section[id] {
   text-transform: uppercase;
   letter-spacing: 0.3em;
   text-indent: 0.3em;
+  white-space: nowrap;
   color: color-mix(in oklab, var(--champagne) 80%, transparent);
   border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
   background: color-mix(in oklab, var(--charcoal-deep) 45%, transparent);
