@@ -752,16 +752,12 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
                 Veg only
               </label>
             </div>
-            <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 [scrollbar-width:thin]">
+            <div className="flex gap-2.5 overflow-x-auto pb-1 -mx-1 px-1 [scrollbar-width:thin]">
               {(["All", ...categories] as const).map((c) => (
                 <button
                   key={c}
                   onClick={() => setActive(c)}
-                  className={`shrink-0 px-3.5 py-2 text-[10px] uppercase tracking-[0.28em] border transition-colors ${
-                    active === c
-                      ? "bg-gold text-charcoal-deep border-gold"
-                      : "border-gold/25 text-ivory/70 hover:border-gold/60 hover:text-gold"
-                  }`}
+                  className={`shrink-0 chip-luxe ${active === c ? "chip-luxe-active" : ""}`}
                 >
                   {c}
                 </button>
