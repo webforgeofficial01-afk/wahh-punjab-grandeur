@@ -555,6 +555,7 @@ main > section, section[id] {
   text-transform: uppercase;
   letter-spacing: 0.3em;
   text-indent: 0.3em;
+  white-space: nowrap;
   color: color-mix(in oklab, var(--champagne) 80%, transparent);
   border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
   background: color-mix(in oklab, var(--charcoal-deep) 45%, transparent);
