@@ -463,8 +463,9 @@ function Index() {
       </section>
 
       {/* ===== SIGNATURE DISHES ===== */}
-      <section id="signature" className="relative py-32 lg:py-44 px-6 border-y border-gold/10">
-        <div className="mx-auto max-w-7xl">
+      <section id="signature" className="relative py-32 lg:py-44 px-6 border-y border-gold/10 overflow-hidden">
+        <Environment image={bgSignatureTable} overlay="dark" parallax={0.1} tint="amber" />
+        <div className="mx-auto max-w-7xl relative">
           <div className="text-center mb-20" data-reveal>
             <Eyebrow>House Signatures</Eyebrow>
             <h2 className="mt-6 editorial text-5xl sm:text-6xl lg:text-7xl text-balance leading-tight text-gold-shimmer">The plates we are known for</h2>
