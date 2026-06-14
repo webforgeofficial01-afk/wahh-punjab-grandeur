@@ -487,10 +487,10 @@ function Index() {
                 </div>
                 <div className="p-6">
                   <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="editorial text-2xl text-ivory">{d.name}</h3>
+                    <h3 className="editorial text-2xl text-champagne">{d.name}</h3>
                   </div>
                   <div className="mt-1 text-glow-amber editorial text-lg">{d.price}</div>
-                  <p className="mt-3 text-sm text-ivory/55 leading-relaxed quote-serif italic">{d.desc}</p>
+                  <p className="mt-3 text-sm text-champagne-deep/70 leading-relaxed quote-serif italic">{d.desc}</p>
                   <a href="#menu" className="mt-5 inline-block text-[10px] uppercase tracking-[0.3em] text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors">Order from menu →</a>
                 </div>
               </article>
