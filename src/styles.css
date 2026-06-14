@@ -151,22 +151,27 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   color: transparent;
-  font-weight: 700;
-  filter: drop-shadow(0 0 18px color-mix(in oklab, var(--gold) 35%, transparent));
-  animation: shimmer 10s linear infinite;
+  font-weight: 800;
+  filter:
+    drop-shadow(0 0 14px color-mix(in oklab, var(--gold-light) 70%, transparent))
+    drop-shadow(0 0 32px color-mix(in oklab, var(--amber) 45%, transparent));
+  animation: shimmer 7s linear infinite;
 }
 
 @utility text-glow-amber {
   color: var(--amber-glow);
   text-shadow:
-    0 0 14px color-mix(in oklab, var(--amber) 60%, transparent),
-    0 0 36px color-mix(in oklab, var(--amber) 30%, transparent);
+    0 0 10px color-mix(in oklab, var(--amber-glow) 90%, transparent),
+    0 0 28px color-mix(in oklab, var(--amber) 75%, transparent),
+    0 0 60px color-mix(in oklab, var(--amber) 45%, transparent);
 }
 
 @utility text-glow-gold {
+  color: var(--gold-light);
   text-shadow:
-    0 0 12px color-mix(in oklab, var(--gold) 35%, transparent),
-    0 0 28px color-mix(in oklab, var(--gold) 18%, transparent);
+    0 0 10px color-mix(in oklab, var(--gold-light) 80%, transparent),
+    0 0 26px color-mix(in oklab, var(--gold) 55%, transparent),
+    0 0 56px color-mix(in oklab, var(--gold) 30%, transparent);
 }
 
 @utility shadow-luxe {
