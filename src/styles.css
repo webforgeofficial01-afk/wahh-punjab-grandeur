@@ -419,7 +419,6 @@ h1 { text-wrap: balance; }
    massive paint cost. Also drops the always-animating grain layer that triggers full-section repaints. */
 @media (max-width: 900px), (hover: none) {
   .bg-layer-back, .bg-layer-mid, .bg-light-amber, .bg-light-gold, .bg-grain { animation: none !important; }
-  .ember-particle { display: none; }
 }
 
 /* Let the browser skip painting/layout for off-screen sections.
