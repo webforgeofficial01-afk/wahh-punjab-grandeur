@@ -441,7 +441,7 @@ main > section, section[id] {
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.4em;
-  text-indent: 0.46em;
+  text-indent: 0.4em;
   text-shadow: 0 1px 0 color-mix(in oklab, white 55%, transparent), 0 0 18px color-mix(in oklab, var(--gold-light) 35%, transparent);
   color: oklch(0.22 0.05 60);
   background: var(--gradient-champagne);
