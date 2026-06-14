@@ -6,7 +6,7 @@ import legacyImg from "@/assets/legacy.jpg";
 import fireImg from "@/assets/fire-experience.jpg";
 import rajatAsset from "@/assets/rajat-saluja.jpg.asset.json";
 const chefImg = rajatAsset.url;
-import privateDining from "@/assets/private-dining.jpg";
+
 import gal1 from "@/assets/gallery-1.jpg";
 import gal2 from "@/assets/gallery-2.jpg";
 import gal3 from "@/assets/gallery-3.jpg";
@@ -24,8 +24,8 @@ import logoAsset from "@/assets/wahh-punjab-logo.jpg.asset.json";
 import { menu, categories, type MenuItem } from "@/data/menu";
 
 const LOGO = logoAsset.url;
-const PHONE = "+91-99999-00000";
-const WHATSAPP = "919999900000";
+const PHONE = "+91-95992-33387";
+const PHONE_TEL = "+919599233387";
 
 const restaurantSchema = {
   "@context": "https://schema.org",
@@ -55,10 +55,10 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Wahh Punjab — Premium Punjabi, Tandoori & Chinese in Burari, Delhi" },
-      { name: "description", content: "Wahh Punjab Restaurant, Sant Nagar, Burari — Premium Punjabi, tandoori, biryani, Chinese, momos & thalis. Free home delivery up to 3 KM. Order online." },
+      { name: "description", content: "Wahh Punjab Restaurant, Sant Nagar, Burari — Premium Punjabi, tandoori, biryani, Chinese, momos & thalis. Call to order home delivery." },
       { name: "keywords", content: "Wahh Punjab, Punjabi Restaurant Burari, Sant Nagar Delhi, Best Butter Chicken Burari, Tandoori Delhi, Biryani Burari, Online food order Burari" },
       { property: "og:title", content: "Wahh Punjab — Burari, Delhi" },
-      { property: "og:description", content: "Premium Punjabi fine dining in Burari. Order online — free delivery up to 3 KM." },
+      { property: "og:description", content: "Premium Punjabi fine dining in Burari. Call to order — home delivery available." },
       { property: "og:type", content: "restaurant" },
       { property: "og:image", content: heroPlatter },
       { name: "twitter:card", content: "summary_large_image" },
@@ -473,7 +473,7 @@ function Index() {
               <span className="italic text-glow-amber">experience.</span>
             </h1>
             <p className="mt-10 max-w-xl text-base sm:text-lg text-champagne-deep/85 leading-relaxed quote-serif">
-              A pure-veg <span className="text-gold">&</span> non-veg fine-dining house in Burari — slow-fire tandoor, butter-rich gravies, hand-rolled momos, biryani straight from the clay oven and thick shakes. The entire menu, orderable in a few taps. Free home delivery within 3 KM.
+              A pure-veg <span className="text-gold">&</span> non-veg fine-dining house in Burari — slow-fire tandoor, butter-rich gravies, hand-rolled momos, biryani straight from the clay oven and thick shakes. The entire menu, a phone call away. Call to order home delivery.
             </p>
 
             <div className="mt-12 flex flex-wrap gap-5">
@@ -488,7 +488,7 @@ function Index() {
 
             <div className="mt-10 inline-flex items-center gap-3 border border-amber/30 bg-amber/5 px-4 py-2.5">
               <span className="h-2 w-2 rounded-full bg-amber animate-ticker" />
-              <span className="text-[10px] uppercase tracking-[0.3em] text-amber-glow">Free Home Delivery · Up to 3 KM · Live on Swiggy & Zomato</span>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-amber-glow">Home Delivery · Call {PHONE} To Order</span>
             </div>
 
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-2xl">
@@ -497,8 +497,8 @@ function Index() {
                 <div className="mt-1 text-xs text-ivory/60">Dishes On Menu</div>
               </div>
               <div className="border-l border-gold/25 pl-4">
-                <div className="editorial text-2xl text-gold-light">3 KM</div>
-                <div className="mt-1 text-xs text-ivory/60">Free Delivery Radius</div>
+                <div className="editorial text-2xl text-gold-light">Call</div>
+                <div className="mt-1 text-xs text-ivory/60">To Order Delivery</div>
               </div>
               <div className="border-l border-gold/25 pl-4">
                 <div className="editorial text-2xl text-gold-light">₹15+</div>
@@ -550,8 +550,8 @@ function Index() {
                 <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">Open Daily</div>
               </div>
               <div>
-                <div className="editorial text-3xl text-gold text-glow-gold">3 KM</div>
-                <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">Free Delivery</div>
+                <div className="editorial text-3xl text-gold text-glow-gold">Call</div>
+                <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">To Order Delivery</div>
               </div>
             </div>
           </div>
@@ -568,7 +568,7 @@ function Index() {
         </div>
       </section>
 
-      <Marquee items={["Wahh Punjab", "Tandoor · Slow Fire", "Hand-Folded Momos", "Biryani From The Clay Oven", "Free Delivery · 3 KM", "Live On Swiggy & Zomato", "Sant Nagar · Burari"]} />
+      <Marquee items={["Wahh Punjab", "Tandoor · Slow Fire", "Hand-Folded Momos", "Biryani From The Clay Oven", "Call To Order Delivery", "Sant Nagar · Burari"]} />
 
       {/* ===== FIRE PARALLAX ===== */}
       <section className="isolate relative overflow-hidden">
@@ -662,32 +662,7 @@ function Index() {
       </section>
 
 
-      {/* ===== PRIVATE / FAMILY DINING ===== */}
-      <section className="relative min-h-[80vh] overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div data-parallax="0.2" className="absolute inset-0 will-change-transform">
-            <img src={privateDining} alt="" loading="lazy" className="h-[125%] w-full object-cover" />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/85 to-charcoal-deep/20" />
-        </div>
-        <div className="relative mx-auto max-w-7xl px-6 py-32 lg:py-44 grid lg:grid-cols-2 gap-12 items-center" data-reveal>
-          <div>
-            <Eyebrow>Family Gatherings & Parties</Eyebrow>
-            <h2 className="mt-8 editorial text-4xl sm:text-5xl lg:text-6xl leading-tight text-ivory text-balance">
-              Hosting at home?
-              <br />
-              <span className="italic text-gold-shimmer">We'll cater the whole table.</span>
-            </h2>
-            <p className="mt-8 quote-serif italic text-lg text-ivory/70 leading-relaxed max-w-lg">
-              Birthdays, kitty parties, family functions in Sant Nagar, Burari, Kamla Nagar and nearby — call us for bulk orders, custom thali platters and family packs.
-            </p>
-            <div className="mt-12 flex flex-wrap gap-5">
-              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="btn-luxe"><span>Call {PHONE}</span></a>
-              <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="btn-luxe-outline"><span>WhatsApp Us</span></a>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* ===== GALLERY ===== */}
       <section className="relative py-32 px-6 bg-charcoal/40 border-y border-gold/10">
@@ -737,9 +712,8 @@ function Index() {
             <div className="border border-gold/20 p-6 bg-charcoal/40 backdrop-blur-md">
               <div className="text-[10px] uppercase tracking-[0.35em] text-gold mb-2">Call & Order</div>
               <div className="text-sm text-ivory/75 quote-serif italic leading-relaxed">
-                <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="hover:text-gold transition-colors">{PHONE}</a><br />
-                Free delivery up to 3 KM<br />
-                Live on Swiggy & Zomato<br />
+                <a href={`tel:${PHONE_TEL}`} className="hover:text-gold transition-colors">{PHONE}</a><br />
+                Call to order home delivery<br />
                 <span className="text-ivory/40 text-xs">GST extra</span>
               </div>
             </div>
@@ -752,7 +726,7 @@ function Index() {
           </div>
           <div className="mt-14 flex flex-wrap justify-center gap-5">
             <a href="#menu" className="btn-luxe"><span>Curate Your Feast</span><span>→</span></a>
-            <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="btn-luxe-outline"><span>WhatsApp</span></a>
+            <a href={`tel:${PHONE_TEL}`} className="btn-luxe-outline"><span>Call {PHONE}</span></a>
           </div>
         </div>
       </section>
@@ -784,8 +758,8 @@ function Index() {
             <div className="md:col-span-2">
               <h4 className="text-[10px] uppercase tracking-[0.4em] text-gold mb-4">Order</h4>
               <p className="text-sm text-ivory/65 leading-relaxed quote-serif">
-                <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="hover:text-gold transition-colors">{PHONE}</a><br />
-                Swiggy · Zomato
+                <a href={`tel:${PHONE_TEL}`} className="hover:text-gold transition-colors">{PHONE}</a><br />
+                Call to order
               </p>
             </div>
           </div>
@@ -850,7 +824,7 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
           <h2 className="mt-6 editorial text-5xl sm:text-6xl lg:text-7xl text-balance leading-tight text-gold-shimmer">
             Every dish. Tap to order.
           </h2>
-          <p className="mt-4 text-ivory/60 quote-serif italic">{menu.length} dishes · {categories.length} sections · Free delivery within 3 KM</p>
+          <p className="mt-4 text-ivory/60 quote-serif italic">{menu.length} dishes · {categories.length} sections · Call {PHONE} to order delivery</p>
         </div>
 
         {/* Controls */}
@@ -957,20 +931,8 @@ function CartDrawer({
   onClose: () => void;
   cart: ReturnType<typeof useCart>;
 }) {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
 
-  const sendOrder = () => {
-    if (cart.lines.length === 0) return;
-    const lines = cart.lines
-      .map((l) => `• ${l.name}${l.variant !== "Regular" ? ` (${l.variant})` : ""} × ${l.qty} — ₹${l.price * l.qty}`)
-      .join("%0A");
-    const total = `Total: ₹${cart.total}`;
-    const customer = `Name: ${name || "—"}%0APhone: ${phone || "—"}%0AAddress: ${address || "—"}`;
-    const msg = `*New Order — Wahh Punjab*%0A%0A${lines}%0A%0A${total}%0A%0A${customer}`;
-    window.open(`https://wa.me/${WHATSAPP}?text=${msg}`, "_blank");
-  };
+
 
   return (
     <>
@@ -1018,18 +980,13 @@ function CartDrawer({
 
         {cart.lines.length > 0 && (
           <div className="border-t border-gold/15 px-6 py-6 space-y-4 bg-charcoal-deep/60">
-            <div className="grid grid-cols-2 gap-3">
-              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="bg-charcoal-deep/70 border border-gold/25 px-3.5 py-2.5 text-sm text-champagne placeholder:text-champagne-deep/45 focus:border-gold focus:outline-none transition-colors" />
-              <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" inputMode="tel" className="bg-charcoal-deep/70 border border-gold/25 px-3.5 py-2.5 text-sm text-champagne placeholder:text-champagne-deep/45 focus:border-gold focus:outline-none transition-colors" />
-            </div>
-            <input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Delivery address (or 'Takeaway')" className="w-full bg-charcoal-deep/70 border border-gold/25 px-3.5 py-2.5 text-sm text-champagne placeholder:text-champagne-deep/45 focus:border-gold focus:outline-none transition-colors" />
             <div className="flex items-center justify-between pt-2 border-t border-gold/10">
               <span className="text-[10px] uppercase tracking-[0.4em] text-champagne-deep/75">Selection Total</span>
               <span className="editorial text-3xl text-gold-shimmer">₹{cart.total}</span>
             </div>
-            <button onClick={sendOrder} className="btn-luxe w-full"><span>Confirm Your Feast</span><span>→</span></button>
+            <a href={`tel:${PHONE_TEL}`} onClick={onClose} className="btn-luxe w-full"><span>Call {PHONE} To Order</span><span>→</span></a>
             <button onClick={cart.clear} className="w-full text-[9px] uppercase tracking-[0.4em] text-champagne-deep/55 hover:text-gold py-1 transition-colors">Clear Selection</button>
-            <p className="text-center text-[9px] uppercase tracking-[0.35em] text-champagne-deep/45">Or call {PHONE} · GST extra</p>
+            <p className="text-center text-[9px] uppercase tracking-[0.35em] text-champagne-deep/45">Delivery available · Call {PHONE} · GST extra</p>
           </div>
         )}
       </aside>
