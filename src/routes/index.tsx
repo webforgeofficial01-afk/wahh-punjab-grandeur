@@ -716,8 +716,9 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
   }, [filtered]);
 
   return (
-    <section id="menu" className="relative py-24 lg:py-32 px-6 bg-charcoal/30 border-y border-gold/10">
-      <div className="mx-auto max-w-7xl">
+    <section id="menu" className="relative py-24 lg:py-32 px-6 border-y border-gold/10 overflow-hidden">
+      <Environment image={bgMenuTable} overlay="dark" parallax={0.08} tint="amber" />
+      <div className="mx-auto max-w-7xl relative">
         <div className="text-center mb-12" data-reveal>
           <Eyebrow>The Full Menu · Order Online</Eyebrow>
           <h2 className="mt-6 editorial text-5xl sm:text-6xl lg:text-7xl text-balance leading-tight text-gold-shimmer">
