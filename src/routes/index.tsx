@@ -445,27 +445,33 @@ function Index() {
       {/* ===== FULL MENU ===== */}
       <MenuSection onAdd={cart.add} />
 
-      {/* ===== CHEF / PROMISE ===== */}
+      {/* ===== CHEF — RAJAT SALUJA ===== */}
       <section className="relative py-32 lg:py-44 px-6">
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           <div className="lg:col-span-5 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -top-6 -left-6 size-40 bg-gold/20 blur-3xl -z-10" />
-            <img src={chefImg} alt="In the Waah Punjab kitchen" loading="lazy" className="w-full h-auto shadow-luxe grayscale-[0.15] hover:grayscale-0 transition-all duration-1000" />
+            <img src={chefImg} alt="Chef Rajat Saluja in the Waah Punjab kitchen" loading="lazy" className="w-full h-auto shadow-luxe grayscale-[0.15] hover:grayscale-0 transition-all duration-1000" />
+            <div className="absolute bottom-4 left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
+              <div className="text-[9px] uppercase tracking-[0.35em] text-gold">Helmed By</div>
+              <div className="font-display text-lg font-bold tracking-[0.1em] text-ivory">CHEF RAJAT SALUJA</div>
+            </div>
           </div>
           <div className="lg:col-span-7" data-reveal>
-            <Eyebrow>Our Promise</Eyebrow>
-            <blockquote className="mt-8 editorial italic text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-ivory text-balance">
-              "Fresh charcoal. Fresh masala.
-              <br />
-              <span className="text-gold-shimmer">Cooked when you order — never before."</span>
-            </blockquote>
-            <ul className="mt-10 space-y-3 text-sm text-ivory/70 quote-serif italic">
+            <Eyebrow>The Man Behind The Flame</Eyebrow>
+            <h2 className="mt-8 font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.02] tracking-[-0.02em] text-ivory text-balance">
+              Every plate at Waah Punjab passes through
+              <span className="text-gold-shimmer"> one pair of hands.</span>
+            </h2>
+            <p className="mt-8 quote-serif italic text-lg text-ivory/75 leading-relaxed max-w-xl">
+              The kitchen is led by <span className="not-italic font-semibold text-gold">Chef Rajat Saluja</span> — a Punjabi cook of the old school, who insists on fresh charcoal, fresh masala and a dish cooked only when you order it. His full story is coming soon to this page.
+            </p>
+            <ul className="mt-10 space-y-3 text-sm text-ivory/75 quote-serif italic">
               {[
                 "100% fresh ingredients — no pre-cooked gravies",
                 "Pure desi ghee & cultured butter in every signature dish",
-                "Halal meat, sourced daily",
-                "Hygienic packaging for every delivery order",
+                "Separate veg & non-veg sections — full pure-veg menu available",
+                "Hygienic packaging on every delivery order",
               ].map((p) => (
                 <li key={p} className="flex items-start gap-3">
                   <span className="mt-2 h-px w-6 bg-gold shrink-0" />
