@@ -547,10 +547,11 @@ main > section, section[id] {
   gap: 0.5rem;
   padding: 0.6rem 1rem;
   font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 700;
+  font-size: 0.7rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em;
   color: color-mix(in oklab, var(--champagne) 80%, transparent);
   border: 1px solid color-mix(in oklab, var(--gold) 22%, transparent);
   background: color-mix(in oklab, var(--charcoal-deep) 45%, transparent);
