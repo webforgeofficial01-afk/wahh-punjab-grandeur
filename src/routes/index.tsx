@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import heroEmbers from "@/assets/hero-embers.jpg";
+
 import heroPlatter from "@/assets/hero-platter.jpg";
 import legacyImg from "@/assets/legacy.jpg";
 import fireImg from "@/assets/fire-experience.jpg";
@@ -13,6 +13,12 @@ import gal4 from "@/assets/gallery-4.jpg";
 import dishDal from "@/assets/dish-dal.jpg";
 import dishKulcha from "@/assets/dish-kulcha.jpg";
 import dishBiryani from "@/assets/dish-biryani.jpg";
+import bgHeroHall from "@/assets/bg-hero-hall.jpg";
+import bgStoryHaveli from "@/assets/bg-story-haveli.jpg";
+import bgMenuTable from "@/assets/bg-menu-table.jpg";
+import bgChefKitchen from "@/assets/bg-chef-kitchen.jpg";
+import bgVisitLounge from "@/assets/bg-visit-lounge.jpg";
+import bgSignatureTable from "@/assets/bg-signature-table.jpg";
 import logoAsset from "@/assets/wahh-punjab-logo.jpg.asset.json";
 import { menu, categories, type MenuItem } from "@/data/menu";
 
@@ -106,6 +112,44 @@ function GoldDivider() {
       <div className="h-px flex-1 hairline-gold opacity-50" />
       <span className="text-gold/70 text-xs tracking-[0.5em]">✦</span>
       <div className="h-px flex-1 hairline-gold opacity-50" />
+    </div>
+  );
+}
+
+/* ---------- Cinematic multi-layer environment ---------- */
+function Environment({
+  image,
+  overlay = "default",
+  parallax = 0.18,
+  tint = "amber",
+}: {
+  image: string;
+  overlay?: "default" | "soft" | "dark" | "side";
+  parallax?: number;
+  tint?: "amber" | "gold" | "dual";
+}) {
+  const overlayClass =
+    overlay === "soft"
+      ? "bg-gradient-to-b from-charcoal-deep/30 via-charcoal-deep/55 to-charcoal-deep/95"
+      : overlay === "dark"
+      ? "bg-gradient-to-b from-charcoal-deep/75 via-charcoal-deep/80 to-charcoal-deep"
+      : overlay === "side"
+      ? "bg-gradient-to-r from-charcoal-deep via-charcoal-deep/70 to-charcoal-deep/20"
+      : "bg-gradient-to-b from-charcoal-deep/50 via-charcoal-deep/70 to-charcoal-deep";
+  return (
+    <div className="bg-environment" aria-hidden>
+      <div data-parallax={parallax} className="absolute inset-0 will-change-transform">
+        <div className="bg-layer-back" style={{ backgroundImage: `url(${image})` }} />
+      </div>
+      <div className={`absolute inset-0 ${overlayClass}`} />
+      <div className="bg-vignette-deep" />
+      {(tint === "amber" || tint === "dual") && (
+        <div className="bg-light-orb bg-light-amber" style={{ width: "55vw", height: "55vw", top: "-10%", right: "-15%" }} />
+      )}
+      {(tint === "gold" || tint === "dual") && (
+        <div className="bg-light-orb bg-light-gold" style={{ width: "45vw", height: "45vw", bottom: "-15%", left: "-10%" }} />
+      )}
+      <div className="bg-grain" />
     </div>
   );
 }
@@ -293,13 +337,8 @@ function Index() {
 
       {/* ===== HERO ===== */}
       <section id="top" className="relative min-h-screen w-full overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div data-parallax="0.18" className="absolute inset-0 will-change-transform">
-            <img src={heroEmbers} alt="" width={1920} height={1080} className="h-[120%] w-full object-cover opacity-70 animate-slow-zoom" />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal-deep/40 via-charcoal-deep/70 to-charcoal-deep" />
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/30 to-charcoal-deep/70" />
-        </div>
+        <Environment image={bgHeroHall} overlay="soft" parallax={0.18} tint="dual" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/30 to-transparent" />
         <EmberField />
 
         <div className="relative z-10 mx-auto max-w-7xl px-6 pt-36 pb-16 md:pt-44 md:pb-24 grid lg:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-screen">
@@ -366,7 +405,8 @@ function Index() {
       </section>
 
       {/* ===== STORY ===== */}
-      <section id="story" className="relative py-32 lg:py-44 px-6">
+      <section id="story" className="relative py-32 lg:py-44 px-6 overflow-hidden">
+        <Environment image={bgStoryHaveli} overlay="dark" parallax={0.12} tint="gold" />
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           <div className="lg:col-span-5 order-2 lg:order-1" data-reveal>
             <Eyebrow>The House</Eyebrow>
@@ -410,13 +450,7 @@ function Index() {
 
       {/* ===== FIRE PARALLAX ===== */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <div data-parallax="0.25" className="absolute inset-0 will-change-transform">
-            <img src={fireImg} alt="" loading="lazy" className="h-[130%] w-full object-cover opacity-40 animate-slow-zoom" />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep via-charcoal-deep/80 to-charcoal-deep/60" />
-        </div>
-        <EmberField />
+        <Environment image={fireImg} overlay="dark" parallax={0.25} tint="amber" />
         <div className="relative mx-auto max-w-5xl px-6 py-32 lg:py-44 text-center" data-reveal>
           <Eyebrow>Smoke · Spice · Slow Fire</Eyebrow>
           <h2 className="mt-8 editorial text-5xl sm:text-6xl lg:text-7xl leading-[1] text-balance text-ivory">
@@ -429,8 +463,9 @@ function Index() {
       </section>
 
       {/* ===== SIGNATURE DISHES ===== */}
-      <section id="signature" className="relative py-32 lg:py-44 px-6 border-y border-gold/10">
-        <div className="mx-auto max-w-7xl">
+      <section id="signature" className="relative py-32 lg:py-44 px-6 border-y border-gold/10 overflow-hidden">
+        <Environment image={bgSignatureTable} overlay="dark" parallax={0.1} tint="amber" />
+        <div className="mx-auto max-w-7xl relative">
           <div className="text-center mb-20" data-reveal>
             <Eyebrow>House Signatures</Eyebrow>
             <h2 className="mt-6 editorial text-5xl sm:text-6xl lg:text-7xl text-balance leading-tight text-gold-shimmer">The plates we are known for</h2>
@@ -465,8 +500,9 @@ function Index() {
       <MenuSection onAdd={cart.add} />
 
       {/* ===== OWNER — RAJAT SALUJA ===== */}
-      <section className="relative py-32 lg:py-44 px-6">
-        <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+      <section className="relative py-32 lg:py-44 px-6 overflow-hidden">
+        <Environment image={bgChefKitchen} overlay="dark" parallax={0.14} tint="amber" />
+        <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center relative">
           <div className="lg:col-span-5 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -top-6 -left-6 size-40 bg-gold/20 blur-3xl -z-10" />
@@ -561,10 +597,7 @@ function Index() {
 
       {/* ===== VISIT / FINAL ===== */}
       <section id="visit" className="relative py-32 lg:py-44 px-6 overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          <img src={heroEmbers} alt="" loading="lazy" className="h-full w-full object-cover opacity-40" />
-          <div className="absolute inset-0 bg-charcoal-deep/80" />
-        </div>
+        <Environment image={bgVisitLounge} overlay="dark" parallax={0.14} tint="dual" />
         <EmberField />
         <div className="relative mx-auto max-w-5xl text-center" data-reveal>
           <Eyebrow>Visit Us</Eyebrow>
@@ -683,8 +716,9 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
   }, [filtered]);
 
   return (
-    <section id="menu" className="relative py-24 lg:py-32 px-6 bg-charcoal/30 border-y border-gold/10">
-      <div className="mx-auto max-w-7xl">
+    <section id="menu" className="relative py-24 lg:py-32 px-6 border-y border-gold/10 overflow-hidden">
+      <Environment image={bgMenuTable} overlay="dark" parallax={0.08} tint="amber" />
+      <div className="mx-auto max-w-7xl relative">
         <div className="text-center mb-12" data-reveal>
           <Eyebrow>The Full Menu · Order Online</Eyebrow>
           <h2 className="mt-6 editorial text-5xl sm:text-6xl lg:text-7xl text-balance leading-tight text-gold-shimmer">
