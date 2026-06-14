@@ -24,8 +24,8 @@ import logoAsset from "@/assets/wahh-punjab-logo.jpg.asset.json";
 import { menu, categories, type MenuItem } from "@/data/menu";
 
 const LOGO = logoAsset.url;
-const PHONE = "+91-99999-00000";
-const WHATSAPP = "919999900000";
+const PHONE = "+91-95992-33387";
+const PHONE_TEL = "+919599233387";
 
 const restaurantSchema = {
   "@context": "https://schema.org",
