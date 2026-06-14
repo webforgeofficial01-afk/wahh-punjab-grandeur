@@ -178,18 +178,38 @@ function useReveal() {
 /* ---------- Parallax hook ---------- */
 function useParallax() {
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]"));
+    // Skip parallax on touch / narrow screens and reduced-motion users — biggest scroll-jank source.
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(hover: none), (max-width: 900px), (prefers-reduced-motion: reduce)");
+    if (mq.matches) return;
+
+    const all = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]"));
+    const visible = new Set<HTMLElement>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.add(e.target as HTMLElement);
+          else visible.delete(e.target as HTMLElement);
+        }
+      },
+      { rootMargin: "200px 0px" },
+    );
+    all.forEach((el) => io.observe(el));
+
     let raf = 0;
+    let ticking = false;
     const onScroll = () => {
-      cancelAnimationFrame(raf);
+      if (ticking) return;
+      ticking = true;
       raf = requestAnimationFrame(() => {
         const vh = window.innerHeight;
-        for (const el of els) {
+        for (const el of visible) {
           const rect = el.getBoundingClientRect();
           const speed = parseFloat(el.dataset.parallax || "0.2");
           const offset = (rect.top + rect.height / 2 - vh / 2) * speed * -1;
           el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0)`;
         }
+        ticking = false;
       });
     };
     onScroll();
@@ -199,6 +219,7 @@ function useParallax() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       cancelAnimationFrame(raf);
+      io.disconnect();
     };
   }, []);
 }
