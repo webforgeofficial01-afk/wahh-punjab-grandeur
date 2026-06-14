@@ -325,11 +325,12 @@ function Index() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setCartOpen(true)}
-              className="relative inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] border border-gold/40 px-3 py-2 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors"
+              className="btn-luxe-ghost"
+              aria-label="Open your dining selection"
             >
-              Cart
+              <span>Your Feast</span>
               {cart.count > 0 && (
-                <span className="inline-flex items-center justify-center min-w-5 h-5 px-1 rounded-full bg-amber text-charcoal-deep text-[10px] font-bold">{cart.count}</span>
+                <span className="inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full bg-gradient-to-b from-gold-light to-gold text-charcoal-deep text-[10px] font-bold tracking-normal">{cart.count}</span>
               )}
             </button>
           </div>
@@ -345,23 +346,24 @@ function Index() {
         <div className="relative z-10 mx-auto max-w-7xl px-6 pt-36 pb-16 md:pt-44 md:pb-24 grid lg:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-screen">
           <div className="animate-fade-up">
             <Eyebrow>Sant Nagar · Burari · Delhi 110084 · Pure Veg & Non-Veg</Eyebrow>
-            <h1 className="mt-8 font-display text-[3rem] sm:text-7xl lg:text-8xl xl:text-[6.5rem] font-extrabold leading-[0.88] tracking-[-0.035em] text-balance text-ivory">
+            <h1 className="mt-8 font-display text-[3rem] sm:text-7xl lg:text-8xl xl:text-[6.5rem] font-extrabold leading-[0.88] tracking-[-0.035em] text-balance text-champagne">
               Where Punjab
               <br />
               <span className="italic text-gold-shimmer">becomes an</span>
               <br />
               <span className="italic text-glow-amber">experience.</span>
             </h1>
-            <p className="mt-8 max-w-xl text-base sm:text-lg text-ivory/70 leading-relaxed quote-serif">
+            <p className="mt-10 max-w-xl text-base sm:text-lg text-champagne-deep/85 leading-relaxed quote-serif">
               A pure-veg <span className="text-gold">&</span> non-veg fine-dining house in Burari — slow-fire tandoor, butter-rich gravies, hand-rolled momos, biryani straight from the clay oven and thick shakes. The entire menu, orderable in a few taps. Free home delivery within 3 KM.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-4">
-              <a href="#menu" className="group inline-flex items-center gap-3 bg-gold text-charcoal-deep px-8 py-4 text-[11px] uppercase tracking-[0.35em] font-medium shadow-ember hover:bg-gold-light transition-all duration-500 hover:-translate-y-0.5">
-                Order Now <span className="transition-transform group-hover:translate-x-1">→</span>
+            <div className="mt-12 flex flex-wrap gap-5">
+              <a href="#menu" className="btn-luxe group">
+                <span>Curate Your Feast</span>
+                <span className="transition-transform group-hover:translate-x-1">→</span>
               </a>
-              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="inline-flex items-center gap-3 border border-gold/40 px-8 py-4 text-[11px] uppercase tracking-[0.35em] text-gold hover:bg-gold/10 transition-colors">
-                Call To Reserve
+              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="btn-luxe-outline">
+                <span>Reserve A Table</span>
               </a>
             </div>
 
@@ -485,10 +487,10 @@ function Index() {
                 </div>
                 <div className="p-6">
                   <div className="flex items-baseline justify-between gap-3">
-                    <h3 className="editorial text-2xl text-ivory">{d.name}</h3>
+                    <h3 className="editorial text-2xl text-champagne">{d.name}</h3>
                   </div>
                   <div className="mt-1 text-glow-amber editorial text-lg">{d.price}</div>
-                  <p className="mt-3 text-sm text-ivory/55 leading-relaxed quote-serif italic">{d.desc}</p>
+                  <p className="mt-3 text-sm text-champagne-deep/70 leading-relaxed quote-serif italic">{d.desc}</p>
                   <a href="#menu" className="mt-5 inline-block text-[10px] uppercase tracking-[0.3em] text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors">Order from menu →</a>
                 </div>
               </article>
@@ -560,9 +562,9 @@ function Index() {
             <p className="mt-8 quote-serif italic text-lg text-ivory/70 leading-relaxed max-w-lg">
               Birthdays, kitty parties, family functions in Sant Nagar, Burari, Kamla Nagar and nearby — call us for bulk orders, custom thali platters and family packs.
             </p>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="inline-flex items-center gap-3 bg-gold text-charcoal-deep px-8 py-4 text-[11px] uppercase tracking-[0.35em] hover:bg-gold-light transition-colors shadow-ember">Call {PHONE}</a>
-              <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 border border-gold/50 px-8 py-4 text-[11px] uppercase tracking-[0.35em] text-gold hover:bg-gold/10 transition-colors">WhatsApp Us</a>
+            <div className="mt-12 flex flex-wrap gap-5">
+              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="btn-luxe"><span>Call {PHONE}</span></a>
+              <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="btn-luxe-outline"><span>WhatsApp Us</span></a>
             </div>
           </div>
         </div>
@@ -629,9 +631,9 @@ function Index() {
               </div>
             </div>
           </div>
-          <div className="mt-12 flex flex-wrap justify-center gap-4">
-            <a href="#menu" className="inline-flex items-center gap-3 bg-gold text-charcoal-deep px-10 py-5 text-[11px] uppercase tracking-[0.4em] font-medium hover:bg-gold-light transition-all duration-500 shadow-ember hover:-translate-y-0.5">Order Now →</a>
-            <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-3 border border-gold/50 px-10 py-5 text-[11px] uppercase tracking-[0.4em] text-gold hover:bg-gold/10 transition-colors">WhatsApp</a>
+          <div className="mt-14 flex flex-wrap justify-center gap-5">
+            <a href="#menu" className="btn-luxe"><span>Curate Your Feast</span><span>→</span></a>
+            <a href={`https://wa.me/${WHATSAPP}`} target="_blank" rel="noreferrer" className="btn-luxe-outline"><span>WhatsApp</span></a>
           </div>
         </div>
       </section>
@@ -668,21 +670,24 @@ function Index() {
               </p>
             </div>
           </div>
-          <div className="pt-8 border-t border-gold/10 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-[9px] uppercase tracking-[0.4em] text-ivory/30">© Wahh Punjab Restaurant · All Rights Reserved</p>
-            <p className="text-[9px] uppercase tracking-[0.4em] text-ivory/30">GST Extra</p>
+          <div className="pt-10 border-t border-gold/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p className="text-[9px] uppercase tracking-[0.4em] text-champagne-deep/55">© Wahh Punjab Restaurant · All Rights Reserved · GST Extra</p>
+            <p className="text-[9px] uppercase tracking-[0.45em] text-champagne-deep/60">
+              Designed &amp; Created by <span className="text-gold-shimmer font-semibold tracking-[0.35em]">Velora Studio</span>
+            </p>
           </div>
         </div>
       </footer>
 
-      {/* ===== Sticky Cart FAB (mobile) ===== */}
+      {/* ===== Sticky Feast FAB (mobile) ===== */}
       {cart.count > 0 && !cartOpen && (
         <button
           onClick={() => setCartOpen(true)}
-          className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-3 bg-gold text-charcoal-deep px-5 py-3.5 text-[11px] uppercase tracking-[0.3em] shadow-ember hover:bg-gold-light transition-all"
+          className="fixed bottom-6 right-6 z-40 btn-luxe"
+          style={{ padding: "1rem 1.6rem" }}
         >
-          <span className="font-bold">{cart.count}</span>
-          <span>View Cart · ₹{cart.total}</span>
+          <span className="font-bold tracking-normal text-base">{cart.count}</span>
+          <span>Review Your Feast · ₹{cart.total}</span>
         </button>
       )}
 
@@ -747,16 +752,12 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
                 Veg only
               </label>
             </div>
-            <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 [scrollbar-width:thin]">
+            <div className="flex gap-2.5 overflow-x-auto pb-1 -mx-1 px-1 [scrollbar-width:thin]">
               {(["All", ...categories] as const).map((c) => (
                 <button
                   key={c}
                   onClick={() => setActive(c)}
-                  className={`shrink-0 px-3.5 py-2 text-[10px] uppercase tracking-[0.28em] border transition-colors ${
-                    active === c
-                      ? "bg-gold text-charcoal-deep border-gold"
-                      : "border-gold/25 text-ivory/70 hover:border-gold/60 hover:text-gold"
-                  }`}
+                  className={`shrink-0 chip-luxe ${active === c ? "chip-luxe-active" : ""}`}
                 >
                   {c}
                 </button>
@@ -782,9 +783,9 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
                 {items.map((m) => (
                   <li
                     key={m.id}
-                    className="group bg-charcoal/60 border border-gold/15 hover:border-gold/45 p-4 sm:p-5 transition-all duration-500 hover:-translate-y-0.5 hover:shadow-ember"
+                    className="group bg-charcoal/55 border border-gold/15 hover:border-gold/45 p-5 sm:p-6 transition-all duration-500 hover:-translate-y-0.5 hover:shadow-ember"
                   >
-                    <div className="flex items-start gap-3">
+                    <div className="flex items-start gap-4">
                       <span
                         className={`mt-1.5 inline-block size-3 border ${m.veg ? "border-green-500" : "border-red-500"} p-0.5`}
                         aria-label={m.veg ? "Vegetarian" : "Non-vegetarian"}
@@ -793,24 +794,24 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
                       </span>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-baseline justify-between gap-3">
-                          <h4 className="editorial text-lg text-ivory leading-tight">{m.name}</h4>
+                          <h4 className="editorial text-lg sm:text-xl text-champagne leading-tight">{m.name}</h4>
                         </div>
                         {m.desc && (
-                          <p className="mt-1 text-xs text-ivory/55 quote-serif italic">{m.desc}</p>
+                          <p className="mt-2 text-xs text-champagne-deep/65 quote-serif italic leading-relaxed">{m.desc}</p>
                         )}
-                        <div className="mt-3 flex flex-wrap items-center gap-2">
+                        <div className="mt-4 flex flex-wrap items-center gap-2.5">
                           {m.variants.map((v, idx) => (
                             <button
                               key={v.label}
                               onClick={() => onAdd(m, idx)}
-                              className="inline-flex items-center gap-2 border border-gold/30 px-3 py-1.5 text-xs text-ivory hover:bg-gold hover:text-charcoal-deep transition-colors"
-                              aria-label={`Add ${m.name} ${v.label} ₹${v.price}`}
+                              className="add-pill"
+                              aria-label={`Add ${m.name} ${v.label} ₹${v.price} to your feast`}
                             >
                               {m.variants.length > 1 && (
-                                <span className="text-[9px] uppercase tracking-[0.25em] text-gold/80 group-hover:text-charcoal-deep">{v.label}</span>
+                                <span className="text-[9px] uppercase tracking-[0.28em] text-gold/85 group-hover:text-charcoal-deep">{v.label}</span>
                               )}
-                              <span className="text-glow-amber font-medium">₹{v.price}</span>
-                              <span className="text-gold">+</span>
+                              <span className="font-semibold text-glow-amber">₹{v.price}</span>
+                              <span className="text-gold/90 text-base leading-none">+</span>
                             </button>
                           ))}
                         </div>
@@ -863,56 +864,53 @@ function CartDrawer({
         className={`fixed top-0 right-0 z-[90] h-full w-full sm:w-[440px] bg-charcoal border-l border-gold/25 shadow-luxe transition-transform duration-500 ${open ? "translate-x-0" : "translate-x-full"} flex flex-col`}
         aria-label="Cart"
       >
-        <header className="flex items-center justify-between p-5 border-b border-gold/15">
+        <header className="flex items-center justify-between px-6 py-6 border-b border-gold/15">
           <div>
-            <div className="text-[10px] uppercase tracking-[0.4em] text-gold">Your Order</div>
-            <div className="editorial text-xl text-ivory">{cart.count} {cart.count === 1 ? "item" : "items"}</div>
+            <div className="text-[10px] uppercase tracking-[0.45em] text-gold">Dining Selection</div>
+            <div className="editorial text-2xl text-champagne mt-1">Your Feast · {cart.count} {cart.count === 1 ? "plate" : "plates"}</div>
           </div>
-          <button onClick={onClose} className="text-ivory/60 hover:text-gold text-2xl leading-none" aria-label="Close cart">×</button>
+          <button onClick={onClose} className="text-champagne-deep/70 hover:text-gold text-3xl leading-none transition-colors" aria-label="Close">×</button>
         </header>
 
-        <div className="flex-1 overflow-y-auto p-5 space-y-3">
+        <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4">
           {cart.lines.length === 0 && (
-            <p className="text-center text-ivory/50 quote-serif italic py-16">Your cart is empty. Pick something from the menu.</p>
+            <p className="text-center text-champagne-deep/55 quote-serif italic py-20 px-4 leading-relaxed">
+              Your table awaits — begin curating your feast from the menu.
+            </p>
           )}
           {cart.lines.map((l) => (
-            <div key={l.key} className="flex items-start gap-3 border border-gold/15 p-3">
+            <div key={l.key} className="flex items-start gap-3 border border-gold/15 hover:border-gold/35 transition-colors p-4 bg-charcoal-deep/40">
               <div className="flex-1 min-w-0">
-                <div className="text-sm text-ivory">{l.name}</div>
+                <div className="editorial text-base text-champagne leading-tight">{l.name}</div>
                 {l.variant !== "Regular" && (
-                  <div className="text-[10px] uppercase tracking-[0.25em] text-gold/70 mt-0.5">{l.variant}</div>
+                  <div className="text-[10px] uppercase tracking-[0.3em] text-gold/80 mt-1">{l.variant}</div>
                 )}
-                <div className="text-xs text-ivory/60 mt-1">₹{l.price} each</div>
+                <div className="text-xs text-champagne-deep/65 mt-1.5 quote-serif italic">₹{l.price} per plate</div>
               </div>
               <div className="flex items-center gap-2">
-                <button onClick={() => cart.setQty(l.key, l.qty - 1)} className="size-7 border border-gold/30 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors">−</button>
-                <span className="w-6 text-center text-sm text-ivory">{l.qty}</span>
-                <button onClick={() => cart.setQty(l.key, l.qty + 1)} className="size-7 border border-gold/30 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors">+</button>
+                <button onClick={() => cart.setQty(l.key, l.qty - 1)} className="size-8 border border-gold/35 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors text-base leading-none">−</button>
+                <span className="w-6 text-center text-sm text-champagne font-semibold">{l.qty}</span>
+                <button onClick={() => cart.setQty(l.key, l.qty + 1)} className="size-8 border border-gold/35 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors text-base leading-none">+</button>
               </div>
-              <div className="w-16 text-right text-sm text-glow-amber">₹{l.price * l.qty}</div>
+              <div className="w-20 text-right text-sm text-glow-amber font-semibold">₹{l.price * l.qty}</div>
             </div>
           ))}
         </div>
 
         {cart.lines.length > 0 && (
-          <div className="border-t border-gold/15 p-5 space-y-3">
-            <div className="grid grid-cols-2 gap-2">
-              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="bg-charcoal-deep/60 border border-gold/20 px-3 py-2 text-sm text-ivory placeholder:text-ivory/35 focus:border-gold focus:outline-none" />
-              <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" inputMode="tel" className="bg-charcoal-deep/60 border border-gold/20 px-3 py-2 text-sm text-ivory placeholder:text-ivory/35 focus:border-gold focus:outline-none" />
+          <div className="border-t border-gold/15 px-6 py-6 space-y-4 bg-charcoal-deep/60">
+            <div className="grid grid-cols-2 gap-3">
+              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" className="bg-charcoal-deep/70 border border-gold/25 px-3.5 py-2.5 text-sm text-champagne placeholder:text-champagne-deep/45 focus:border-gold focus:outline-none transition-colors" />
+              <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone" inputMode="tel" className="bg-charcoal-deep/70 border border-gold/25 px-3.5 py-2.5 text-sm text-champagne placeholder:text-champagne-deep/45 focus:border-gold focus:outline-none transition-colors" />
             </div>
-            <input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Delivery address (or 'Takeaway')" className="w-full bg-charcoal-deep/60 border border-gold/20 px-3 py-2 text-sm text-ivory placeholder:text-ivory/35 focus:border-gold focus:outline-none" />
-            <div className="flex items-center justify-between pt-2">
-              <span className="text-[10px] uppercase tracking-[0.3em] text-ivory/60">Total</span>
-              <span className="editorial text-2xl text-gold-shimmer">₹{cart.total}</span>
+            <input value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Delivery address (or 'Takeaway')" className="w-full bg-charcoal-deep/70 border border-gold/25 px-3.5 py-2.5 text-sm text-champagne placeholder:text-champagne-deep/45 focus:border-gold focus:outline-none transition-colors" />
+            <div className="flex items-center justify-between pt-2 border-t border-gold/10">
+              <span className="text-[10px] uppercase tracking-[0.4em] text-champagne-deep/75">Selection Total</span>
+              <span className="editorial text-3xl text-gold-shimmer">₹{cart.total}</span>
             </div>
-            <button
-              onClick={sendOrder}
-              className="w-full bg-gold text-charcoal-deep py-3.5 text-[11px] uppercase tracking-[0.4em] font-medium hover:bg-gold-light transition-colors shadow-ember"
-            >
-              Send Order via WhatsApp →
-            </button>
-            <button onClick={cart.clear} className="w-full text-[10px] uppercase tracking-[0.35em] text-ivory/50 hover:text-gold py-1">Clear cart</button>
-            <p className="text-center text-[9px] uppercase tracking-[0.3em] text-ivory/35">Or call {PHONE} · GST extra</p>
+            <button onClick={sendOrder} className="btn-luxe w-full"><span>Confirm Your Feast</span><span>→</span></button>
+            <button onClick={cart.clear} className="w-full text-[9px] uppercase tracking-[0.4em] text-champagne-deep/55 hover:text-gold py-1 transition-colors">Clear Selection</button>
+            <p className="text-center text-[9px] uppercase tracking-[0.35em] text-champagne-deep/45">Or call {PHONE} · GST extra</p>
           </div>
         )}
       </aside>
