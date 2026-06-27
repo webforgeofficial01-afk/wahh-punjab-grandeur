@@ -385,7 +385,7 @@ function Index() {
 
       {/* ===== HERO ===== */}
       <section id="top" className="isolate relative min-h-screen w-full overflow-hidden">
-        <Environment overlay="soft" parallax={0.18} tint="dual" />
+        <Environment overlay="soft" parallax={0.18} tint="dual" image={bgHero} />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/30 to-transparent" />
         <EmberField />
 
@@ -455,7 +455,7 @@ function Index() {
 
       {/* ===== STORY ===== */}
       <section id="story" className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
-        <Environment overlay="dark" parallax={0.12} tint="gold" />
+        <Environment overlay="dark" parallax={0.12} tint="gold" image={bgStory} />
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           <div className="lg:col-span-5 order-2 lg:order-1" data-reveal>
             <Eyebrow>The House</Eyebrow>
@@ -501,7 +501,7 @@ function Index() {
 
       {/* ===== FIRE PARALLAX ===== */}
       <section className="isolate relative overflow-hidden">
-        <Environment overlay="dark" parallax={0.25} tint="amber" />
+        <Environment overlay="dark" parallax={0.25} tint="amber" image={bgChef} />
         <div className="relative mx-auto max-w-5xl px-6 py-32 lg:py-44 text-center" data-reveal>
           <Eyebrow>Smoke · Spice · Slow Fire</Eyebrow>
           <h2 className="mt-8 editorial text-5xl sm:text-6xl lg:text-7xl leading-[1] text-balance text-ivory">
@@ -515,7 +515,7 @@ function Index() {
 
       {/* ===== SIGNATURE DISHES ===== */}
       <section id="signature" className="isolate relative py-32 lg:py-44 px-6 border-y border-gold/10 overflow-hidden">
-        <Environment overlay="dark" parallax={0.1} tint="amber" />
+        <Environment overlay="dark" parallax={0.1} tint="amber" image={bgSignature} />
         <div className="mx-auto max-w-7xl relative">
           <div className="text-center mb-20" data-reveal>
             <Eyebrow>House Signatures</Eyebrow>
@@ -552,7 +552,7 @@ function Index() {
 
       {/* ===== OWNER — RAJAT SALUJA ===== */}
       <section className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
-        <Environment overlay="dark" parallax={0.14} tint="amber" />
+        <Environment overlay="dark" parallax={0.14} tint="amber" image={bgChef} />
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center relative">
           <div className="lg:col-span-5 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
@@ -625,7 +625,7 @@ function Index() {
 
       {/* ===== VISIT / FINAL ===== */}
       <section id="visit" className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
-        <Environment overlay="dark" parallax={0.14} tint="dual" />
+        <Environment overlay="dark" parallax={0.14} tint="dual" image={bgVisit} />
         <EmberField />
         <div className="relative mx-auto max-w-5xl text-center" data-reveal>
           <Eyebrow>Visit Us</Eyebrow>
@@ -734,7 +734,7 @@ function MenuSection() {
 
   return (
     <section id="menu" className="isolate relative py-24 lg:py-32 px-6 border-y border-gold/10 overflow-hidden">
-      <Environment overlay="dark" parallax={0.08} tint="amber" />
+      <Environment overlay="dark" parallax={0.08} tint="amber" image={bgMenu} />
       <div className="mx-auto max-w-7xl relative">
         <div className="text-center mb-12" data-reveal>
           <Eyebrow>The Full Menu</Eyebrow>
