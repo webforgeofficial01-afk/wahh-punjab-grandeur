@@ -2,6 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 
 import { menu, categories } from "@/data/menu";
+import logoUrl from "@/assets/wahh-punjab-logo.jpg";
+import bgHero from "@/assets/bg-hero-hall.jpg";
+import bgStory from "@/assets/bg-story-haveli.jpg";
+import bgMenu from "@/assets/bg-menu-table.jpg";
+import bgSignature from "@/assets/bg-signature-table.jpg";
+import bgChef from "@/assets/bg-chef-kitchen.jpg";
+import bgVisit from "@/assets/bg-visit-lounge.jpg";
 
 const PHONE = "+91-95992-33387";
 const PHONE_TEL = "+919599233387";
