@@ -72,36 +72,23 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const LOGO_URL = "/__l5e/assets-v1/476893d0-27d2-4d65-a758-d4828e1a75a9/wahh-punjab-logo.jpg";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Wahh Punjab Grandeur — Where Punjab Becomes an Experience" },
-      {
-        name: "description",
-        content:
-          "Wahh Punjab Grandeur — a cinematic luxury Punjabi fine dining destination. Heritage, fire, artistry and world-class hospitality. Reserve your table.",
-      },
-      { name: "author", content: "Wahh Punjab Grandeur" },
-      { property: "og:title", content: "Wahh Punjab Grandeur — Where Punjab Becomes an Experience" },
-      {
-        property: "og:description",
-        content: "Cinematic luxury Punjabi fine dining. Reserve your table.",
-      },
+      { name: "author", content: "Wahh Punjab Restaurant" },
+      { name: "theme-color", content: "#0a0807" },
+      { property: "og:site_name", content: "Wahh Punjab" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "Wahh Punjab Grandeur — Where Punjab Becomes an Experience" },
-      { name: "description", content: "Wahh Punjab – A premium fine-dining experience celebrating authentic Punjabi heritage with royal ambiance, traditional flavors, and modern luxury dining." },
-      { property: "og:description", content: "Wahh Punjab – A premium fine-dining experience celebrating authentic Punjabi heritage with royal ambiance, traditional flavors, and modern luxury dining." },
-      { name: "twitter:description", content: "Wahh Punjab – A premium fine-dining experience celebrating authentic Punjabi heritage with royal ambiance, traditional flavors, and modern luxury dining." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/ZWHXJLVtgoeOaymDtsDaALslL6i2/social-images/social-1781435439938-1000138926.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/ZWHXJLVtgoeOaymDtsDaALslL6i2/social-images/social-1781435439938-1000138926.webp" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/jpeg", href: "/__l5e/assets-v1/9e8cc383-6282-4bb5-bc1f-c07b8d8cb47a/wahh-punjab-logo.jpg" },
-      { rel: "apple-touch-icon", href: "/__l5e/assets-v1/9e8cc383-6282-4bb5-bc1f-c07b8d8cb47a/wahh-punjab-logo.jpg" },
+      { rel: "icon", type: "image/jpeg", href: LOGO_URL },
+      { rel: "apple-touch-icon", href: LOGO_URL },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

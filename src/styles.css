@@ -64,6 +64,8 @@
   --bronze: oklch(0.66 0.13 58);
   --amber: oklch(0.82 0.22 62);
   --amber-glow: oklch(0.92 0.24 68);
+  --veg: oklch(0.7 0.18 145);
+  --nonveg: oklch(0.62 0.22 28);
 
   --background: var(--charcoal-deep);
   --foreground: var(--ivory);

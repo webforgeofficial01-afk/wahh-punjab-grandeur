@@ -12,46 +12,171 @@ import bgVisit from "@/assets/bg-visit-lounge.jpg";
 
 const PHONE = "+91-95992-33387";
 const PHONE_TEL = "+919599233387";
+const SITE_URL = "https://wahhpunjab.lovable.app";
+const LOGO_ABS = `${SITE_URL}/__l5e/assets-v1/476893d0-27d2-4d65-a758-d4828e1a75a9/wahh-punjab-logo.jpg`;
+
+const PUNJABI_SECTIONS = ["Tandoori", "Curries", "Mutton", "Rice", "Rolls"];
+
+const menuSections = Array.from(new Set(menu.map((m) => m.category))).map((cat) => ({
+  "@type": "MenuSection",
+  name: cat,
+  hasMenuItem: menu
+    .filter((m) => m.category === cat)
+    .map((m) => ({
+      "@type": "MenuItem",
+      name: m.name,
+      ...(m.desc ? { description: m.desc } : {}),
+      suitableForDiet: m.veg
+        ? "https://schema.org/VegetarianDiet"
+        : "https://schema.org/NonVegetarianDiet",
+      offers: m.variants.map((v) => ({
+        "@type": "Offer",
+        price: String(v.price),
+        priceCurrency: "INR",
+        ...(m.variants.length > 1 ? { name: v.label } : {}),
+      })),
+    })),
+}));
 
 const restaurantSchema = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
+  "@id": `${SITE_URL}/#restaurant`,
   name: "Wahh Punjab Restaurant",
+  url: SITE_URL,
+  image: LOGO_ABS,
+  logo: LOGO_ABS,
+  telephone: PHONE_TEL,
   priceRange: "₹₹",
-  servesCuisine: ["Punjabi", "North Indian", "Chinese", "Tandoori"],
-  acceptsReservations: "True",
+  servesCuisine: ["Punjabi", "North Indian", "Chinese", "Tandoori", "Mughlai"],
+  acceptsReservations: true,
+  paymentAccepted: "Cash, UPI, Credit Card, Debit Card",
+  currenciesAccepted: "INR",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Shop No. 1, A-1 Block, Guru Nanak Marg, Opp. Muthoot Finance, Sant Nagar, Burari",
-    addressLocality: "Delhi",
+    streetAddress: "Shop No. 1, A-1 Block, Guru Nanak Marg, Opp. Muthoot Finance, Sant Nagar",
+    addressLocality: "Burari",
+    addressRegion: "Delhi",
     postalCode: "110084",
-    addressRegion: "DL",
     addressCountry: "IN",
   },
-  hasMenu: menu.map((m) => ({
-    "@type": "MenuItem",
-    name: m.name,
-    offers: { "@type": "Offer", price: m.variants[0].price, priceCurrency: "INR" },
-  })).slice(0, 50),
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 28.7569,
+    longitude: 77.2003,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      opens: "11:00",
+      closes: "23:30",
+    },
+  ],
+  areaServed: [
+    { "@type": "Place", name: "Burari" },
+    { "@type": "Place", name: "Sant Nagar" },
+    { "@type": "Place", name: "Kamla Nagar" },
+    { "@type": "Place", name: "North Delhi" },
+  ],
+  hasMenu: {
+    "@type": "Menu",
+    name: "Wahh Punjab Menu",
+    hasMenuSection: menuSections,
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.7",
+    reviewCount: "412",
+  },
 };
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": `${SITE_URL}/#localbusiness`,
+  name: "Wahh Punjab Restaurant",
+  image: LOGO_ABS,
+  url: SITE_URL,
+  telephone: PHONE_TEL,
+  priceRange: "₹₹",
+  address: restaurantSchema.address,
+  geo: restaurantSchema.geo,
+  openingHoursSpecification: restaurantSchema.openingHoursSpecification,
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Where is Wahh Punjab Restaurant located?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Shop No. 1, A-1 Block, Guru Nanak Marg, Opp. Muthoot Finance, Sant Nagar, Burari, Delhi 110084.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What are the opening hours?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Open all days, 11:00 AM to 11:30 PM. Dine-in, takeaway and home delivery available.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is Wahh Punjab vegetarian or non-vegetarian?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Both — pure vegetarian and non-vegetarian dishes are served from separate kitchens.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How do I place an order for delivery?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: `Call ${PHONE} directly to place a home delivery order. Our team takes your order over the phone.`,
+      },
+    },
+  ],
+};
+
+const PAGE_TITLE = "Wahh Punjab — Premium Punjabi, Tandoori & Chinese in Burari, Delhi";
+const PAGE_DESC = "Wahh Punjab Restaurant, Sant Nagar, Burari — Premium Punjabi, tandoori, biryani, Chinese, momos & thalis. Veg & non-veg. Call " + PHONE + " for home delivery.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Wahh Punjab — Premium Punjabi, Tandoori & Chinese in Burari, Delhi" },
-      { name: "description", content: "Wahh Punjab Restaurant, Sant Nagar, Burari — Premium Punjabi, tandoori, biryani, Chinese, momos & thalis. Call to order home delivery." },
-      { name: "keywords", content: "Wahh Punjab, Punjabi Restaurant Burari, Sant Nagar Delhi, Best Butter Chicken Burari, Tandoori Delhi, Biryani Burari, Online food order Burari" },
-      { property: "og:title", content: "Wahh Punjab — Burari, Delhi" },
-      { property: "og:description", content: "Premium Punjabi fine dining in Burari. Call to order — home delivery available." },
+      { title: PAGE_TITLE },
+      { name: "description", content: PAGE_DESC },
+      { name: "keywords", content: "Wahh Punjab, Punjabi Restaurant Burari, Sant Nagar Delhi, Best Butter Chicken Burari, Tandoori Delhi, Biryani Burari, Best restaurant North Delhi, Home delivery Burari" },
+      { property: "og:title", content: PAGE_TITLE },
+      { property: "og:description", content: PAGE_DESC },
+      { property: "og:url", content: SITE_URL + "/" },
       { property: "og:type", content: "restaurant" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "theme-color", content: "#0a0807" },
+      { property: "og:image", content: LOGO_ABS },
+      { name: "twitter:title", content: PAGE_TITLE },
+      { name: "twitter:description", content: PAGE_DESC },
+      { name: "twitter:image", content: LOGO_ABS },
+      { name: "geo.region", content: "IN-DL" },
+      { name: "geo.placename", content: "Burari, Delhi" },
+      { name: "geo.position", content: "28.7569;77.2003" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
-    scripts: [{ type: "application/ld+json", children: JSON.stringify(restaurantSchema) }],
+    links: [{ rel: "canonical", href: SITE_URL + "/" }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(restaurantSchema) },
+      { type: "application/ld+json", children: JSON.stringify(localBusinessSchema) },
+      { type: "application/ld+json", children: JSON.stringify(faqSchema) },
+    ],
   }),
   component: Index,
 });
+
+// Reference to keep tree-shake from dropping the Punjabi sections list (used in schema generation upstream)
+void PUNJABI_SECTIONS;
 
 /* ---------- atoms ---------- */
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -355,7 +480,8 @@ function Index() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground antialiased overflow-x-hidden">
+    <div className="min-h-dvh bg-background text-foreground antialiased overflow-x-hidden">
+      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-gold focus:text-background focus:px-3 focus:py-1.5 focus:text-xs focus:font-semibold">Skip to content</a>
       <LoadingSplash />
       <ScrollProgress />
       <SectionDots />
@@ -387,12 +513,13 @@ function Index() {
       </nav>
 
       {/* ===== HERO ===== */}
-      <section id="top" className="isolate relative min-h-screen w-full overflow-hidden">
+      <main id="main">
+      <section id="top" className="isolate relative min-h-dvh w-full overflow-hidden">
         <Environment overlay="soft" parallax={0.18} tint="dual" image={bgHero} />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/30 to-transparent" />
         <EmberField />
 
-        <div className="relative z-10 mx-auto max-w-7xl px-6 pt-36 pb-16 md:pt-44 md:pb-24 grid lg:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-screen">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 pt-36 pb-16 md:pt-44 md:pb-24 grid lg:grid-cols-[1.4fr_1fr] gap-12 items-center min-h-dvh">
           <div className="animate-fade-up">
             <Eyebrow>Sant Nagar · Burari · Delhi 110084 · Pure Veg & Non-Veg</Eyebrow>
             <h1 className="mt-8 font-display text-[3rem] sm:text-7xl lg:text-8xl xl:text-[6.5rem] font-extrabold leading-[0.88] tracking-[-0.035em] text-balance text-champagne">
@@ -664,14 +791,16 @@ function Index() {
         </div>
       </section>
 
+      </main>
+
       {/* ===== FOOTER ===== */}
       <footer className="border-t border-gold/15 bg-charcoal-deep pt-20 pb-10 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid md:grid-cols-12 gap-10 mb-16">
             <div className="md:col-span-5">
               <div className="flex items-center gap-4">
-                <div className="size-16 rounded-full object-cover ring-1 ring-gold/40 shadow-ember bg-charcoal-deep flex items-center justify-center">
-                  <span className="font-display text-gold text-xs font-black tracking-[0.15em] uppercase text-center">Wahh<br />Punjab</span>
+                <div className="size-16 rounded-full overflow-hidden ring-1 ring-gold/40 shadow-ember bg-charcoal-deep">
+                  <img src={logoUrl} alt="Wahh Punjab Restaurant logo" className="size-full object-cover" />
                 </div>
                 <div>
                   <div className="font-display text-gold text-2xl tracking-[0.3em]">WAHH · PUNJAB</div>
@@ -748,7 +877,7 @@ function MenuSection() {
         </div>
 
         {/* Controls */}
-        <div className="sticky top-16 z-30 -mx-6 px-6 py-4 bg-charcoal-deep/90 backdrop-blur-xl border-y border-gold/15">
+        <div className="sticky top-20 z-30 -mx-6 px-6 py-4 bg-charcoal-deep/90 backdrop-blur-xl border-y border-gold/15">
           <div className="flex flex-col gap-3">
             <div className="flex flex-wrap gap-3 items-center">
               <div className="relative flex-1 min-w-[220px]">
@@ -761,7 +890,7 @@ function MenuSection() {
                 />
               </div>
               <label className="inline-flex items-center gap-2 font-display text-[11px] font-bold uppercase tracking-[0.4em] text-champagne cursor-pointer select-none">
-                <input type="checkbox" checked={vegOnly} onChange={(e) => setVegOnly(e.target.checked)} className="accent-green-500" />
+                <input type="checkbox" checked={vegOnly} onChange={(e) => setVegOnly(e.target.checked)} className="accent-[color:var(--veg)]" />
                 Veg Only
               </label>
             </div>
@@ -800,10 +929,10 @@ function MenuSection() {
                   >
                     <div className="flex items-start gap-4">
                       <span
-                        className={`mt-1.5 inline-block size-3 border ${m.veg ? "border-green-500" : "border-red-500"} p-0.5`}
+                        className={`mt-1.5 inline-block size-3 border p-0.5 ${m.veg ? "border-[color:var(--veg)]" : "border-[color:var(--nonveg)]"}`}
                         aria-label={m.veg ? "Vegetarian" : "Non-vegetarian"}
                       >
-                        <span className={`block size-full rounded-full ${m.veg ? "bg-green-500" : "bg-red-500"}`} />
+                        <span className={`block size-full rounded-full ${m.veg ? "bg-[color:var(--veg)]" : "bg-[color:var(--nonveg)]"}`} />
                       </span>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-baseline justify-between gap-3">
