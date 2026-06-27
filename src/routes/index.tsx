@@ -1,29 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 
-import heroPlatter from "@/assets/hero-platter.jpg";
-import legacyImg from "@/assets/legacy.jpg";
-import fireImg from "@/assets/fire-experience.jpg";
-import rajatAsset from "@/assets/rajat-saluja.jpg.asset.json";
-const chefImg = rajatAsset.url;
+import { menu, categories } from "@/data/menu";
 
-import gal1 from "@/assets/gallery-1.jpg";
-import gal2 from "@/assets/gallery-2.jpg";
-import gal3 from "@/assets/gallery-3.jpg";
-import gal4 from "@/assets/gallery-4.jpg";
-import dishDal from "@/assets/dish-dal.jpg";
-import dishKulcha from "@/assets/dish-kulcha.jpg";
-import dishBiryani from "@/assets/dish-biryani.jpg";
-import bgHeroHall from "@/assets/bg-hero-hall.jpg";
-import bgStoryHaveli from "@/assets/bg-story-haveli.jpg";
-import bgMenuTable from "@/assets/bg-menu-table.jpg";
-import bgChefKitchen from "@/assets/bg-chef-kitchen.jpg";
-import bgVisitLounge from "@/assets/bg-visit-lounge.jpg";
-import bgSignatureTable from "@/assets/bg-signature-table.jpg";
-import logoAsset from "@/assets/wahh-punjab-logo.jpg.asset.json";
-import { menu, categories, type MenuItem } from "@/data/menu";
-
-const LOGO = logoAsset.url;
 const PHONE = "+91-95992-33387";
 const PHONE_TEL = "+919599233387";
 
@@ -31,8 +10,6 @@ const restaurantSchema = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   name: "Wahh Punjab Restaurant",
-  image: [LOGO],
-  logo: LOGO,
   priceRange: "₹₹",
   servesCuisine: ["Punjabi", "North Indian", "Chinese", "Tandoori"],
   acceptsReservations: "True",
@@ -60,9 +37,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Wahh Punjab — Burari, Delhi" },
       { property: "og:description", content: "Premium Punjabi fine dining in Burari. Call to order — home delivery available." },
       { property: "og:type", content: "restaurant" },
-      { property: "og:image", content: heroPlatter },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: heroPlatter },
       { name: "theme-color", content: "#0a0807" },
     ],
     links: [{ rel: "canonical", href: "/" }],
@@ -214,12 +189,10 @@ function Marquee({ items }: { items: string[] }) {
 
 /* ---------- Cinematic multi-layer environment ---------- */
 function Environment({
-  image,
   overlay = "default",
   parallax = 0.18,
   tint = "amber",
 }: {
-  image: string;
   overlay?: "default" | "soft" | "dark" | "side";
   parallax?: number;
   tint?: "amber" | "gold" | "dual";
@@ -235,7 +208,7 @@ function Environment({
   return (
     <div className="bg-environment" aria-hidden>
       <div data-parallax={parallax} className="absolute inset-0 will-change-transform">
-        <div className="bg-layer-back" style={{ backgroundImage: `url(${image})` }} />
+        <div className="bg-layer-back" />
       </div>
       <div className={`absolute inset-0 ${overlayClass}`} />
       <div className="bg-vignette-deep" />
@@ -273,7 +246,6 @@ function useReveal() {
 /* ---------- Parallax hook ---------- */
 function useParallax() {
   useEffect(() => {
-    // Skip parallax on touch / narrow screens and reduced-motion users — biggest scroll-jank source.
     if (typeof window === "undefined") return;
     const mq = window.matchMedia("(hover: none), (max-width: 900px), (prefers-reduced-motion: reduce)");
     if (mq.matches) return;
@@ -319,46 +291,6 @@ function useParallax() {
   }, []);
 }
 
-/* ---------- Cart ---------- */
-type CartLine = { key: string; itemId: string; name: string; variant: string; price: number; qty: number };
-
-function useCart() {
-  const [lines, setLines] = useState<CartLine[]>([]);
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem("wahh:cart");
-      if (raw) setLines(JSON.parse(raw) as CartLine[]);
-    } catch {/* noop */}
-    setHydrated(true);
-  }, []);
-  useEffect(() => {
-    if (!hydrated) return;
-    try { localStorage.setItem("wahh:cart", JSON.stringify(lines)); } catch {/* noop */}
-  }, [lines, hydrated]);
-
-  const add = (item: MenuItem, vIndex = 0) => {
-    const v = item.variants[vIndex];
-    const key = `${item.id}::${v.label}`;
-    setLines((prev) => {
-      const idx = prev.findIndex((l) => l.key === key);
-      if (idx >= 0) {
-        const next = [...prev];
-        next[idx] = { ...next[idx], qty: next[idx].qty + 1 };
-        return next;
-      }
-      return [...prev, { key, itemId: item.id, name: item.name, variant: v.label, price: v.price, qty: 1 }];
-    });
-  };
-  const setQty = (key: string, qty: number) =>
-    setLines((prev) => prev.flatMap((l) => (l.key === key ? (qty <= 0 ? [] : [{ ...l, qty }]) : [l])));
-  const remove = (key: string) => setQty(key, 0);
-  const clear = () => setLines([]);
-  const count = lines.reduce((n, l) => n + l.qty, 0);
-  const total = lines.reduce((s, l) => s + l.qty * l.price, 0);
-  return { lines, add, setQty, remove, clear, count, total };
-}
-
 /* ---------- Page ---------- */
 function LoadingSplash() {
   const [gone, setGone] = useState(false);
@@ -374,22 +306,14 @@ function LoadingSplash() {
       className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black transition-opacity duration-[800ms] ${fade ? "opacity-0" : "opacity-100"}`}
       aria-hidden
     >
-      {/* Warm golden glow emerges from center */}
       <div className="absolute inset-0 splash-glow" />
-      {/* Subtle vignette */}
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%)" }} />
 
       <div className="relative splash-logo-wrap">
         <div className="absolute -inset-16 rounded-full bg-gold/15 blur-3xl animate-ember-pulse" />
-        <img
-          src={LOGO}
-          alt="Wahh Punjab"
-          width={200}
-          height={200}
-          className="relative size-36 sm:size-48 rounded-full object-cover ring-1 ring-gold/50"
-          style={{ boxShadow: "0 0 60px -10px color-mix(in oklab, var(--gold) 60%, transparent), 0 0 120px -20px color-mix(in oklab, var(--amber) 40%, transparent)" }}
-        />
-        {/* Gold sweep across logo */}
+        <div className="relative size-36 sm:size-48 rounded-full object-cover ring-1 ring-gold/50 bg-charcoal-deep flex items-center justify-center" style={{ boxShadow: "0 0 60px -10px color-mix(in oklab, var(--gold) 60%, transparent), 0 0 120px -20px color-mix(in oklab, var(--amber) 40%, transparent)" }}>
+          <span className="font-display text-gold text-xs sm:text-sm text-center font-black tracking-[0.18em] uppercase">Wahh<br />Punjab</span>
+        </div>
         <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
           <div className="splash-sweep absolute inset-0" />
         </div>
@@ -406,8 +330,6 @@ function LoadingSplash() {
 
 function Index() {
   const [scrolled, setScrolled] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
-  const cart = useCart();
 
   useReveal();
   useParallax();
@@ -424,12 +346,13 @@ function Index() {
       <ScrollProgress />
       <SectionDots />
 
-
       {/* ===== Nav ===== */}
       <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "bg-charcoal-deep/85 backdrop-blur-xl border-b border-gold/15 py-2.5" : "bg-transparent py-4"}`}>
         <div className="mx-auto max-w-7xl px-6 flex items-center justify-between gap-4">
           <a href="#top" className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3 group">
-            <img src={LOGO} alt="Wahh Punjab" width={44} height={44} className={`rounded-full object-cover ring-1 ring-gold/40 shadow-ember transition-all duration-500 ${scrolled ? "size-8 sm:size-9" : "size-9 sm:size-11"}`} />
+            <div className={`rounded-full ring-1 ring-gold/40 shadow-ember transition-all duration-500 bg-charcoal-deep flex items-center justify-center ${scrolled ? "size-8 sm:size-9" : "size-9 sm:size-11"}`}>
+              <span className="font-display text-gold text-[8px] sm:text-[10px] font-black tracking-[0.15em] uppercase text-center">W·P</span>
+            </div>
             <span className="flex flex-col leading-tight min-w-0">
               <span className="font-display text-gold-shimmer text-[11px] sm:text-lg font-black tracking-[0.18em] sm:tracking-[0.36em] truncate drop-shadow-[0_0_12px_color-mix(in_oklab,var(--gold)_45%,transparent)]">WAHH PUNJAB</span>
               <span className="hidden sm:inline text-[8px] uppercase tracking-[0.5em] text-ivory/40">Burari · Delhi</span>
@@ -442,23 +365,16 @@ function Index() {
             <a href="#visit" className="hover:text-gold transition-colors">Visit</a>
           </div>
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => setCartOpen(true)}
-              className="btn-luxe-ghost"
-              aria-label="Open your dining selection"
-            >
-              <span>Your Feast</span>
-              {cart.count > 0 && (
-                <span className="inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full bg-gradient-to-b from-gold-light to-gold text-charcoal-deep text-[10px] font-bold tracking-normal">{cart.count}</span>
-              )}
-            </button>
+            <a href={`tel:${PHONE_TEL}`} className="btn-luxe-ghost" aria-label="Call to order">
+              <span>Call {PHONE}</span>
+            </a>
           </div>
         </div>
       </nav>
 
       {/* ===== HERO ===== */}
       <section id="top" className="isolate relative min-h-screen w-full overflow-hidden">
-        <Environment image={bgHeroHall} overlay="soft" parallax={0.18} tint="dual" />
+        <Environment overlay="soft" parallax={0.18} tint="dual" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/30 to-transparent" />
         <EmberField />
 
@@ -478,10 +394,10 @@ function Index() {
 
             <div className="mt-12 flex flex-wrap gap-5">
               <a href="#menu" className="btn-luxe group">
-                <span>Curate Your Feast</span>
+                <span>Explore The Menu</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </a>
-              <a href={`tel:${PHONE.replace(/[^+\d]/g, "")}`} className="btn-luxe-outline">
+              <a href={`tel:${PHONE_TEL}`} className="btn-luxe-outline">
                 <span>Reserve A Table</span>
               </a>
             </div>
@@ -507,11 +423,11 @@ function Index() {
             </div>
           </div>
 
-          {/* Hero plate visual */}
+          {/* Hero plate visual — empty spot */}
           <div className="relative hidden lg:block">
             <div className="absolute -inset-12 rounded-full bg-amber/20 blur-3xl animate-ember-pulse" aria-hidden />
-            <div className="relative aspect-square overflow-hidden rounded-full ring-1 ring-gold/40 shadow-luxe">
-              <img src={heroPlatter} alt="Royal Punjabi platter" className="h-full w-full object-cover animate-slow-zoom" />
+            <div className="relative aspect-square overflow-hidden rounded-full ring-1 ring-gold/40 shadow-luxe bg-charcoal-deep/80 border border-gold/10 flex items-center justify-center">
+              <span className="text-gold/40 text-xs uppercase tracking-[0.3em]">Image spot</span>
             </div>
             <div className="absolute -bottom-4 -left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.35em] text-gold">House Special</div>
@@ -528,7 +444,7 @@ function Index() {
 
       {/* ===== STORY ===== */}
       <section id="story" className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
-        <Environment image={bgStoryHaveli} overlay="dark" parallax={0.12} tint="gold" />
+        <Environment overlay="dark" parallax={0.12} tint="gold" />
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           <div className="lg:col-span-5 order-2 lg:order-1" data-reveal>
             <Eyebrow>The House</Eyebrow>
@@ -559,7 +475,9 @@ function Index() {
           <div className="lg:col-span-7 order-1 lg:order-2 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -bottom-6 -right-6 size-40 bg-amber/20 blur-3xl -z-10 animate-ember-pulse" />
-            <img src={legacyImg} alt="Tandoor at Wahh Punjab" loading="lazy" width={1280} height={1280} className="w-full h-auto shadow-luxe" />
+            <div className="w-full aspect-square bg-charcoal-deep/60 border border-gold/10 shadow-luxe flex items-center justify-center">
+              <span className="text-gold/40 text-xs uppercase tracking-[0.3em]">Image spot</span>
+            </div>
             <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto bg-charcoal-deep/85 backdrop-blur-md border border-gold/25 px-4 py-3 max-w-xs">
               <div className="text-[9px] uppercase tracking-[0.35em] text-gold mb-1">From the Tandoor</div>
               <div className="text-xs text-ivory/70 quote-serif italic">Slow-cured charcoal, hand-stretched naan, every plate hits the table hot.</div>
@@ -572,7 +490,7 @@ function Index() {
 
       {/* ===== FIRE PARALLAX ===== */}
       <section className="isolate relative overflow-hidden">
-        <Environment image={fireImg} overlay="dark" parallax={0.25} tint="amber" />
+        <Environment overlay="dark" parallax={0.25} tint="amber" />
         <div className="relative mx-auto max-w-5xl px-6 py-32 lg:py-44 text-center" data-reveal>
           <Eyebrow>Smoke · Spice · Slow Fire</Eyebrow>
           <h2 className="mt-8 editorial text-5xl sm:text-6xl lg:text-7xl leading-[1] text-balance text-ivory">
@@ -586,7 +504,7 @@ function Index() {
 
       {/* ===== SIGNATURE DISHES ===== */}
       <section id="signature" className="isolate relative py-32 lg:py-44 px-6 border-y border-gold/10 overflow-hidden">
-        <Environment image={bgSignatureTable} overlay="dark" parallax={0.1} tint="amber" />
+        <Environment overlay="dark" parallax={0.1} tint="amber" />
         <div className="mx-auto max-w-7xl relative">
           <div className="text-center mb-20" data-reveal>
             <Eyebrow>House Signatures</Eyebrow>
@@ -594,13 +512,13 @@ function Index() {
           </div>
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
             {[
-              { name: "Wahh Punjab Special Chicken", price: "₹280 / ₹430 / ₹680", img: dishDal, tag: "House Royal", desc: "Our signature gravy — slow-cooked chicken in a buttery, aromatic masala. Order it as Quarter, Half or Full." },
-              { name: "Butter Chicken", price: "₹240 / ₹400 / ₹680", img: dishKulcha, tag: "Most Loved", desc: "Tandoor-charred chicken in a velvety, tomato-cream gravy. The Delhi classic done right." },
-              { name: "Wahh Punjab Special Thali", price: "₹299", img: dishBiryani, tag: "Best Value", desc: "A grand single-platter feast of our specials — perfect for the full Punjabi experience." },
+              { name: "Wahh Punjab Special Chicken", price: "₹280 / ₹430 / ₹680", tag: "House Royal", desc: "Our signature gravy — slow-cooked chicken in a buttery, aromatic masala. Order it as Quarter, Half or Full." },
+              { name: "Butter Chicken", price: "₹240 / ₹400 / ₹680", tag: "Most Loved", desc: "Tandoor-charred chicken in a velvety, tomato-cream gravy. The Delhi classic done right." },
+              { name: "Wahh Punjab Special Thali", price: "₹299", tag: "Best Value", desc: "A grand single-platter feast of our specials — perfect for the full Punjabi experience." },
             ].map((d, i) => (
               <article key={d.name} className="dish-card group relative bg-charcoal/50 border border-gold/15 hover:border-gold/45 transition-all duration-700 hover:shadow-luxe hover:-translate-y-1" data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <img src={d.img} alt={d.name} loading="lazy" className="dish-img absolute inset-0 h-full w-full object-cover" />
+                <div className="relative aspect-[4/5] overflow-hidden bg-charcoal-deep/60 border-b border-gold/10 flex items-center justify-center">
+                  <span className="text-gold/40 text-xs uppercase tracking-[0.3em]">Image spot</span>
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep via-charcoal-deep/20 to-transparent" />
                   <div className="absolute top-4 left-4 bg-gold text-charcoal-deep text-[9px] uppercase tracking-[0.3em] px-2.5 py-1">{d.tag}</div>
                 </div>
@@ -610,7 +528,7 @@ function Index() {
                   </div>
                   <div className="mt-1 text-glow-amber editorial text-lg">{d.price}</div>
                   <p className="mt-3 text-sm text-champagne-deep/70 leading-relaxed quote-serif italic">{d.desc}</p>
-                  <a href="#menu" className="mt-5 inline-block text-[10px] uppercase tracking-[0.3em] text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors">Order from menu →</a>
+                  <a href="#menu" className="mt-5 inline-block text-[10px] uppercase tracking-[0.3em] text-gold border-b border-gold/40 pb-1 hover:border-gold transition-colors">View in menu →</a>
                 </div>
               </article>
             ))}
@@ -619,16 +537,18 @@ function Index() {
       </section>
 
       {/* ===== FULL MENU ===== */}
-      <MenuSection onAdd={cart.add} />
+      <MenuSection />
 
       {/* ===== OWNER — RAJAT SALUJA ===== */}
       <section className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
-        <Environment image={bgChefKitchen} overlay="dark" parallax={0.14} tint="amber" />
+        <Environment overlay="dark" parallax={0.14} tint="amber" />
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center relative">
           <div className="lg:col-span-5 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -top-6 -left-6 size-40 bg-gold/20 blur-3xl -z-10" />
-            <img src={chefImg} alt="Rajat Saluja, founder of Wahh Punjab" loading="lazy" className="w-full h-auto aspect-[4/5] object-cover shadow-luxe grayscale-[0.1] hover:grayscale-0 transition-all duration-1000" />
+            <div className="w-full aspect-[4/5] bg-charcoal-deep/60 border border-gold/10 shadow-luxe flex items-center justify-center">
+              <span className="text-gold/40 text-xs uppercase tracking-[0.3em]">Image spot</span>
+            </div>
             <div className="absolute bottom-4 left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.35em] text-gold">Founder</div>
               <div className="font-display text-lg font-bold tracking-[0.1em] text-ivory">RAJAT SALUJA</div>
@@ -661,9 +581,6 @@ function Index() {
         </div>
       </section>
 
-
-
-
       {/* ===== GALLERY ===== */}
       <section className="relative py-32 px-6 bg-charcoal/40 border-y border-gold/10">
         <div className="mx-auto max-w-7xl">
@@ -677,15 +594,17 @@ function Index() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-[180px] md:auto-rows-[220px]">
             {[
-              { src: gal1, span: "col-span-2 row-span-2" },
-              { src: dishBiryani, span: "" },
-              { src: gal3, span: "row-span-2" },
-              { src: gal2, span: "" },
-              { src: dishKulcha, span: "" },
-              { src: gal4, span: "col-span-2" },
+              { span: "col-span-2 row-span-2" },
+              { span: "" },
+              { span: "row-span-2" },
+              { span: "" },
+              { span: "" },
+              { span: "col-span-2" },
             ].map((g, i) => (
-              <div key={i} className={`relative overflow-hidden group border border-gold/10 ${g.span}`} data-reveal style={{ transitionDelay: `${i * 60}ms` }}>
-                <img src={g.src} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-110" />
+              <div key={i} className={`relative overflow-hidden group border border-gold/10 bg-charcoal-deep/60 ${g.span}`} data-reveal style={{ transitionDelay: `${i * 60}ms` }}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-gold/40 text-xs uppercase tracking-[0.3em]">Image spot</span>
+                </div>
                 <div className="absolute inset-0 bg-charcoal-deep/0 group-hover:bg-charcoal-deep/40 transition-colors duration-700" />
               </div>
             ))}
@@ -695,7 +614,7 @@ function Index() {
 
       {/* ===== VISIT / FINAL ===== */}
       <section id="visit" className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
-        <Environment image={bgVisitLounge} overlay="dark" parallax={0.14} tint="dual" />
+        <Environment overlay="dark" parallax={0.14} tint="dual" />
         <EmberField />
         <div className="relative mx-auto max-w-5xl text-center" data-reveal>
           <Eyebrow>Visit Us</Eyebrow>
@@ -725,7 +644,7 @@ function Index() {
             </div>
           </div>
           <div className="mt-14 flex flex-wrap justify-center gap-5">
-            <a href="#menu" className="btn-luxe"><span>Curate Your Feast</span><span>→</span></a>
+            <a href="#menu" className="btn-luxe"><span>Explore The Menu</span><span>→</span></a>
             <a href={`tel:${PHONE_TEL}`} className="btn-luxe-outline"><span>Call {PHONE}</span></a>
           </div>
         </div>
@@ -737,7 +656,9 @@ function Index() {
           <div className="grid md:grid-cols-12 gap-10 mb-16">
             <div className="md:col-span-5">
               <div className="flex items-center gap-4">
-                <img src={LOGO} alt="Wahh Punjab" width={72} height={72} loading="lazy" className="size-16 rounded-full object-cover ring-1 ring-gold/40 shadow-ember" />
+                <div className="size-16 rounded-full object-cover ring-1 ring-gold/40 shadow-ember bg-charcoal-deep flex items-center justify-center">
+                  <span className="font-display text-gold text-xs font-black tracking-[0.15em] uppercase text-center">Wahh<br />Punjab</span>
+                </div>
                 <div>
                   <div className="font-display text-gold text-2xl tracking-[0.3em]">WAHH · PUNJAB</div>
                   <div className="text-[9px] uppercase tracking-[0.5em] text-ivory/40 mt-1">Sant Nagar · Burari · Delhi</div>
@@ -771,27 +692,12 @@ function Index() {
           </div>
         </div>
       </footer>
-
-      {/* ===== Sticky Feast FAB (mobile) ===== */}
-      {cart.count > 0 && !cartOpen && (
-        <button
-          onClick={() => setCartOpen(true)}
-          className="fixed bottom-6 right-6 z-40 btn-luxe"
-          style={{ padding: "1rem 1.6rem" }}
-        >
-          <span className="font-bold tracking-normal text-base">{cart.count}</span>
-          <span>Review Your Feast · ₹{cart.total}</span>
-        </button>
-      )}
-
-      {/* ===== Cart Drawer ===== */}
-      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} cart={cart} />
     </div>
   );
 }
 
 /* ---------- Menu Section ---------- */
-function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => void }) {
+function MenuSection() {
   const [active, setActive] = useState<string>("All");
   const [query, setQuery] = useState("");
   const [vegOnly, setVegOnly] = useState(false);
@@ -807,7 +713,7 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
   }, [active, query, vegOnly]);
 
   const grouped = useMemo(() => {
-    const map = new Map<string, MenuItem[]>();
+    const map = new Map<string, typeof menu>();
     for (const m of filtered) {
       if (!map.has(m.category)) map.set(m.category, []);
       map.get(m.category)!.push(m);
@@ -817,12 +723,12 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
 
   return (
     <section id="menu" className="isolate relative py-24 lg:py-32 px-6 border-y border-gold/10 overflow-hidden">
-      <Environment image={bgMenuTable} overlay="dark" parallax={0.08} tint="amber" />
+      <Environment overlay="dark" parallax={0.08} tint="amber" />
       <div className="mx-auto max-w-7xl relative">
         <div className="text-center mb-12" data-reveal>
-          <Eyebrow>The Full Menu · Order Online</Eyebrow>
+          <Eyebrow>The Full Menu</Eyebrow>
           <h2 className="mt-6 editorial text-5xl sm:text-6xl lg:text-7xl text-balance leading-tight text-gold-shimmer">
-            Every dish. Tap to order.
+            Every dish on the menu.
           </h2>
           <p className="mt-4 text-ivory/60 quote-serif italic">{menu.length} dishes · {categories.length} sections · Call {PHONE} to order delivery</p>
         </div>
@@ -892,20 +798,18 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
                         {m.desc && (
                           <p className="mt-2 text-xs text-champagne-deep/65 quote-serif italic leading-relaxed">{m.desc}</p>
                         )}
-                        <div className="mt-4 flex flex-wrap items-center gap-2.5">
-                          {m.variants.map((v, idx) => (
-                            <button
+                        <div className="mt-4 flex flex-wrap items-center gap-3">
+                          {m.variants.map((v) => (
+                            <span
                               key={v.label}
-                              onClick={() => onAdd(m, idx)}
-                              className="add-pill"
-                              aria-label={`Add ${m.name} ${v.label} ₹${v.price} to your feast`}
+                              className="inline-flex items-center gap-2 px-3 py-1.5 border border-gold/25 bg-charcoal-deep/50 text-sm"
+                              aria-label={`${m.name} ${v.label} ₹${v.price}`}
                             >
                               {m.variants.length > 1 && (
-                                <span className="text-[9px] uppercase tracking-[0.28em] text-gold/85 group-hover:text-charcoal-deep">{v.label}</span>
+                                <span className="text-[9px] uppercase tracking-[0.28em] text-gold/85">{v.label}</span>
                               )}
                               <span className="font-semibold text-glow-amber">₹{v.price}</span>
-                              <span className="text-gold/90 text-base leading-none">+</span>
-                            </button>
+                            </span>
                           ))}
                         </div>
                       </div>
@@ -918,78 +822,5 @@ function MenuSection({ onAdd }: { onAdd: (item: MenuItem, vIndex?: number) => vo
         </div>
       </div>
     </section>
-  );
-}
-
-/* ---------- Cart Drawer ---------- */
-function CartDrawer({
-  open,
-  onClose,
-  cart,
-}: {
-  open: boolean;
-  onClose: () => void;
-  cart: ReturnType<typeof useCart>;
-}) {
-
-
-
-  return (
-    <>
-      <div
-        className={`fixed inset-0 z-[80] bg-charcoal-deep/70 backdrop-blur-sm transition-opacity duration-300 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
-        onClick={onClose}
-        aria-hidden
-      />
-      <aside
-        className={`fixed top-0 right-0 z-[90] h-full w-full sm:w-[440px] bg-charcoal border-l border-gold/25 shadow-luxe transition-transform duration-500 ${open ? "translate-x-0" : "translate-x-full"} flex flex-col`}
-        aria-label="Cart"
-      >
-        <header className="flex items-center justify-between px-6 py-6 border-b border-gold/15">
-          <div>
-            <div className="text-[10px] uppercase tracking-[0.45em] text-gold">Dining Selection</div>
-            <div className="editorial text-2xl text-champagne mt-1">Your Feast · {cart.count} {cart.count === 1 ? "plate" : "plates"}</div>
-          </div>
-          <button onClick={onClose} className="text-champagne-deep/70 hover:text-gold text-3xl leading-none transition-colors" aria-label="Close">×</button>
-        </header>
-
-        <div className="flex-1 overflow-y-auto px-6 py-5 space-y-4">
-          {cart.lines.length === 0 && (
-            <p className="text-center text-champagne-deep/55 quote-serif italic py-20 px-4 leading-relaxed">
-              Your table awaits — begin curating your feast from the menu.
-            </p>
-          )}
-          {cart.lines.map((l) => (
-            <div key={l.key} className="flex items-start gap-3 border border-gold/15 hover:border-gold/35 transition-colors p-4 bg-charcoal-deep/40">
-              <div className="flex-1 min-w-0">
-                <div className="editorial text-base text-champagne leading-tight">{l.name}</div>
-                {l.variant !== "Regular" && (
-                  <div className="text-[10px] uppercase tracking-[0.3em] text-gold/80 mt-1">{l.variant}</div>
-                )}
-                <div className="text-xs text-champagne-deep/65 mt-1.5 quote-serif italic">₹{l.price} per plate</div>
-              </div>
-              <div className="flex items-center gap-2">
-                <button onClick={() => cart.setQty(l.key, l.qty - 1)} className="size-8 border border-gold/35 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors text-base leading-none">−</button>
-                <span className="w-6 text-center text-sm text-champagne font-semibold">{l.qty}</span>
-                <button onClick={() => cart.setQty(l.key, l.qty + 1)} className="size-8 border border-gold/35 text-gold hover:bg-gold hover:text-charcoal-deep transition-colors text-base leading-none">+</button>
-              </div>
-              <div className="w-20 text-right text-sm text-glow-amber font-semibold">₹{l.price * l.qty}</div>
-            </div>
-          ))}
-        </div>
-
-        {cart.lines.length > 0 && (
-          <div className="border-t border-gold/15 px-6 py-6 space-y-4 bg-charcoal-deep/60">
-            <div className="flex items-center justify-between pt-2 border-t border-gold/10">
-              <span className="text-[10px] uppercase tracking-[0.4em] text-champagne-deep/75">Selection Total</span>
-              <span className="editorial text-3xl text-gold-shimmer">₹{cart.total}</span>
-            </div>
-            <a href={`tel:${PHONE_TEL}`} onClick={onClose} className="btn-luxe w-full"><span>Call {PHONE} To Order</span><span>→</span></a>
-            <button onClick={cart.clear} className="w-full text-[9px] uppercase tracking-[0.4em] text-champagne-deep/55 hover:text-gold py-1 transition-colors">Clear Selection</button>
-            <p className="text-center text-[9px] uppercase tracking-[0.35em] text-champagne-deep/45">Delivery available · Call {PHONE} · GST extra</p>
-          </div>
-        )}
-      </aside>
-    </>
   );
 }
