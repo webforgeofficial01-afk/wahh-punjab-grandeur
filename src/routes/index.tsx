@@ -2,6 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 
 import { menu, categories } from "@/data/menu";
+import logoUrl from "@/assets/wahh-punjab-logo.jpg";
+import bgHero from "@/assets/bg-hero-hall.jpg";
+import bgStory from "@/assets/bg-story-haveli.jpg";
+import bgMenu from "@/assets/bg-menu-table.jpg";
+import bgSignature from "@/assets/bg-signature-table.jpg";
+import bgChef from "@/assets/bg-chef-kitchen.jpg";
+import bgVisit from "@/assets/bg-visit-lounge.jpg";
 
 const PHONE = "+91-95992-33387";
 const PHONE_TEL = "+919599233387";
@@ -192,24 +199,27 @@ function Environment({
   overlay = "default",
   parallax = 0.18,
   tint = "amber",
+  image,
 }: {
   overlay?: "default" | "soft" | "dark" | "side";
   parallax?: number;
   tint?: "amber" | "gold" | "dual";
+  image?: string;
 }) {
   const overlayClass =
     overlay === "soft"
-      ? "bg-gradient-to-b from-charcoal-deep/30 via-charcoal-deep/55 to-charcoal-deep/95"
+      ? "bg-gradient-to-b from-charcoal-deep/40 via-charcoal-deep/65 to-charcoal-deep/95"
       : overlay === "dark"
-      ? "bg-gradient-to-b from-charcoal-deep/75 via-charcoal-deep/80 to-charcoal-deep"
+      ? "bg-gradient-to-b from-charcoal-deep/80 via-charcoal-deep/85 to-charcoal-deep"
       : overlay === "side"
       ? "bg-gradient-to-r from-charcoal-deep via-charcoal-deep/70 to-charcoal-deep/20"
-      : "bg-gradient-to-b from-charcoal-deep/50 via-charcoal-deep/70 to-charcoal-deep";
+      : "bg-gradient-to-b from-charcoal-deep/55 via-charcoal-deep/75 to-charcoal-deep";
   return (
     <div className="bg-environment" aria-hidden>
       <div data-parallax={parallax} className="absolute inset-0 will-change-transform">
-        <div className="bg-layer-back" />
+        <div className="bg-layer-back" style={image ? { backgroundImage: `url(${image})` } : undefined} />
       </div>
+      {image && <div className="bg-shimmer-beam" />}
       <div className={`absolute inset-0 ${overlayClass}`} />
       <div className="bg-vignette-deep" />
       {(tint === "amber" || tint === "dual") && (
@@ -218,6 +228,7 @@ function Environment({
       {(tint === "gold" || tint === "dual") && (
         <div className="bg-light-orb bg-light-gold" style={{ width: "45vw", height: "45vw", bottom: "-15%", left: "-10%" }} />
       )}
+      <div className="bg-smoke-layer" />
       <div className="bg-grain" />
     </div>
   );
@@ -310,10 +321,13 @@ function LoadingSplash() {
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%)" }} />
 
       <div className="relative splash-logo-wrap">
-        <div className="absolute -inset-16 rounded-full bg-gold/15 blur-3xl animate-ember-pulse" />
-        <div className="relative size-36 sm:size-48 rounded-full object-cover ring-1 ring-gold/50 bg-charcoal-deep flex items-center justify-center" style={{ boxShadow: "0 0 60px -10px color-mix(in oklab, var(--gold) 60%, transparent), 0 0 120px -20px color-mix(in oklab, var(--amber) 40%, transparent)" }}>
-          <span className="font-display text-gold text-xs sm:text-sm text-center font-black tracking-[0.18em] uppercase">Wahh<br />Punjab</span>
-        </div>
+        <div className="absolute -inset-16 rounded-full bg-gold/20 blur-3xl animate-ember-pulse" />
+        <img
+          src={logoUrl}
+          alt="Wahh Punjab"
+          className="relative size-36 sm:size-48 rounded-full object-cover ring-1 ring-gold/60"
+          style={{ boxShadow: "0 0 60px -10px color-mix(in oklab, var(--gold) 60%, transparent), 0 0 120px -20px color-mix(in oklab, var(--amber) 40%, transparent)" }}
+        />
         <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
           <div className="splash-sweep absolute inset-0" />
         </div>
@@ -350,8 +364,8 @@ function Index() {
       <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "bg-charcoal-deep/85 backdrop-blur-xl border-b border-gold/15 py-2.5" : "bg-transparent py-4"}`}>
         <div className="mx-auto max-w-7xl px-6 flex items-center justify-between gap-4">
           <a href="#top" className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3 group">
-            <div className={`rounded-full ring-1 ring-gold/40 shadow-ember transition-all duration-500 bg-charcoal-deep flex items-center justify-center ${scrolled ? "size-8 sm:size-9" : "size-9 sm:size-11"}`}>
-              <span className="font-display text-gold text-[8px] sm:text-[10px] font-black tracking-[0.15em] uppercase text-center">W·P</span>
+            <div className={`rounded-full ring-1 ring-gold/40 shadow-ember transition-all duration-500 overflow-hidden ${scrolled ? "size-8 sm:size-9" : "size-9 sm:size-11"}`}>
+              <img src={logoUrl} alt="Wahh Punjab logo" className="size-full object-cover" />
             </div>
             <span className="flex flex-col leading-tight min-w-0">
               <span className="font-display text-gold-shimmer text-[11px] sm:text-lg font-black tracking-[0.18em] sm:tracking-[0.36em] truncate drop-shadow-[0_0_12px_color-mix(in_oklab,var(--gold)_45%,transparent)]">WAHH PUNJAB</span>
@@ -374,7 +388,7 @@ function Index() {
 
       {/* ===== HERO ===== */}
       <section id="top" className="isolate relative min-h-screen w-full overflow-hidden">
-        <Environment overlay="soft" parallax={0.18} tint="dual" />
+        <Environment overlay="soft" parallax={0.18} tint="dual" image={bgHero} />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-charcoal-deep via-charcoal-deep/30 to-transparent" />
         <EmberField />
 
@@ -444,7 +458,7 @@ function Index() {
 
       {/* ===== STORY ===== */}
       <section id="story" className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
-        <Environment overlay="dark" parallax={0.12} tint="gold" />
+        <Environment overlay="dark" parallax={0.12} tint="gold" image={bgStory} />
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           <div className="lg:col-span-5 order-2 lg:order-1" data-reveal>
             <Eyebrow>The House</Eyebrow>
@@ -490,7 +504,7 @@ function Index() {
 
       {/* ===== FIRE PARALLAX ===== */}
       <section className="isolate relative overflow-hidden">
-        <Environment overlay="dark" parallax={0.25} tint="amber" />
+        <Environment overlay="dark" parallax={0.25} tint="amber" image={bgChef} />
         <div className="relative mx-auto max-w-5xl px-6 py-32 lg:py-44 text-center" data-reveal>
           <Eyebrow>Smoke · Spice · Slow Fire</Eyebrow>
           <h2 className="mt-8 editorial text-5xl sm:text-6xl lg:text-7xl leading-[1] text-balance text-ivory">
@@ -504,7 +518,7 @@ function Index() {
 
       {/* ===== SIGNATURE DISHES ===== */}
       <section id="signature" className="isolate relative py-32 lg:py-44 px-6 border-y border-gold/10 overflow-hidden">
-        <Environment overlay="dark" parallax={0.1} tint="amber" />
+        <Environment overlay="dark" parallax={0.1} tint="amber" image={bgSignature} />
         <div className="mx-auto max-w-7xl relative">
           <div className="text-center mb-20" data-reveal>
             <Eyebrow>House Signatures</Eyebrow>
@@ -541,7 +555,7 @@ function Index() {
 
       {/* ===== OWNER — RAJAT SALUJA ===== */}
       <section className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
-        <Environment overlay="dark" parallax={0.14} tint="amber" />
+        <Environment overlay="dark" parallax={0.14} tint="amber" image={bgChef} />
         <div className="mx-auto max-w-7xl grid lg:grid-cols-12 gap-12 lg:gap-20 items-center relative">
           <div className="lg:col-span-5 relative" data-reveal>
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
@@ -614,7 +628,7 @@ function Index() {
 
       {/* ===== VISIT / FINAL ===== */}
       <section id="visit" className="isolate relative py-32 lg:py-44 px-6 overflow-hidden">
-        <Environment overlay="dark" parallax={0.14} tint="dual" />
+        <Environment overlay="dark" parallax={0.14} tint="dual" image={bgVisit} />
         <EmberField />
         <div className="relative mx-auto max-w-5xl text-center" data-reveal>
           <Eyebrow>Visit Us</Eyebrow>
@@ -723,7 +737,7 @@ function MenuSection() {
 
   return (
     <section id="menu" className="isolate relative py-24 lg:py-32 px-6 border-y border-gold/10 overflow-hidden">
-      <Environment overlay="dark" parallax={0.08} tint="amber" />
+      <Environment overlay="dark" parallax={0.08} tint="amber" image={bgMenu} />
       <div className="mx-auto max-w-7xl relative">
         <div className="text-center mb-12" data-reveal>
           <Eyebrow>The Full Menu</Eyebrow>
