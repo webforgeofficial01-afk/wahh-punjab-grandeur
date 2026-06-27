@@ -199,24 +199,27 @@ function Environment({
   overlay = "default",
   parallax = 0.18,
   tint = "amber",
+  image,
 }: {
   overlay?: "default" | "soft" | "dark" | "side";
   parallax?: number;
   tint?: "amber" | "gold" | "dual";
+  image?: string;
 }) {
   const overlayClass =
     overlay === "soft"
-      ? "bg-gradient-to-b from-charcoal-deep/30 via-charcoal-deep/55 to-charcoal-deep/95"
+      ? "bg-gradient-to-b from-charcoal-deep/40 via-charcoal-deep/65 to-charcoal-deep/95"
       : overlay === "dark"
-      ? "bg-gradient-to-b from-charcoal-deep/75 via-charcoal-deep/80 to-charcoal-deep"
+      ? "bg-gradient-to-b from-charcoal-deep/80 via-charcoal-deep/85 to-charcoal-deep"
       : overlay === "side"
       ? "bg-gradient-to-r from-charcoal-deep via-charcoal-deep/70 to-charcoal-deep/20"
-      : "bg-gradient-to-b from-charcoal-deep/50 via-charcoal-deep/70 to-charcoal-deep";
+      : "bg-gradient-to-b from-charcoal-deep/55 via-charcoal-deep/75 to-charcoal-deep";
   return (
     <div className="bg-environment" aria-hidden>
       <div data-parallax={parallax} className="absolute inset-0 will-change-transform">
-        <div className="bg-layer-back" />
+        <div className="bg-layer-back" style={image ? { backgroundImage: `url(${image})` } : undefined} />
       </div>
+      {image && <div className="bg-shimmer-beam" />}
       <div className={`absolute inset-0 ${overlayClass}`} />
       <div className="bg-vignette-deep" />
       {(tint === "amber" || tint === "dual") && (
@@ -225,6 +228,7 @@ function Environment({
       {(tint === "gold" || tint === "dual") && (
         <div className="bg-light-orb bg-light-gold" style={{ width: "45vw", height: "45vw", bottom: "-15%", left: "-10%" }} />
       )}
+      <div className="bg-smoke-layer" />
       <div className="bg-grain" />
     </div>
   );
