@@ -582,40 +582,19 @@ main > section, section[id] {
   color: var(--champagne-deep);
 }
 
-/* Add-to-feast pill on menu items */
-@utility add-pill {
-  position: relative;
+/* ===== Price tag on menu items ===== */
+@utility price-tag {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.55rem 0.9rem;
+  padding: 0.5rem 0.85rem;
   font-family: var(--font-sans);
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 0.05em;
   color: var(--champagne);
   background: color-mix(in oklab, var(--charcoal-deep) 60%, transparent);
   border: 1px solid color-mix(in oklab, var(--gold) 32%, transparent);
-  transition: all 0.45s cubic-bezier(0.16,1,0.3,1);
-  cursor: pointer;
-  overflow: hidden;
-  isolation: isolate;
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: var(--gradient-champagne);
-    transform: translateY(101%);
-    transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
-    z-index: -1;
-  }
-  &:hover {
-    color: var(--charcoal-deep);
-    border-color: var(--gold);
-    box-shadow: 0 10px 30px -10px color-mix(in oklab, var(--gold) 60%, transparent);
-    transform: translateY(-1px);
-  }
-  &:hover::before { transform: translateY(0); }
 }
 
 /* ===== Marquee band ===== */
