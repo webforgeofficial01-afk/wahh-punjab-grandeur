@@ -2,7 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 
 import { menu, categories } from "@/data/menu";
-import logoUrl from "@/assets/wahh-punjab-logo.jpg";
+import logoAsset from "@/assets/wahh-punjab-logo.jpg.asset.json";
+const logoUrl = logoAsset.url;
 import bgHero from "@/assets/bg-hero-hall.jpg";
 import bgStory from "@/assets/bg-story-haveli.jpg";
 import bgMenu from "@/assets/bg-menu-table.jpg";
