@@ -321,10 +321,13 @@ function LoadingSplash() {
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.75) 100%)" }} />
 
       <div className="relative splash-logo-wrap">
-        <div className="absolute -inset-16 rounded-full bg-gold/15 blur-3xl animate-ember-pulse" />
-        <div className="relative size-36 sm:size-48 rounded-full object-cover ring-1 ring-gold/50 bg-charcoal-deep flex items-center justify-center" style={{ boxShadow: "0 0 60px -10px color-mix(in oklab, var(--gold) 60%, transparent), 0 0 120px -20px color-mix(in oklab, var(--amber) 40%, transparent)" }}>
-          <span className="font-display text-gold text-xs sm:text-sm text-center font-black tracking-[0.18em] uppercase">Wahh<br />Punjab</span>
-        </div>
+        <div className="absolute -inset-16 rounded-full bg-gold/20 blur-3xl animate-ember-pulse" />
+        <img
+          src={logoUrl}
+          alt="Wahh Punjab"
+          className="relative size-36 sm:size-48 rounded-full object-cover ring-1 ring-gold/60"
+          style={{ boxShadow: "0 0 60px -10px color-mix(in oklab, var(--gold) 60%, transparent), 0 0 120px -20px color-mix(in oklab, var(--amber) 40%, transparent)" }}
+        />
         <div className="absolute inset-0 rounded-full overflow-hidden pointer-events-none">
           <div className="splash-sweep absolute inset-0" />
         </div>
@@ -361,8 +364,8 @@ function Index() {
       <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${scrolled ? "bg-charcoal-deep/85 backdrop-blur-xl border-b border-gold/15 py-2.5" : "bg-transparent py-4"}`}>
         <div className="mx-auto max-w-7xl px-6 flex items-center justify-between gap-4">
           <a href="#top" className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3 group">
-            <div className={`rounded-full ring-1 ring-gold/40 shadow-ember transition-all duration-500 bg-charcoal-deep flex items-center justify-center ${scrolled ? "size-8 sm:size-9" : "size-9 sm:size-11"}`}>
-              <span className="font-display text-gold text-[8px] sm:text-[10px] font-black tracking-[0.15em] uppercase text-center">W·P</span>
+            <div className={`rounded-full ring-1 ring-gold/40 shadow-ember transition-all duration-500 overflow-hidden ${scrolled ? "size-8 sm:size-9" : "size-9 sm:size-11"}`}>
+              <img src={logoUrl} alt="Wahh Punjab logo" className="size-full object-cover" />
             </div>
             <span className="flex flex-col leading-tight min-w-0">
               <span className="font-display text-gold-shimmer text-[11px] sm:text-lg font-black tracking-[0.18em] sm:tracking-[0.36em] truncate drop-shadow-[0_0_12px_color-mix(in_oklab,var(--gold)_45%,transparent)]">WAHH PUNJAB</span>
