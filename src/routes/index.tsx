@@ -342,12 +342,12 @@ function Environment({
 }) {
   const overlayClass =
     overlay === "soft"
-      ? "bg-gradient-to-b from-charcoal-deep/40 via-charcoal-deep/65 to-charcoal-deep/95"
+      ? "bg-gradient-to-b from-charcoal-deep/15 via-charcoal-deep/35 to-charcoal-deep/75"
       : overlay === "dark"
-      ? "bg-gradient-to-b from-charcoal-deep/80 via-charcoal-deep/85 to-charcoal-deep"
+      ? "bg-gradient-to-b from-charcoal-deep/40 via-charcoal-deep/55 to-charcoal-deep/85"
       : overlay === "side"
-      ? "bg-gradient-to-r from-charcoal-deep via-charcoal-deep/70 to-charcoal-deep/20"
-      : "bg-gradient-to-b from-charcoal-deep/55 via-charcoal-deep/75 to-charcoal-deep";
+      ? "bg-gradient-to-r from-charcoal-deep/85 via-charcoal-deep/40 to-charcoal-deep/10"
+      : "bg-gradient-to-b from-charcoal-deep/25 via-charcoal-deep/45 to-charcoal-deep/80";
   return (
     <div className="bg-environment" aria-hidden>
       <div data-parallax={parallax} className="absolute inset-0 will-change-transform">
