@@ -547,8 +547,8 @@ function Index() {
                 <span>Explore The Menu</span>
                 <span className="transition-transform group-hover:translate-x-1">→</span>
               </a>
-              <a href={`tel:${PHONE_TEL}`} className="btn-luxe-outline">
-                <span>Reserve A Table</span>
+              <a href={`tel:${PHONE_TEL}`} className="btn-luxe-outline" aria-label={`Call ${PHONE} to reserve a table`}>
+                <span aria-hidden>☎</span><span>Reserve A Table</span>
               </a>
             </div>
 
