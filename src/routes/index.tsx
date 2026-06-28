@@ -190,7 +190,14 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 
 function EmberField() {
-  const particles = Array.from({ length: 32 }, (_, i) => ({
+  const [enabled, setEnabled] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(hover: none), (max-width: 900px), (prefers-reduced-motion: reduce)");
+    if (!mq.matches) setEnabled(true);
+  }, []);
+  if (!enabled) return null;
+  const particles = Array.from({ length: 18 }, (_, i) => ({
     left: (i * 37) % 100,
     delay: (i * 0.7) % 12,
     duration: 10 + (i % 7),
@@ -214,6 +221,7 @@ function EmberField() {
     </div>
   );
 }
+
 
 function GoldDivider() {
   return (
