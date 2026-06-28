@@ -577,7 +577,7 @@ function Index() {
           <div className="relative hidden lg:block">
             <div className="absolute -inset-12 rounded-full bg-amber/20 blur-3xl animate-ember-pulse" aria-hidden />
             <div className="relative aspect-square overflow-hidden rounded-full ring-1 ring-gold/40 shadow-luxe bg-charcoal-deep/80 border border-gold/10 flex items-center justify-center">
-              <span className="text-gold/40 text-xs uppercase tracking-[0.3em]">Image spot</span>
+              <span aria-hidden className="text-gold/30 text-[10px] uppercase tracking-[0.4em] select-none">✦</span>
             </div>
             <div className="absolute -bottom-4 -left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.35em] text-gold">House Special</div>
@@ -626,7 +626,7 @@ function Index() {
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -bottom-6 -right-6 size-40 bg-amber/20 blur-3xl -z-10 animate-ember-pulse" />
             <div className="w-full aspect-square bg-charcoal-deep/60 border border-gold/10 shadow-luxe flex items-center justify-center">
-              <span className="text-gold/40 text-xs uppercase tracking-[0.3em]">Image spot</span>
+              <span aria-hidden className="text-gold/30 text-[10px] uppercase tracking-[0.4em] select-none">✦</span>
             </div>
             <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-auto bg-charcoal-deep/85 backdrop-blur-md border border-gold/25 px-4 py-3 max-w-xs">
               <div className="text-[9px] uppercase tracking-[0.35em] text-gold mb-1">From the Tandoor</div>
@@ -668,7 +668,7 @@ function Index() {
             ].map((d, i) => (
               <article key={d.name} className="dish-card group relative bg-charcoal/50 border border-gold/15 hover:border-gold/45 transition-all duration-700 hover:shadow-luxe hover:-translate-y-1" data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className="relative aspect-[4/5] overflow-hidden bg-charcoal-deep/60 border-b border-gold/10 flex items-center justify-center">
-                  <span className="text-gold/40 text-xs uppercase tracking-[0.3em]">Image spot</span>
+                  <span aria-hidden className="text-gold/30 text-[10px] uppercase tracking-[0.4em] select-none">✦</span>
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal-deep via-charcoal-deep/20 to-transparent" />
                   <div className="absolute top-4 left-4 bg-gold text-charcoal-deep text-[9px] uppercase tracking-[0.3em] px-2.5 py-1">{d.tag}</div>
                 </div>
@@ -697,7 +697,7 @@ function Index() {
             <div className="absolute -inset-4 border border-gold/15 -z-10" />
             <div className="absolute -top-6 -left-6 size-40 bg-gold/20 blur-3xl -z-10" />
             <div className="w-full aspect-[4/5] bg-charcoal-deep/60 border border-gold/10 shadow-luxe flex items-center justify-center">
-              <span className="text-gold/40 text-xs uppercase tracking-[0.3em]">Image spot</span>
+              <span aria-hidden className="text-gold/30 text-[10px] uppercase tracking-[0.4em] select-none">✦</span>
             </div>
             <div className="absolute bottom-4 left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.35em] text-gold">Founder</div>
@@ -753,7 +753,7 @@ function Index() {
             ].map((g, i) => (
               <div key={i} className={`relative overflow-hidden group border border-gold/10 bg-charcoal-deep/60 ${g.span}`} data-reveal style={{ transitionDelay: `${i * 60}ms` }}>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-gold/40 text-xs uppercase tracking-[0.3em]">Image spot</span>
+                  <span aria-hidden className="text-gold/30 text-[10px] uppercase tracking-[0.4em] select-none">✦</span>
                 </div>
                 <div className="absolute inset-0 bg-charcoal-deep/0 group-hover:bg-charcoal-deep/40 transition-colors duration-700" />
               </div>
