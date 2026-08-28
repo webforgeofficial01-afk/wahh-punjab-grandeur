@@ -581,7 +581,7 @@ function Index() {
             </div>
             <div className="absolute -bottom-4 -left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.35em] text-gold">House Special</div>
-              <div className="editorial text-lg text-ivory">Wahh Punjab Thali · ₹299</div>
+              <div className="editorial text-lg text-ivory">Butter Chicken · ₹340</div>
             </div>
           </div>
         </div>
@@ -608,7 +608,7 @@ function Index() {
             </p>
             <div className="mt-10 grid grid-cols-3 gap-6 border-t border-gold/15 pt-8">
               <div>
-                <div className="editorial text-3xl text-gold text-glow-gold">15+</div>
+                <div className="editorial text-3xl text-gold text-glow-gold">{categories.length}</div>
                 <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">Menu Sections</div>
               </div>
               <div>
@@ -662,9 +662,9 @@ function Index() {
           </div>
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
             {[
-              { name: "Wahh Punjab Special Chicken", price: "₹280 / ₹430 / ₹680", tag: "House Royal", desc: "Our signature gravy — slow-cooked chicken in a buttery, aromatic masala. Order it as Quarter, Half or Full." },
-              { name: "Butter Chicken", price: "₹240 / ₹400 / ₹680", tag: "Most Loved", desc: "Tandoor-charred chicken in a velvety, tomato-cream gravy. The Delhi classic done right." },
-              { name: "Wahh Punjab Special Thali", price: "₹299", tag: "Best Value", desc: "A grand single-platter feast of our specials — perfect for the full Punjabi experience." },
+              { name: "Waah Punjab Spl. Chicken", price: "₹360 / ₹480 / ₹730", tag: "House Royal", desc: "Our signature gravy — slow-cooked chicken in a buttery, aromatic masala. Quarter, Half or Full." },
+              { name: "Butter Chicken", price: "₹340 / ₹450 / ₹700", tag: "Most Loved", desc: "Tandoor-charred chicken in a velvety, tomato-cream gravy. The Delhi classic done right." },
+              { name: "Non Veg Platter", price: "₹650", tag: "Best Value", desc: "A grand tandoori platter of our house kababs and tikkas — built for the full table." },
             ].map((d, i) => (
               <article key={d.name} className="dish-card group relative bg-charcoal/50 border border-gold/15 hover:border-gold/45 transition-all duration-700 hover:shadow-luxe hover:-translate-y-1" data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className="relative aspect-[4/5] overflow-hidden bg-charcoal-deep/60 border-b border-gold/10 flex items-center justify-center">
@@ -883,6 +883,7 @@ function MenuSection() {
             Every dish on the menu.
           </h2>
           <p className="mt-4 text-ivory/60 quote-serif italic">{menu.length} dishes · {categories.length} sections · Call {PHONE} to order delivery</p>
+          <p className="mt-2 text-[10px] uppercase tracking-[0.3em] text-gold/70">GST 5% Extra</p>
         </div>
 
         {/* Controls */}
@@ -955,12 +956,12 @@ function MenuSection() {
                             <span
                               key={v.label}
                               className="inline-flex items-center gap-2 px-3 py-1.5 border border-gold/25 bg-charcoal-deep/50 text-sm"
-                              aria-label={`${m.name} ${v.label} ₹${v.price}`}
+                              aria-label={v.price > 0 ? `${m.name} ${v.label} ₹${v.price}` : `${m.name} ${v.label}`}
                             >
-                              {m.variants.length > 1 && (
+                              {m.variants.length > 1 && v.price > 0 && (
                                 <span className="text-[9px] uppercase tracking-[0.28em] text-gold/85">{v.label}</span>
                               )}
-                              <span className="font-semibold text-glow-amber">₹{v.price}</span>
+                              <span className="font-semibold text-glow-amber">{v.price > 0 ? `₹${v.price}` : v.label}</span>
                             </span>
                           ))}
                         </div>
