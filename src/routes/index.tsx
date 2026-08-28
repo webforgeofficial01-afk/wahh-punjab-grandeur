@@ -608,7 +608,7 @@ function Index() {
             </p>
             <div className="mt-10 grid grid-cols-3 gap-6 border-t border-gold/15 pt-8">
               <div>
-                <div className="editorial text-3xl text-gold text-glow-gold">15+</div>
+                <div className="editorial text-3xl text-gold text-glow-gold">{categories.length}</div>
                 <div className="mt-1 text-[10px] uppercase tracking-[0.3em] text-ivory/45">Menu Sections</div>
               </div>
               <div>
