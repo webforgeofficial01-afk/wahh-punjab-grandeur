@@ -955,12 +955,12 @@ function MenuSection() {
                             <span
                               key={v.label}
                               className="inline-flex items-center gap-2 px-3 py-1.5 border border-gold/25 bg-charcoal-deep/50 text-sm"
-                              aria-label={`${m.name} ${v.label} ₹${v.price}`}
+                              aria-label={v.price > 0 ? `${m.name} ${v.label} ₹${v.price}` : `${m.name} ${v.label}`}
                             >
-                              {m.variants.length > 1 && (
+                              {m.variants.length > 1 && v.price > 0 && (
                                 <span className="text-[9px] uppercase tracking-[0.28em] text-gold/85">{v.label}</span>
                               )}
-                              <span className="font-semibold text-glow-amber">₹{v.price}</span>
+                              <span className="font-semibold text-glow-amber">{v.price > 0 ? `₹${v.price}` : v.label}</span>
                             </span>
                           ))}
                         </div>
