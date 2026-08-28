@@ -662,9 +662,9 @@ function Index() {
           </div>
           <div className="grid md:grid-cols-3 gap-8 lg:gap-10">
             {[
-              { name: "Wahh Punjab Special Chicken", price: "₹280 / ₹430 / ₹680", tag: "House Royal", desc: "Our signature gravy — slow-cooked chicken in a buttery, aromatic masala. Order it as Quarter, Half or Full." },
-              { name: "Butter Chicken", price: "₹240 / ₹400 / ₹680", tag: "Most Loved", desc: "Tandoor-charred chicken in a velvety, tomato-cream gravy. The Delhi classic done right." },
-              { name: "Wahh Punjab Special Thali", price: "₹299", tag: "Best Value", desc: "A grand single-platter feast of our specials — perfect for the full Punjabi experience." },
+              { name: "Waah Punjab Spl. Chicken", price: "₹360 / ₹480 / ₹730", tag: "House Royal", desc: "Our signature gravy — slow-cooked chicken in a buttery, aromatic masala. Quarter, Half or Full." },
+              { name: "Butter Chicken", price: "₹340 / ₹450 / ₹700", tag: "Most Loved", desc: "Tandoor-charred chicken in a velvety, tomato-cream gravy. The Delhi classic done right." },
+              { name: "Non Veg Platter", price: "₹650", tag: "Best Value", desc: "A grand tandoori platter of our house kababs and tikkas — built for the full table." },
             ].map((d, i) => (
               <article key={d.name} className="dish-card group relative bg-charcoal/50 border border-gold/15 hover:border-gold/45 transition-all duration-700 hover:shadow-luxe hover:-translate-y-1" data-reveal style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className="relative aspect-[4/5] overflow-hidden bg-charcoal-deep/60 border-b border-gold/10 flex items-center justify-center">
