@@ -883,6 +883,7 @@ function MenuSection() {
             Every dish on the menu.
           </h2>
           <p className="mt-4 text-ivory/60 quote-serif italic">{menu.length} dishes · {categories.length} sections · Call {PHONE} to order delivery</p>
+          <p className="mt-2 text-[10px] uppercase tracking-[0.3em] text-gold/70">GST 5% Extra</p>
         </div>
 
         {/* Controls */}
