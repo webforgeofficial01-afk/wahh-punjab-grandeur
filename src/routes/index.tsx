@@ -581,7 +581,7 @@ function Index() {
             </div>
             <div className="absolute -bottom-4 -left-4 bg-charcoal-deep/85 backdrop-blur border border-gold/30 px-4 py-3">
               <div className="text-[9px] uppercase tracking-[0.35em] text-gold">House Special</div>
-              <div className="editorial text-lg text-ivory">Wahh Punjab Thali · ₹299</div>
+              <div className="editorial text-lg text-ivory">Butter Chicken · ₹340</div>
             </div>
           </div>
         </div>
